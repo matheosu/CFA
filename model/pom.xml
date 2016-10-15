@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>br.unigranrio.edu.ect.si.cfa</groupId>
+        <groupId>br.edu.unigranrio.edu.ect.si.cfa</groupId>
         <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
@@ -15,7 +15,7 @@
     <dependencies>
         <!-- Commons -->
         <dependency>
-            <groupId>br.unigranrio.edu.ect.si.cfa</groupId>
+            <groupId>br.edu.unigranrio.edu.ect.si.cfa</groupId>
             <artifactId>commons</artifactId>
             <version>1.0.0</version>
         </dependency>
