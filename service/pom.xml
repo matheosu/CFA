@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>br.unigranrio.edu.ect.si.cfa</groupId>
+        <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
         <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
@@ -12,4 +12,48 @@
 
     <artifactId>service</artifactId>
 
+    <dependencies>
+        <!-- Commons -->
+        <dependency>
+            <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
+            <artifactId>commons</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- Model -->
+        <dependency>
+            <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
+            <artifactId>model</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- CDI -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- Hibernate Core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- Hibernate EntityManager -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- Hibernate C3P0 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+    </dependencies>
 </project>

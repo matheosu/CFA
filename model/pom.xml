@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>br.edu.unigranrio.edu.ect.si.cfa</groupId>
+        <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
         <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
@@ -15,9 +15,9 @@
     <dependencies>
         <!-- Commons -->
         <dependency>
-            <groupId>br.edu.unigranrio.edu.ect.si.cfa</groupId>
+            <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
             <artifactId>commons</artifactId>
-            <version>1.0.0</version>
+            <version>RELEASE</version>
         </dependency>
 
         <!-- JPA 2.1 -->
@@ -25,6 +25,13 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
+        </dependency>
+
+        <!-- Postgres -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>RELEASE</version>
         </dependency>
 
     </dependencies>
