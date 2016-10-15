@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 
 @Entity
-@Table(name = "\"Role\"")
+@Table(name = "\"role\"")
 public class Role extends BaseAuditable<Long> {
 
 	private static final long serialVersionUID = 3505187003425922556L;

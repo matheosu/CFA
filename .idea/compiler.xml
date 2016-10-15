@@ -25,6 +25,7 @@
         <module name="commons" />
         <module name="model" />
         <module name="service" />
+        <module name="web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,6 +33,7 @@
       <module name="model" target="1.8" />
       <module name="parent" target="1.5" />
       <module name="service" target="1.8" />
+      <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

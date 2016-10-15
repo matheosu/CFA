@@ -10,6 +10,20 @@
     <packaging>pom</packaging>
     <name>Controle de Fluxo de Água</name>
 
+    <modules>
+        <module>
+            ../commons
+        </module>
+        <module>
+            ../model
+        </module>
+        <module>
+            ../service
+        </module>
+        <module>
+            ../web
+        </module>
+    </modules>
     <build>
         <pluginManagement>
             <plugins>
@@ -44,4 +58,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
 </project>

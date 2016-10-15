@@ -1,0 +1,65 @@
+<web-app
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+        version="3.1">
+    <display-name>cfa</display-name>
+
+    <!-- Session Config -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <!-- Listener Jboss Weld -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+    <resource-env-ref>
+        <resource-env-ref-name>BeanManager</resource-env-ref-name>
+        <resource-env-ref-type>
+            javax.enterprise.inject.spi.BeanManager
+        </resource-env-ref-type>
+    </resource-env-ref>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.action</welcome-file>
+    </welcome-file-list>
+
+    <!-- JSF Servlet -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Url Pattern -->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+
+    <!-- Mime Type -->
+    <mime-mapping>
+        <extension>xhtml</extension>
+        <mime-type>application/xhtml+xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jsp</extension>
+        <mime-type>application/xhtml+xml</mime-type>
+    </mime-mapping>
+
+    <!-- State Saving Method -->
+    <context-param>
+        <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
+
+    <!-- Internationalization -->
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>resources.application</param-value>
+    </context-param>
+
+</web-app>

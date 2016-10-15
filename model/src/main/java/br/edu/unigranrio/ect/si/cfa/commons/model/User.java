@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "\"User\"")
+@Table(name = "\"user\"")
 public class User extends BaseAuditable<Long> {
 
     private static final long serialVersionUID = -5666710091863571387L;

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
+@Table(name = "flow_restriction")
 public class FlowRestriction extends BaseAuditable<Long> {
 
     private static final long serialVersionUID = 3230381671813980976L;

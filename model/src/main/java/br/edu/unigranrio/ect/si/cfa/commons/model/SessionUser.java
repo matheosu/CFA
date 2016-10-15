@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "\"SessionUser\"")
+@Table(name = "\"sessionUser\"")
 public class SessionUser extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = -8067729738451603353L;
