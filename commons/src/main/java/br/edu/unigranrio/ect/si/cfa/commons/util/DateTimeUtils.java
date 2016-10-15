@@ -1,4 +1,4 @@
-package br.edu.unigranrio.ect.si.cfa.commons;
+package br.edu.unigranrio.ect.si.cfa.commons.util;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

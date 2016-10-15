@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="cfaPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+
+            <!-- Connection -->
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/cfa" />
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
+
+            <!-- Auto Detection and DDL -->
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- C3P0 Pool properties -->
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="1800"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+
+            <!-- Log SQL -->
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>

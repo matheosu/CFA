@@ -1,4 +1,4 @@
-package br.edu.unigranrio.ect.si.cfa.commons;
+package br.edu.unigranrio.ect.si.cfa.commons.util;
 
 import java.math.BigInteger;
 import java.nio.charset.Charset;

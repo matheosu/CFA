@@ -23,12 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="commons" />
+        <module name="model" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="commons" target="1.8" />
-      <module name="parent" target="1.5" />
-      <module name="Web" target="1.5" />
+      <module name="model" target="1.8" />
+      <module name="parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
