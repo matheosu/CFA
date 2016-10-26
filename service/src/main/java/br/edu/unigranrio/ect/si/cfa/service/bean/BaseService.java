@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.service.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,23 +32,28 @@ abstract class BaseService implements Service {
     }
 
     @Override
-    public <E extends Entity<PK>, PK extends Serializable> E list(Class<E> clazz) {
+    public <E extends Entity<?>> E list(Class<E> clazz) {
         return null;
     }
 
     @Override
-    public <E extends Entity<PK>, PK extends Serializable> void save(E entity) {
+    public <E extends Entity<?>> void save(E entity) {
         em.persist(entity);
     }
 
     @Override
-    public <E extends Entity<PK>, PK extends Serializable> E update(E entity) {
+    public <E extends Entity<?>> E update(E entity) {
         return em.merge(entity);
     }
 
     @Override
-    public <E extends Entity<PK>, PK extends Serializable> void remove(E entity) {
+    public <E extends Entity<?>> void remove(E entity) {
         em.remove(entity);
+    }
+
+    @Override
+    public <E extends Entity<?>> void refresh(E entity) {
+        em.refresh(entity);
     }
 
     protected <E extends Entity<PK>, PK extends Serializable> E singleResult(TypedQuery<E> query) {

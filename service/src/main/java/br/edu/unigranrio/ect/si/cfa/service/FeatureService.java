@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
 
-import br.edu.unigranrio.ect.si.cfa.model.Feature;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Feature;
 
 public interface FeatureService extends Service {
 

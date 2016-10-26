@@ -1,8 +1,8 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
 
-import br.edu.unigranrio.ect.si.cfa.model.SessionUser;
-import br.edu.unigranrio.ect.si.cfa.model.User;
+import br.edu.unigranrio.ect.si.cfa.commons.model.SessionUser;
+import br.edu.unigranrio.ect.si.cfa.commons.model.User;
 
 import java.util.Calendar;
 import java.util.List;

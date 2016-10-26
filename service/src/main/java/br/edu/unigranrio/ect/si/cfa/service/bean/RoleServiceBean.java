@@ -1,8 +1,8 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.model.Feature;
-import br.edu.unigranrio.ect.si.cfa.model.Role;
-import br.edu.unigranrio.ect.si.cfa.model.Role_;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Feature;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Role;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Role_;
 import br.edu.unigranrio.ect.si.cfa.service.RoleService;
 
 import javax.inject.Named;
