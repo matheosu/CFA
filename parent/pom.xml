@@ -37,7 +37,9 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
     </build>
+
 
     <properties>
         <slf4jVersion>1.6.1</slf4jVersion>

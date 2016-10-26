@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.commons.listener;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Auditable;
+import br.edu.unigranrio.ect.si.cfa.model.Auditable;
 
 import java.io.Serializable;
 

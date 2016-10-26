@@ -8,8 +8,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <user-name>postgres</user-name>
       <user-password>dfdadfc5dfd9dfdedfcddfd8dfcfdfd9</user-password>
-      <introspection-scope>cfa:public,pg_catalog,postgres</introspection-scope>
-      <resolve-scope>cfa:public,postgres</resolve-scope>
+      <resolve-scope>cfa:postgres,public</resolve-scope>
     </data-source>
   </component>
 </project>
