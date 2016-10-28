@@ -21,6 +21,8 @@ import java.util.Objects;
 
 abstract class BaseService implements Service {
 
+    private static final long serialVersionUID = -4097016207010149674L;
+
     private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
 
     @Inject

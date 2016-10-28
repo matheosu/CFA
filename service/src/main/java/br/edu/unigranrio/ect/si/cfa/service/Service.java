@@ -4,7 +4,7 @@ import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 
 import java.io.Serializable;
 
-public interface Service {
+public interface Service extends Serializable {
 
     <E extends Entity<PK>, PK extends Serializable> E find(Class<E> clazz, PK id);
 

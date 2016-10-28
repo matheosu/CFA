@@ -6,8 +6,8 @@
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <user-name>postgres</user-name>
-      <user-password>dfdadfc5dfd9dfdedfcddfd8dfcfdfd9</user-password>
+      <user-name>cfa</user-name>
+      <user-password>dfc9dfccdfcb</user-password>
       <resolve-scope>cfa:postgres,public</resolve-scope>
     </data-source>
   </component>

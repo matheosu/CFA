@@ -12,6 +12,7 @@ import java.util.List;
 @Named
 public class UserServiceBean extends BaseService implements UserService {
 
+    private static final long serialVersionUID = 6581130279830770035L;
 
     @Override
     public User findUserByEmail(String email) {

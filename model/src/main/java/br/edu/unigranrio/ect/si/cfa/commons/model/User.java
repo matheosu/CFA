@@ -11,11 +11,6 @@ public class User extends BaseAuditable<Long> {
 
     private static final long serialVersionUID = -5666710091863571387L;
 
-    /**
-     * Default System User ID
-     */
-    public static final Long systemUserId = 1L;
-
     public static final int MAX_LENGTH_NAME = 200;
     public static final int MAX_LENGTH_EMAIL = 400;
     public static final int MAX_LENGTH_PASSWORD = 500;

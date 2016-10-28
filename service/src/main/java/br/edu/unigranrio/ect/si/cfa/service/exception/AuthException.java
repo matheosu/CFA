@@ -2,6 +2,8 @@ package br.edu.unigranrio.ect.si.cfa.service.exception;
 
 public class AuthException extends ServiceExeption {
 
+    private static final long serialVersionUID = 6014990833151318131L;
+
     public AuthException() {
     }
 

@@ -1,12 +1,9 @@
 package br.edu.unigranrio.ect.si.cfa.commons.util;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
-import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -14,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Base64;
 
 /**
  * Classe responsável por segurança e criptgrafias.
@@ -71,7 +69,8 @@ public final class SecurityUtils {
         Cipher cipher = getCipher(passPhrase, Cipher.ENCRYPT_MODE);
         try {
             byte[] crypt = cipher != null ? cipher.doFinal(StringUtils.string2Bytes(data)) : null;
-            return crypt != null ? new BASE64Encoder().encode(crypt).replace(FINAL_ENCRYPT, NEW_FINAL_ENCRYPT) : "";
+
+            return crypt != null ? new String(Base64.getEncoder().encode(crypt)).replace(FINAL_ENCRYPT, NEW_FINAL_ENCRYPT) : "";
         } catch (IllegalBlockSizeException | BadPaddingException e) {
             throw new SecurityException("Error in encrypt data");
         } catch (Exception e) {
@@ -87,9 +86,9 @@ public final class SecurityUtils {
         data = data != null ? data.replace(NEW_FINAL_ENCRYPT, FINAL_ENCRYPT) : "";
         Cipher cipher = getCipher(passPhrase, Cipher.DECRYPT_MODE);
         try {
-            byte[] crypt = cipher != null ? cipher.doFinal(new BASE64Decoder().decodeBuffer(data)) : null;
+            byte[] crypt = cipher != null ? cipher.doFinal(Base64.getDecoder().decode(data)) : null;
             return StringUtils.byte2String(crypt);
-        } catch (BadPaddingException | IllegalBlockSizeException | IOException e) {
+        } catch (BadPaddingException | IllegalBlockSizeException e) {
             throw new SecurityException("Error in decrypt data");
         } catch (Exception e) {
             throw new SecurityException("Exception to decrypt data",e);

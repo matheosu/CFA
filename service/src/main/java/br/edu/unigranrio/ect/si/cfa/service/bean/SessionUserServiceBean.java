@@ -13,6 +13,8 @@ import java.util.List;
 @Named
 public class SessionUserServiceBean extends BaseService implements SessionUserService {
 
+    private static final long serialVersionUID = 8239206494004378799L;
+
     @Override
     public SessionUser findActiveSessionUser(User user) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

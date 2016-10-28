@@ -8,8 +8,8 @@
             <!-- Connection -->
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/cfa" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-            <property name="hibernate.connection.username" value="postgres"/>
-            <property name="hibernate.connection.password" value="postgres"/>
+            <property name="hibernate.connection.username" value="cfa"/>
+            <property name="hibernate.connection.password" value="cfa"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
 
             <!-- Auto Detection and DDL -->

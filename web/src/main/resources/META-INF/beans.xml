@@ -4,8 +4,10 @@
        version="1.1" bean-discovery-mode="all">
     <scan>
         <exclude name="br.edu.unigranrio.ect.si.cfa.commons.*"/>
-        <exclude name="br.edu.unigranrio.ect.si.cfa.model.*"/>
-        <exclude name="org.jboss.weld.**" />
+        <exclude name="org.jboss.weld.**"/>
     </scan>
 
+    <interceptors>
+        <class>br.edu.unigranrio.ect.si.cfa.service.interceptor.TransactionalInterceptor</class>
+    </interceptors>
 </beans>

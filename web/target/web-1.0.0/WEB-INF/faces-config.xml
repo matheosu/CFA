@@ -15,5 +15,8 @@
             <var>msg</var>
         </resource-bundle>
 
+        <!-- Listener -->
+        <action-listener id="br.edu.unigranrio.ect.si.cfa.web.listener.AuthListener"/>
+
     </application>
 </faces-config>

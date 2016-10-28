@@ -1,11 +1,14 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
 import br.edu.unigranrio.ect.si.cfa.commons.model.User;
+import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 
-public interface AuthService {
+import java.io.Serializable;
 
-    User doLogin(String email, String password);
+public interface AuthService extends Serializable {
 
-    void doLogout(User user);
+    User doLogin(String email, String password) throws AuthException;
+
+    void doLogout(User user) throws AuthException;
 
 }

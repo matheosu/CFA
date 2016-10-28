@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 
 abstract class BaseAction<E extends Entity<PK>, PK extends Serializable> implements Action {
 
+    private static final long serialVersionUID = -2353426370709926798L;
+
     @Inject
     @RequestParam
     private String id;

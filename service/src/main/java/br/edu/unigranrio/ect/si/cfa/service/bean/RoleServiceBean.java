@@ -14,6 +14,8 @@ import java.util.List;
 @Named
 public class RoleServiceBean extends BaseService implements RoleService {
 
+    private static final long serialVersionUID = -801540652111399827L;
+
     @Override
     public List<Role> findRolesByName(String name) {
         return resultList(comparing(Role.class, Role_.name, name));

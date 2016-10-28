@@ -11,18 +11,6 @@ public class Feature extends BaseEntity<Long> {
 
     private static final long serialVersionUID = 9028582384847994851L;
 
-    /**
-     * System Features
-     */
-    public static final Long roleFeatureId = 10L;
-    public static final Long userFeatureId = 20L;
-    public static final Long controllerFeatureId = 30L;
-    public static final Long localizationFeatureId = 40L;
-    public static final Long flowRestrictionFeatureId = 50L;
-
-    public static final List<Long> systemFeaturesId = Arrays.asList(roleFeatureId, userFeatureId,
-                            controllerFeatureId, localizationFeatureId, flowRestrictionFeatureId);
-
     public static final int MAX_LENGTH_NAME = 50;
     public static final int MAX_LENGTH_DESCRIPTION = 100;
 

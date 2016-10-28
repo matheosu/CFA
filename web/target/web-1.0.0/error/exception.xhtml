@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
+
+<ui:composition template="${pageContext.request.contextPath}/template/messages.xhtml">
+    <ui:define name="title">#{msg['error.exception.title']}</ui:define>
+
+    <ui:param name="color" value="#d9534f" />
+    <ui:param name="icon" value="fa-exclamation-triangle" />
+
+    <ui:define name="content">
+        <h:panelGrid columns="1" cellpadding="5" style="text-align:center;">
+            <h:outputLabel styleClass="fa #{icon} fa-5x" style="color: #ffffff;" />
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                    value="#{msg['error.exception.msg']}" />
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
+                    value="#{msg['error.exception.detail']}" />
+            <p:commandButton value="Menu" ajax="false" immediate="true"
+                             action="#{menuAction.show}" icon="fa fa-tachometer" id="btnMenu"
+                             style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>
+</html>

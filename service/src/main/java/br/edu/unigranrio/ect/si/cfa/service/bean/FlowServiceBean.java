@@ -1,7 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
 import br.edu.unigranrio.ect.si.cfa.commons.model.*;
-import br.edu.unigranrio.ect.si.cfa.model.*;
 import br.edu.unigranrio.ect.si.cfa.service.FlowService;
 
 import javax.inject.Named;
@@ -12,6 +11,8 @@ import java.util.List;
 
 @Named
 public class FlowServiceBean extends BaseService implements FlowService {
+
+    private static final long serialVersionUID = 3532101836322434970L;
 
     public Float availableFlow(Long userId) {
         User user = find(User.class, userId); // Descobre usuário

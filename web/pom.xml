@@ -59,7 +59,6 @@
             <scope>compile</scope>
         </dependency>
 
-
         <!-- JSF -->
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -79,10 +78,44 @@
             <version>6.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-services</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
+                                    <artifactId>service</artifactId>
+                                    <version>1.0.0</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -95,6 +128,8 @@
                     <warSourceDirectory>${project.build.directory}/${project.build.finalName}/</warSourceDirectory>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 </project>

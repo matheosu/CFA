@@ -9,6 +9,8 @@ import javax.inject.Named;
 @Named
 public class FeatureServiceBean extends BaseService implements FeatureService {
 
+    private static final long serialVersionUID = 8890579990737820060L;
+
     @Override
     public Feature findFeatureByName(String name) {
         return singleResult(comparing(Feature.class, Feature_.name, name));

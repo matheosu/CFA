@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.web.producer;
 
 import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUserId;
-import br.edu.unigranrio.ect.si.cfa.web.util.Constants;
+import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;

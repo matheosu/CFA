@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>#{msg['title']} - <ui:insert name="title"/></title>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/css/font-awesome.min.css" />
+</h:head>
+
+<h:body>
+    <style type="text/css">
+        <!--
+        body {
+            background-color: #{color}
+        }
+        -->
+    </style>
+    <div class="ui-grid ui-grid-responsive" style="border: none;"
+         id="pagina" align="center">
+        <div id="idConteudo" class="ui-grid-row"
+             style="position: absolute; top: 40%; left: 45%; margin-left: -110px; margin-top: -50px;">
+            <h:form>
+                <ui:insert name="content"/>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

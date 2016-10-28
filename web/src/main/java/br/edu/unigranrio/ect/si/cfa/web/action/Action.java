@@ -1,6 +1,8 @@
 package br.edu.unigranrio.ect.si.cfa.web.action;
 
-public interface Action {
+import java.io.Serializable;
+
+public interface Action extends Serializable {
 
     String create();
 

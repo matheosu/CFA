@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>#{msg['title']}</title>
+</h:head>
+
+<h:body>
+    <div class="ui-grid ui-grid-responsive" id="pagina" align="center"
+         style="margin-top: 70px; margin-left: 25px;">
+        <div id="idCabecalho" class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <p:toolbar
+                        style="border:none; background:#FFFFFF; align:center;text-align:center;">
+                    <p:toolbarGroup align="center">
+                        <h:graphicImage url="/img/logo_unigranrio.png" width="220"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+            </div>
+        </div>
+
+        <h:form id="form">
+            <h:panelGrid>
+                <p:panel header="Acesso ao Sistema"
+                         style="position: absolute; left: 50%; top: 20%; margin-left: -110px; margin-top: -40px;">
+                    <h:panelGrid columns="1" cellpadding="2" cellspacing="2">
+                        <p:messages globalOnly="true" closable="true" showIcon="false"/>
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{auth.email}"
+                                         required="true" type="email"
+                                         requiredMessage="#{msg['required.email']}"
+                                         placeholder="#{msg['email']}" tabindex="1"/>
+                            <p:focus for="email"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:password feedback="false" id="password"
+                                        value="#{auth.password}" required="true"
+                                        requiredMessage="#{msg['required.password']}"
+                                        placeholder="#{msg['password']}" tabindex="2"/>
+                        </h:panelGroup>
+                        <f:facet name="footer">
+                            <h:panelGroup layout="block" style="text-align: center">
+                                <p:commandButton ajax="false" id="btnLogin"
+                                                 action="#{auth.doLogin}" value="#{msg['login']}"
+                                                 icon="fa fa-paper-plane" tabindex="3"
+                                                 style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"/>
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
+
+        <div id="idRodape" class="ui-grid-row">
+            <f:facet name="footer">
+                <h:outputText
+                        value="2016 Unigranrio - &copy; Todos os direitos reservados."/>
+            </f:facet>
+        </div>
+    </div>
+</h:body>
+
+</html>
