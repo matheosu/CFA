@@ -12,11 +12,6 @@ public class Role extends BaseAuditable<Long> {
 
 	private static final long serialVersionUID = 3505187003425922556L;
 
-	/**
-	 * Default System Role ID
-	 * */
-	public static final Long systemRoleId = 1L;
-
 	public static final int MAX_LENGTH_NAME = 100;
 	public static final int MAX_LENGTH_DESCRIPTION = 200;
 
@@ -25,7 +20,7 @@ public class Role extends BaseAuditable<Long> {
 	@SequenceGenerator(name = "generator_role", sequenceName = "seq_role", allocationSize = 1, initialValue = 100)
 	private Long id;
 
-	@Column(nullable = false, length = MAX_LENGTH_NAME)
+	@Column(nullable = false, unique = true, length = MAX_LENGTH_NAME)
 	private String name;
 
 	@Column(length = MAX_LENGTH_DESCRIPTION)

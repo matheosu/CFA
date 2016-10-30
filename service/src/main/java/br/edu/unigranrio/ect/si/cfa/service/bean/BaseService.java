@@ -58,6 +58,11 @@ abstract class BaseService implements Service {
         em.refresh(entity);
     }
 
+    @Override
+    public <E extends Entity<?>> boolean contains(E entity) {
+        return em.contains(entity);
+    }
+
     protected <E extends Entity<PK>, PK extends Serializable> E singleResult(TypedQuery<E> query) {
         try {
             return Objects.requireNonNull(query).getSingleResult();

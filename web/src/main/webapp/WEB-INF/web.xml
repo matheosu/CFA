@@ -15,6 +15,11 @@
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
 
+    <!-- WebApplication Context -->
+    <listener>
+        <listener-class>br.edu.unigranrio.ect.si.cfa.web.listener.WebApplicationContextListener</listener-class>
+    </listener>
+
     <!-- Welcome File List -->
     <welcome-file-list>
         <welcome-file>index.action</welcome-file>
@@ -98,6 +103,12 @@
         <param-value>true</param-value>
     </context-param>
 
+    <!-- Locale Param -->
+    <context-param>
+        <param-name>locale</param-name>
+        <param-value>pt_BR</param-value>
+    </context-param>
+
     <!-- Error Pages -->
     <error-page>
         <error-code>500</error-code>
@@ -107,9 +118,9 @@
         <error-code>404</error-code>
         <location>/error/404.xhtml</location>
     </error-page>
-
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/error/exception.xhtml</location>
     </error-page>
+
 </web-app>

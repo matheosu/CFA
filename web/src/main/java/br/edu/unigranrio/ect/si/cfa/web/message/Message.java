@@ -1,4 +1,4 @@
-package br.edu.unigranrio.ect.si.cfa.web;
+package br.edu.unigranrio.ect.si.cfa.web.message;
 
 import javax.faces.application.FacesMessage;
 import java.io.Serializable;
@@ -55,4 +55,6 @@ public interface Message extends Serializable {
     default void fatal(String msg) {
         fatal(msg, null);
     }
+
+
 }

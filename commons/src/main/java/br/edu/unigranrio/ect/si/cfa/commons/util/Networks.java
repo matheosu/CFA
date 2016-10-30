@@ -7,13 +7,13 @@ import org.slf4j.LoggerFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 
-public final class NetworkUtils {
+public final class Networks {
 
     private static final String MAC_ADDR_FORMAT = "%02X%s";
     private static final String MAC_ADDR_DEFAULT = "00-00-00-00-00-00";
-    private static final Logger logger = LoggerFactory.getLogger(NetworkUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(Networks.class);
 
-    private NetworkUtils(){}
+    private Networks(){}
 
     public static String getMacAddress(InetAddress inetAddress) {
         try {

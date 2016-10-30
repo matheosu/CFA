@@ -4,11 +4,11 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public final class StringUtils {
+public final class Strings {
 
 	private static final String HEX_STRING_FORMAT = "%1$032x";
 
-	private StringUtils() {	}
+	private Strings() {	}
 
 	public static byte[] string2Bytes(String value) {
 		return string2Bytes(value, StandardCharsets.UTF_8);

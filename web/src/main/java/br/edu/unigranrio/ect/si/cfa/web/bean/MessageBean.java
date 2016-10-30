@@ -1,6 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.web.bean;
 
-import br.edu.unigranrio.ect.si.cfa.web.Message;
+import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
+import br.edu.unigranrio.ect.si.cfa.web.message.Message;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,9 +15,9 @@ public class MessageBean implements Message {
 
     @Inject FacesContext context;
 
-
     @Override
     public void msg(FacesMessage.Severity status, String msg, String details, String idPage) {
         context.addMessage(idPage, new FacesMessage(status, msg, details));
     }
+
 }

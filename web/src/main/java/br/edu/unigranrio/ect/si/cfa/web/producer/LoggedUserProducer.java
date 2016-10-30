@@ -15,7 +15,7 @@ public class LoggedUserProducer implements Serializable {
     @Inject HttpSession session;
 
     @Produces @LoggedUserId
-    Long getLoggedUserId() {
+    public Long getLoggedUserId() {
         Object object = session.getAttribute(Constants.LOGGED_USER_ATTR);
         return object != null ? Long.valueOf(object.toString()) : Constants.SYSTEM_ID;
     }

@@ -1,11 +1,12 @@
 package br.edu.unigranrio.ect.si.cfa.web.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListenerFactory;
+import br.edu.unigranrio.ect.si.cfa.commons.factory.AuditListenerFactory;
 import br.edu.unigranrio.ect.si.cfa.commons.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.AuthService;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 import br.edu.unigranrio.ect.si.cfa.web.Auth;
-import br.edu.unigranrio.ect.si.cfa.web.Message;
+import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
+import br.edu.unigranrio.ect.si.cfa.web.message.Message;
 import br.edu.unigranrio.ect.si.cfa.web.listener.WebAuditListener;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 
@@ -19,7 +20,7 @@ public class AuthBean implements Auth {
 
     private static final long serialVersionUID = 3015058683489706291L;
 
-    @Inject Message message;
+    @Inject AuthMessage message;
     @Inject AuthService authService;
 
     private User user;
@@ -31,11 +32,11 @@ public class AuthBean implements Auth {
         try {
             user = authService.doLogin(email, password);
 
-            AuditListenerFactory.addEntityListener(new WebAuditListener(user.getId()));
+            AuditListenerFactory.setEntityListener(new WebAuditListener(user.getId()));
 
             return Pages.actionMenu();
         } catch (AuthException e) {
-            message.error(e.getMessage());
+            message.authMsg(e.getType());
         }
         return null;
     }
@@ -45,7 +46,7 @@ public class AuthBean implements Auth {
         try {
             authService.doLogout(user);
         } catch (AuthException e) {
-            e.printStackTrace();
+            message.authMsg(e.getType());
         }
 
         return null;

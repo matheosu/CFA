@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.commons.model.listener;
 
 import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListener;
-import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListenerFactory;
+import br.edu.unigranrio.ect.si.cfa.commons.factory.AuditListenerFactory;
 import br.edu.unigranrio.ect.si.cfa.commons.model.BaseAuditable;
 
 import javax.persistence.PrePersist;

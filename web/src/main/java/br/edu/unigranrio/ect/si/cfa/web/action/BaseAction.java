@@ -52,6 +52,7 @@ abstract class BaseAction<E extends Entity<PK>, PK extends Serializable> impleme
     }
 
     @Override
+    @Transactional
     public String delete() {
         setInstance(service().find(clazz(), parseId(id)));
         service().remove(getInstance());
@@ -76,9 +77,9 @@ abstract class BaseAction<E extends Entity<PK>, PK extends Serializable> impleme
     @SuppressWarnings("unchecked")
     private Class<E> clazz() {
         if (clazz == null) {
-            Type tipo = ((ParameterizedType) getClass().getGenericSuperclass())
+            Type type = ((ParameterizedType) getClass().getGenericSuperclass())
                     .getActualTypeArguments()[0];
-            clazz = (Class<E>) tipo;
+            clazz = (Class<E>) type;
         }
         return clazz;
     }

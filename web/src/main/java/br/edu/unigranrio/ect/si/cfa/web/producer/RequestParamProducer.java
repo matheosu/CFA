@@ -14,7 +14,7 @@ public class RequestParamProducer implements Serializable {
     @Inject ExternalContext context;
 
     @Produces @RequestParam
-    String getRequestParameter(InjectionPoint ip) {
+    public String getRequestParameter(InjectionPoint ip) {
         String name = ip.getAnnotated().getAnnotation(RequestParam.class)
                 .value();
 

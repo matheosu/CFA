@@ -15,6 +15,8 @@ public class Feature extends BaseEntity<Long> {
     public static final int MAX_LENGTH_DESCRIPTION = 100;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator_feature")
+    @SequenceGenerator(name = "generator_feature", sequenceName = "seq_feature", initialValue = 100, allocationSize = 1)
     private Long id;
 
     @Column(nullable = false, unique = true, length = MAX_LENGTH_NAME)

@@ -18,7 +18,7 @@ import java.util.Base64;
  *
  * @author matheuscastro
  */
-public final class SecurityUtils {
+public final class Securities {
 
     private static final String MD5 = "MD5";
     private static final String ALGORITHM = "PBEWithMD5AndDES";
@@ -33,7 +33,7 @@ public final class SecurityUtils {
     };
 
 
-    private SecurityUtils() {
+    private Securities() {
     }
 
     /**
@@ -43,7 +43,7 @@ public final class SecurityUtils {
      * @return md5 em hexadecimal
      */
     public static String md5Hex(String data) {
-        return StringUtils.bytes2Hex(md5(data));
+        return Strings.bytes2Hex(md5(data));
     }
 
     /**
@@ -53,7 +53,7 @@ public final class SecurityUtils {
      * @return md5 em array de bytes
      */
     public static byte[] md5(String data) {
-        return data != null ? md5(StringUtils.string2Bytes(data)) : null;
+        return data != null ? md5(Strings.string2Bytes(data)) : null;
     }
 
     public static byte[] md5(byte[] data) {
@@ -68,7 +68,7 @@ public final class SecurityUtils {
     public static String encrypt(String passPhrase, String data) throws SecurityException {
         Cipher cipher = getCipher(passPhrase, Cipher.ENCRYPT_MODE);
         try {
-            byte[] crypt = cipher != null ? cipher.doFinal(StringUtils.string2Bytes(data)) : null;
+            byte[] crypt = cipher != null ? cipher.doFinal(Strings.string2Bytes(data)) : null;
 
             return crypt != null ? new String(Base64.getEncoder().encode(crypt)).replace(FINAL_ENCRYPT, NEW_FINAL_ENCRYPT) : "";
         } catch (IllegalBlockSizeException | BadPaddingException e) {
@@ -87,7 +87,7 @@ public final class SecurityUtils {
         Cipher cipher = getCipher(passPhrase, Cipher.DECRYPT_MODE);
         try {
             byte[] crypt = cipher != null ? cipher.doFinal(Base64.getDecoder().decode(data)) : null;
-            return StringUtils.byte2String(crypt);
+            return Strings.byte2String(crypt);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             throw new SecurityException("Error in decrypt data");
         } catch (Exception e) {

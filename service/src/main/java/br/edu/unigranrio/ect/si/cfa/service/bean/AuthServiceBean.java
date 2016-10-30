@@ -4,9 +4,8 @@ import br.edu.unigranrio.ect.si.cfa.commons.model.SessionInfo;
 import br.edu.unigranrio.ect.si.cfa.commons.model.SessionUser;
 import br.edu.unigranrio.ect.si.cfa.commons.model.User;
 import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
-import br.edu.unigranrio.ect.si.cfa.commons.util.SecurityUtils;
+import br.edu.unigranrio.ect.si.cfa.commons.util.Securities;
 import br.edu.unigranrio.ect.si.cfa.service.AuthService;
-import br.edu.unigranrio.ect.si.cfa.service.LocalMessage;
 import br.edu.unigranrio.ect.si.cfa.service.SessionUserService;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
@@ -26,6 +25,8 @@ import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static br.edu.unigranrio.ect.si.cfa.service.exception.AuthException.*;
+
 @Named
 public class AuthServiceBean implements AuthService {
 
@@ -40,7 +41,6 @@ public class AuthServiceBean implements AuthService {
 
     /* Services */
     @Inject UserService userService;
-    @Inject LocalMessage localMessage;
     @Inject SessionUserService sessionUserService;
 
     @Override
@@ -51,16 +51,16 @@ public class AuthServiceBean implements AuthService {
 
         // Verify if User is Active
         if(!user.isActive()) {
-            String inactiveMsg = localMessage.get("user.inactive", user);
+            String inactiveMsg = "User Inactive " + user;
             logger.warn(inactiveMsg);
-            throw new AuthException(inactiveMsg);
+            throw new AuthException(inactiveMsg, Type.USER_INACTIVE);
         }
 
         // Verify Password
         if (!verifyPassword(user, password)) {
-            String wrongPsswdMsg = localMessage.get("user.password.wrong");
-            logger.warn(user +": " + wrongPsswdMsg);
-            throw new AuthException(wrongPsswdMsg);
+            String wrongPasswordMsg = "User " + user + "Password Wrong";
+            logger.warn(wrongPasswordMsg);
+            throw new AuthException(wrongPasswordMsg, Type.INVALID_PASSWORD);
         }
 
         // Login Session User
@@ -85,7 +85,7 @@ public class AuthServiceBean implements AuthService {
         try {
             inetAddr = InetAddress.getByName(request.getRemoteAddr());
         } catch (UnknownHostException e) {
-            logger.warn(localMessage.get("error.discovery.inetaddr", user), e);
+            logger.warn("Erro ao descobrir InetAddrs para o usuário {}", user, e);
         }
 
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader(USER_AGENT));
@@ -108,24 +108,17 @@ public class AuthServiceBean implements AuthService {
             sessionUserService.save(sessionUser);
 
             session.setAttribute(Constants.LOGGED_USER_ATTR, user.getId());
-            logger.info(localMessage.get("user.session.create", sessionUser));
+            logger.info("User Session Create {}", sessionUser);
         } catch (Exception e) {
-            logger.error(localMessage.get("user.session.create.error",user), e);
-            throw new AuthException(localMessage.get("user.session.login.error"), e);
-        }
-    }
-
-    private void closeSession(SessionUser sessionUser) {
-        if(sessionUser != null){
-            sessionUser.setLogoutDate(Calendar.getInstance());
-            sessionUser = sessionUserService.update(sessionUser);
-            logger.info(localMessage.get("user.session.close", sessionUser));
+            logger.error("User Session Create Error {}", user, e);
+            throw new AuthException(e, Type.LOGIN);
         }
     }
 
     private void logoutSession(User user) throws AuthException {
         try{
-            user = userService.find(User.class, user.getId());
+            if (!userService.contains(user))
+                userService.refresh(user);
 
             // Find Active Session User
             SessionUser sessionUser = sessionUserService.findActiveSessionUser(user);
@@ -133,25 +126,31 @@ public class AuthServiceBean implements AuthService {
             // Close session user if exist active session
             closeSession(sessionUser);
         } catch (Exception e) {
-            String logoutErrorMsg = localMessage.get("user.session.logout.error");
-            logger.error(logoutErrorMsg, e);
-            throw new AuthException(logoutErrorMsg, e);
+            logger.error("User Session Logout Error {}", user, e);
+            throw new AuthException(e, Type.LOGOUT);
+        }
+    }
+
+    private void closeSession(SessionUser sessionUser) {
+        if(sessionUser != null){
+            sessionUser.setLogoutDate(Calendar.getInstance());
+            sessionUser = sessionUserService.update(sessionUser);
+            logger.info("User Session Close {}", sessionUser);
         }
     }
 
     private User identify(String email) throws AuthException {
         User user = userService.findUserByEmail(email);
         if(user == null) {
-            String notFoundMsg = localMessage.get("user.notfound", email);
-            logger.warn(notFoundMsg);
-            throw new AuthException(notFoundMsg);
+            logger.warn("User not found {}", email);
+            throw new AuthException(Type.USER_NOT_FOUND);
         }
 
         return user;
     }
 
     private boolean verifyPassword(User user, String password)  {
-        String encryptPassword = SecurityUtils.encrypt(password);
+        String encryptPassword = Securities.encrypt(password);
         return user != null && user.getPassword().equals(encryptPassword);
     }
 }

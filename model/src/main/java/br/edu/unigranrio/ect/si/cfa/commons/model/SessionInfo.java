@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.commons.model;
 
-import br.edu.unigranrio.ect.si.cfa.commons.util.NetworkUtils;
+import br.edu.unigranrio.ect.si.cfa.commons.util.Networks;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -59,7 +59,7 @@ public class SessionInfo implements Serializable {
         this(locale, address);
         setUserAgent(userAgent);
         setOperationSystem(operationSystem);
-        setMacAddr(address != null ? NetworkUtils.getMacAddress(address) : "");
+        setMacAddr(address != null ? Networks.getMacAddress(address) : "");
     }
 
     public String getLocale() {

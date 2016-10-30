@@ -12,7 +12,7 @@ public final class Pages {
     public static final String RESTRICT = "restrict/";
 
     /* Default Pages */
-    public static final String ACTION_AUTH = "auth.action";
+    public static final String ACTION_AUTH = "authMsg.action";
     public static final String ACTION_MENU = RESTRICT + "menu.action";
 
     public static final String ERROR_AUTH_EXPIRED = ERROR + "expired.action";
