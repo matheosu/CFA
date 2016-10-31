@@ -110,6 +110,6 @@ public abstract class BaseAuditable<PK extends Serializable> extends BaseEntity<
 				", userUpdatedId:" + userUpdatedId +
 				", dateUpdated:" + DateTimeUtils.calendar2String(dateUpdated) +
 				", version:" + version +
-				"} " ;
+				"]" ;
 	}
 }

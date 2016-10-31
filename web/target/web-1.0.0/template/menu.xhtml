@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+
+<ui:composition>
+    <h:form>
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Menu Principal" url="/restrict/menu.action"
+                        icon="fa fa-tachometer">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+
+            <p:menuitem value="Grupo de Usuários" url="#{auth.urlFeature('Grupo de Usuários')}"
+                        icon="fa fa-users" rendered="#{auth.hasFeature('Grupo de Usuários')}">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+
+            <p:menuitem value="Usuários" url="#{auth.urlFeature('Usuários')}"
+                        icon="fa fa-user" rendered="#{auth.hasFeature('Usuários')}">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+
+            <p:menuitem value="Restrições de Fluxo" url="#{auth.urlFeature('Restrições de Fluxo')}"
+                        icon="fa fa-viacoin" rendered="#{auth.hasFeature('Restrições de Fluxo')}">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+
+            <p:menuitem value="Localização de Controladores" url="#{auth.urlFeature('Localização de Controladores')}"
+                        icon="fa fa-map-marker" rendered="#{auth.hasFeature('Localização de Controladores')}">
+                <f:param name="i" value="4" />
+            </p:menuitem>
+
+            <p:menuitem value="Controladores" url="#{auth.urlFeature('Controladores')}"
+                        icon="fa fa-server" rendered="#{auth.hasFeature('Controladores')}">
+                <f:param name="i" value="5" />
+            </p:menuitem>
+
+            <f:facet name="options">
+                <p:inputText style="margin-right:10px" placeholder="Search"/>
+                <p:menuButton value="#{auth.userName}" iconPos="" style="margin-right:20px; border:none;">
+                    <p:menuitem value="Alterar Dados" icon="fa fa-user" />
+                    <p:menuitem value="Configurações" icon="fa fa-cog" />
+                    <p:separator />
+                    <p:menuitem value="Sair" icon="fa fa-sign-out"
+                                action="#{auth.doLogout}" ajax="false" style="color:red" />
+                </p:menuButton>
+            </f:facet>
+        </p:tabMenu>
+    </h:form>
+</ui:composition>
+
+
+</html>

@@ -7,19 +7,22 @@ public final class Pages {
     /* Redirect */
     public static final String REDIRECT = "?faces-redirect=true";
 
+    public static final String EXTENSION = ".xhtml";
+
     /* Path */
-    public static final String ERROR = "error/";
-    public static final String RESTRICT = "restrict/";
+    public static final String ERROR = "/error/";
+    public static final String RESTRICT = "/restrict/";
 
     /* Default Pages */
-    public static final String ACTION_AUTH = "authMsg.action";
-    public static final String ACTION_MENU = RESTRICT + "menu.action";
+    public static final String INDEX = "/index" + EXTENSION;
+    public static final String ACTION_AUTH = "/auth" + EXTENSION;
+    public static final String ACTION_MENU = RESTRICT + "menu" + EXTENSION;
 
-    public static final String ERROR_AUTH_EXPIRED = ERROR + "expired.action";
+    public static final String ERROR_AUTH_EXPIRED = ERROR + "expired" + EXTENSION;
 
     /* Pattern */
-    public static final String ACTION_LIST = "_list.action";
-    public static final String ACTION_EDIT = "_edit.action";
+    public static final String ACTION_LIST = "_list" + EXTENSION;
+    public static final String ACTION_EDIT = "_edit" + EXTENSION;
 
 
     private Pages() {
@@ -43,7 +46,11 @@ public final class Pages {
 
     public static  <E extends Entity<?>> String actionList(Class<E> clazz, boolean redirect) {
         String classLower = clazz.getSimpleName().toLowerCase();
-        return RESTRICT + classLower + ACTION_LIST + (redirect ? REDIRECT : "");
+        return actionList(classLower, redirect);
+    }
+
+    public static String actionList(String page, boolean redirect) {
+        return RESTRICT + page + ACTION_LIST + (redirect ? REDIRECT : "");
     }
 
     public static <E extends Entity<?>> String actionList(Class<E> clazz) {
@@ -52,7 +59,11 @@ public final class Pages {
 
     public static <E extends Entity<?>> String actionEdit(Class<E> clazz, boolean redirect) {
         String classLower = clazz.getSimpleName().toLowerCase();
-        return RESTRICT + classLower + ACTION_EDIT + (redirect ? REDIRECT : "");
+        return actionEdit(classLower, redirect);
+    }
+
+    public static String actionEdit(String page, boolean redirect) {
+        return RESTRICT + page + ACTION_EDIT + (redirect ? REDIRECT : "");
     }
 
     public static <E extends Entity<?>> String actionEdit(Class<E> clazz) {

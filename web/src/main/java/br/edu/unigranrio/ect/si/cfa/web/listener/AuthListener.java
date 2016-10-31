@@ -14,16 +14,16 @@ public class AuthListener implements PhaseListener {
 
     private static final long serialVersionUID = -8035214378922845726L;
 
-    @Inject Auth auth;
-    @Inject FacesContext context;
-
     @Override
     public void afterPhase(PhaseEvent phaseEvent) {
-        if(!context.getViewRoot().getViewId().contains(Pages.ACTION_AUTH) ||
-            !context.getViewRoot().getViewId().contains(Pages.ERROR_AUTH_EXPIRED)) {
+        final FacesContext context = phaseEvent.getFacesContext();
+        if(!context.getViewRoot().getViewId().equals(Pages.INDEX) &&
+                 !context.getViewRoot().getViewId().equals(Pages.ACTION_AUTH) &&
+                 !context.getViewRoot().getViewId().equals(Pages.ERROR_AUTH_EXPIRED)) {
 
+            Auth auth = context.getApplication().evaluateExpressionGet(context, "#{auth}", Auth.class);
             NavigationHandler nav = context.getApplication().getNavigationHandler();
-            if (auth == null || auth.getUser() == null)
+            if (auth == null || !auth.isAuthenticate())
                 nav.handleNavigation(context, null, Pages.ERROR_AUTH_EXPIRED);
         }
     }

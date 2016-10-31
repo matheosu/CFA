@@ -58,7 +58,7 @@ public class AuthServiceBean implements AuthService {
 
         // Verify Password
         if (!verifyPassword(user, password)) {
-            String wrongPasswordMsg = "User " + user + "Password Wrong";
+            String wrongPasswordMsg = "User " + user.getName() + " Wrong Password";
             logger.warn(wrongPasswordMsg);
             throw new AuthException(wrongPasswordMsg, Type.INVALID_PASSWORD);
         }

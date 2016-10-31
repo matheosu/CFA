@@ -1,7 +1,5 @@
 package br.edu.unigranrio.ect.si.cfa.web;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.User;
-
 import java.io.Serializable;
 
 public interface Auth extends Serializable {
@@ -10,6 +8,12 @@ public interface Auth extends Serializable {
 
     String doLogout();
 
-    User getUser();
+    String getUserName();
+
+    boolean isAuthenticate();
+
+    boolean hasFeature(String featureName);
+
+    String urlFeature(final String featureName);
 
 }

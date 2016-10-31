@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <application>
         <locale-config>
@@ -14,9 +14,11 @@
             <base-name>messages</base-name>
             <var>msg</var>
         </resource-bundle>
-
-        <!-- Listener -->
-        <action-listener id="br.edu.unigranrio.ect.si.cfa.web.listener.AuthListener"/>
-
     </application>
+
+    <!-- Listener -->
+    <lifecycle>
+        <phase-listener>br.edu.unigranrio.ect.si.cfa.web.listener.AuthListener</phase-listener>
+    </lifecycle>
+
 </faces-config>

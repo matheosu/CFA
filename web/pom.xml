@@ -123,6 +123,7 @@
                 <configuration>
                     <path>/cfa</path>
                     <port>8080</port>
+                    <contextReloadable>true</contextReloadable>
                     <addContextWarDependencies>true</addContextWarDependencies>
                     <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
                     <warSourceDirectory>${project.build.directory}/${project.build.finalName}/</warSourceDirectory>
