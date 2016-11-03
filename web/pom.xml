@@ -16,25 +16,48 @@
         <!-- Commons -->
         <dependency>
             <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>cfa-commons</artifactId>
             <version>1.0.0</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- Model -->
         <dependency>
             <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>cfa-model</artifactId>
             <version>1.0.0</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- Service -->
         <dependency>
             <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>cfa-service</artifactId>
             <version>1.0.0</version>
-            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jstl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>sip-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.el</groupId>
+                    <artifactId>el-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Java EE -->
@@ -47,16 +70,35 @@
 
         <!-- Weld -->
         <dependency>
-            <groupId>org.jboss.weld</groupId>
-            <artifactId>weld-core-jsf</artifactId>
-            <version>2.4.0.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet</artifactId>
             <version>2.4.0.Final</version>
-            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jstl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>sip-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.el</groupId>
+                    <artifactId>el-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- JSF -->
@@ -77,13 +119,11 @@
             <artifactId>primefaces</artifactId>
             <version>6.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>bootstrap</artifactId>
             <version>1.0.10</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -102,7 +142,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
-                                    <artifactId>service</artifactId>
+                                    <artifactId>cfa-service</artifactId>
                                     <version>1.0.0</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
@@ -124,6 +164,7 @@
                     <path>/cfa</path>
                     <port>8080</port>
                     <contextReloadable>true</contextReloadable>
+                    <contextFile>src/main/webapp/META-INF/context.xml</contextFile>
                     <addContextWarDependencies>true</addContextWarDependencies>
                     <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
                     <warSourceDirectory>${project.build.directory}/${project.build.finalName}/</warSourceDirectory>

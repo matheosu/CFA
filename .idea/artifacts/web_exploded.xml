@@ -46,7 +46,6 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="web/web/Web" />
-      <element id="jpa-descriptors" facet="model/jpa/JPA" />
     </root>
   </artifact>
 </component>

@@ -40,7 +40,7 @@ public class AuthBean implements Auth {
             features = user.getRole().getFeatures();
             if (!features.isEmpty())
                 AuditListenerFactory.setEntityListener(new WebAuditListener(user.getId()));
-            return Pages.actionMenu();
+            return Pages.actionMain();
         } catch (AuthException e) {
             message.authMsg(e.getType());
         }
@@ -83,7 +83,7 @@ public class AuthBean implements Auth {
             Optional<Feature> optional = features.stream()
                                 .filter(f -> f.getName().equals(featureName))
                                 .findFirst();
-            return optional.isPresent() ? Pages.actionList(optional.get().getUrl(), true) : Pages.actionMenu();
+            return optional.isPresent() ? Pages.actionList(optional.get().getUrl(), true) : Pages.actionMain();
         }
         return Pages.actionAuth(true);
     }

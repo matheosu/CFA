@@ -27,7 +27,7 @@ public class WebApplication implements Serializable {
         if (auth == null || !auth.isAuthenticate()) {
             navigation.handleNavigation(context, null, Pages.actionAuth());
         } else {
-            navigation.handleNavigation(context, null, Pages.actionMenu());
+            navigation.handleNavigation(context, null, Pages.actionMain());
         }
     }
 

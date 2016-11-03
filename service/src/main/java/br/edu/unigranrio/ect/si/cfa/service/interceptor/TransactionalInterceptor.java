@@ -30,7 +30,9 @@ public class TransactionalInterceptor implements Serializable {
 
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {
-        boolean error = false;
+        boolean exception = false;
+        boolean serviceException = false;
+        boolean applicationException = false;
 
         EntityTransaction transaction = em.getTransaction();
         try {
@@ -40,20 +42,23 @@ public class TransactionalInterceptor implements Serializable {
             }
 
             return context.proceed();
-        } catch (ServiceExeption | ApplicationException se) {
-            error = true;
+        } catch (ServiceExeption se) {
+            serviceException = true;
             throw se;
+        } catch (ApplicationException ae) {
+            applicationException = true;
+            throw ae;
         } catch (Exception e) {
-            error = true;
+            exception = true;
             throw new TransactionalException("Transactional Error ", e);
         } finally {
             if (transaction != null && transaction.isActive()) {
-                if (!error) {
+                if (!exception && !serviceException && !applicationException) {
                     transaction.commit();
                     logger.info("Transaction Commit");
                 } else {
                     transaction.rollback();
-                    logger.error("Transaction Rollback");
+                    logger.warn("Transaction Rollback");
                 }
             }
         }

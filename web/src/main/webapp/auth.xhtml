@@ -9,17 +9,18 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>#{msg['title']}</title>
+    <h:outputStylesheet library="css" name="default.css"/>
 </h:head>
 
 <h:body>
     <div class="ui-grid ui-grid-responsive" id="pagina" align="center"
-         style="margin-top: 70px; margin-left: 25px;">
+         style="margin: 50px auto;">
         <div id="idCabecalho" class="ui-grid-row">
             <div class="ui-grid-col-12">
                 <p:toolbar
                         style="border:none; background:#FFFFFF; align:center;text-align:center;">
                     <p:toolbarGroup align="center">
-                        <h:graphicImage url="/img/logo_unigranrio.png" width="220"/>
+                        <h:graphicImage library="img" name="logo_unigranrio.png" width="200"/>
                     </p:toolbarGroup>
                 </p:toolbar>
             </div>
@@ -28,7 +29,7 @@
         <h:form id="form">
             <h:panelGrid>
                 <p:panel header="Acesso ao Sistema"
-                         style="position: absolute; left: 50%; top: 20%; margin-left: -110px; margin-top: -40px;">
+                         style="margin: 5px auto;">
                     <h:panelGrid columns="1" cellpadding="2" cellspacing="2">
                         <p:messages globalOnly="true" closable="true" showIcon="false"/>
                         <h:panelGroup>
@@ -56,13 +57,6 @@
                 </p:panel>
             </h:panelGrid>
         </h:form>
-
-        <div id="idRodape" class="ui-grid-row">
-            <f:facet name="footer">
-                <h:outputText
-                        value="2016 Unigranrio - &copy; Todos os direitos reservados."/>
-            </f:facet>
-        </div>
     </div>
 </h:body>
 

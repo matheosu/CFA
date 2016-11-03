@@ -16,7 +16,7 @@ public final class Pages {
     /* Default Pages */
     public static final String INDEX = "/index" + EXTENSION;
     public static final String ACTION_AUTH = "/auth" + EXTENSION;
-    public static final String ACTION_MENU = RESTRICT + "menu" + EXTENSION;
+    public static final String ACTION_MAIN = RESTRICT + "main" + EXTENSION;
 
     public static final String ERROR_AUTH_EXPIRED = ERROR + "expired" + EXTENSION;
 
@@ -28,12 +28,12 @@ public final class Pages {
     private Pages() {
     }
 
-    public static String actionMenu() {
-        return actionMenu(true);
+    public static String actionMain() {
+        return actionMain(true);
     }
 
-    public static String actionMenu(boolean redirect) {
-        return ACTION_MENU + (redirect  ? REDIRECT : "");
+    public static String actionMain(boolean redirect) {
+        return ACTION_MAIN + (redirect  ? REDIRECT : "");
     }
 
     public static String actionAuth() {

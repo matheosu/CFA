@@ -1,0 +1,8 @@
+<Context reloadable="true" cachingAllowed="false" path="/cfa">
+    <Resource name="BeanManager"
+              auth="Container"
+              type="javax.enterprise.inject.spi.BeanManager"
+              factory="org.jboss.weld.resources.ManagerObjectFactory"/>
+</Context>
+
+
