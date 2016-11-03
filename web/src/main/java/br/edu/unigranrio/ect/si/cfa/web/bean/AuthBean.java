@@ -44,18 +44,19 @@ public class AuthBean implements Auth {
         } catch (AuthException e) {
             message.authMsg(e.getType());
         }
-        return null;
+        return "";
     }
 
     @Override
+    @Transactional
     public String doLogout() {
         try {
             authService.doLogout(user);
+            return Pages.actionAuth();
         } catch (AuthException e) {
             message.authMsg(e.getType());
         }
-
-        return null;
+        return "";
     }
 
     @Override

@@ -7,7 +7,7 @@ public final class Pages {
     /* Redirect */
     public static final String REDIRECT = "?faces-redirect=true";
 
-    public static final String EXTENSION = ".xhtml";
+    public static final String EXTENSION = ".action";
 
     /* Path */
     public static final String ERROR = "/error/";

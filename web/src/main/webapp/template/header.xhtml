@@ -9,10 +9,18 @@
 
 <ui:composition>
     <h:form id="formHeader">
-        <p:toolbar style="border:none;background:#FFFFFF;">
+        <p:toolbar style="border:none;background:#FFFFFF; padding: 10px 35px 10px 35px">
             <f:facet name="left">
-                <h:graphicImage library="img" name="logo_unigranrio.png" width="220" style="margin-left:20px;"/>
-                <h:outputLabel style="margin-bottom: 20px;">#{msg['title']}</h:outputLabel>
+                <h:graphicImage library="img" name="logo_unigranrio.png" width="200" style="margin-left: 15px;"/>
+
+                <h:outputLabel style="margin-left: 15px;">#{msg['title']}</h:outputLabel>
+            </f:facet>
+            <f:facet name="right">
+                <p:splitButton value="#{auth.userName}" icon="fa fa-user">
+                    <p:menuitem value="#{msg['update']}" icon="fa fa-cogs" />
+                    <p:separator />
+                    <p:menuitem value="#{msg['logout']}" action="#{auth.doLogout}" icon="fa fa-sign-out" />
+                </p:splitButton>
             </f:facet>
         </p:toolbar>
     </h:form>

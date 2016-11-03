@@ -15,17 +15,19 @@
 
             <!-- SubTitle -->
             <div align="left" style="display: inline-block; margin-bottom: 20px;">
-                <p:outputLabel value="Lista de #{fullEntityName}" />
+                <p:outputLabel value="#{msg['template.list.title']}">
+                    <f:param value="#{fullEntityName}"/>
+                </p:outputLabel>
             </div>
 
             <!-- Button New -->
             <div align="right" style="float: right;">
                 <p:commandButton action="#{action.create}" type="push" immediate="true"
                                  ajax="false" icon="fa fa-plus" id="btnCreate"
-                                 value="Novo #{entityName}" styleClass=".btn-new"
+                                 value="#{msg['new']} #{entityName}" styleClass=".btn-new"
                                  style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
                 <p:tooltip id="tooltipNew" for="btnCreate"
-                           value="Novo #{fullEntityName}" trackMouse="true" />
+                           value="#{msg['new']} #{fullEntityName}" trackMouse="true" />
             </div>
 
 
@@ -37,7 +39,7 @@
                          var="instance" paginator="true" rows="10"
                          rowsPerPageTemplate="10,15,20" selectionMode="single"
                          rowKey="#{instance.id}"
-                         emptyMessage="Não há #{fullEntityName}s Cadastrados">
+                         emptyMessage="#{msg['template.list.empty']}#{fullEntityName}">
 
                 <!-- Insert -->
                 <ui:insert name="itensList">
@@ -58,7 +60,7 @@
 
                         <!-- Tool tip Change -->
                         <p:tooltip id="toolTipAlterar" for="btnAlterar"
-                                   value="Alterar #{fullEntityName}" trackMouse="true" />
+                                   value="#{msg['update']} #{fullEntityName}" trackMouse="true" />
 
                         <!-- Button Delete  -->
                         <p:commandButton type="button" id="btnExcluir"
@@ -72,20 +74,20 @@
                                          header="Confirmação de Exclusão" severity="alert"
                                          widgetVar="conf#{instance.id}" >
 
-                            <p:commandButton ajax="false" type="push" value="Sim" oncomplete="PF('conf#{instance.id}').hide()"
+                            <p:commandButton ajax="false" type="push" value="#{msg['yes']}" oncomplete="PF('conf#{instance.id}').hide()"
                                              style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                              action="#{action.delete}" immediate="true" icon="fa fa-check">
                                 <f:param value="#{instance.id}" name="id" />
                             </p:commandButton>
 
-                            <p:commandButton value="Não" onclick="PF('conf#{instance.id}').hide()"
+                            <p:commandButton value="#{msg['no']}" onclick="PF('conf#{instance.id}').hide()"
                                              style="text-shadow: none;background: #d9534f none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                              type="button" icon="fa fa-times" />
                         </p:confirmDialog>
 
                         <!-- Tool tip Delete -->
                         <p:tooltip id="toolTipExcluir" for="btnExcluir"
-                                   value="Excluir #{fullEntityName}" trackMouse="true" />
+                                   value="#{msg['remove']} #{fullEntityName}" trackMouse="true" />
 
                     </h:panelGroup>
                 </p:column>

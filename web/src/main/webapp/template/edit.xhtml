@@ -24,13 +24,13 @@
                 <!-- Buttons -->
                 <f:facet name="footer">
                     <div align="left" style="display: inline-block;">
-                        <p:commandButton icon="fa fa-check" value="Salvar"
+                        <p:commandButton icon="fa fa-check" value="#{msg[save]}"
                                          action="#{action.save}" type="push" imediate="false" ajax="false"
                                          style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                          styleClass="btn btn-save"/>
                     </div>
                     <div align="right" style="float: right;">
-                        <p:commandButton icon="fa fa-undo" value="Voltar"
+                        <p:commandButton icon="fa fa-undo" value="#{msg['back']}"
                                          action="#{action.back}" type="push" immediate="true" ajax="false"
                                          style="text-shadow: none;background: #f0ad4e none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                          styleClass="btn btn-back"/>

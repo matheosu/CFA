@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
 >
@@ -21,9 +20,9 @@
             <h:outputText
                     style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
                     value="#{msg['error.exception.detail']}" />
-            <p:commandButton value="Menu" ajax="false" immediate="true"
-                             action="#{menuAction.show}" icon="fa fa-tachometer" id="btnMenu"
-                             style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
+            <!--<p:commandButton value="Menu" ajax="false" immediate="true"-->
+                             <!--action="#{.show}" icon="fa fa-tachometer" id="btnMenu"-->
+                             <!--style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />-->
         </h:panelGrid>
     </ui:define>
 </ui:composition>

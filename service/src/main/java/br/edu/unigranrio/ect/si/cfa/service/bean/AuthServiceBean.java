@@ -118,7 +118,7 @@ public class AuthServiceBean implements AuthService {
     private void logoutSession(User user) throws AuthException {
         try{
             if (!userService.contains(user))
-                userService.refresh(user);
+                user = userService.find(User.class, user.getId());
 
             // Find Active Session User
             SessionUser sessionUser = sessionUserService.findActiveSessionUser(user);
