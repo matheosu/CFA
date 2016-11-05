@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Service extends Serializable {
 
-    <E extends Entity<PK>, PK extends Serializable> E find(Class<E> clazz, PK id);
+    <E extends Entity<PK>, PK extends Number> E find(Class<E> clazz, PK id);
 
     <E extends Entity<?>> List<E> list(Class<E> clazz);
 

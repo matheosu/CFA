@@ -19,7 +19,7 @@ public class WebAuditListener implements AuditListener, Serializable {
     }
 
     @Override
-    public <PK extends Serializable> void prePersist(Auditable<PK> entity) {
+    public <PK extends Number> void prePersist(Auditable<PK> entity) {
         entity.setDateCreated(Calendar.getInstance());
         entity.setUserCreatedId(loggedUserId != null ? loggedUserId : SYSTEM_ID);
         entity.setDateUpdated(Calendar.getInstance());
@@ -27,7 +27,7 @@ public class WebAuditListener implements AuditListener, Serializable {
     }
 
     @Override
-    public <PK extends Serializable> void preUpdate(Auditable<PK> entity) {
+    public <PK extends Number> void preUpdate(Auditable<PK> entity) {
         entity.setDateUpdated(Calendar.getInstance());
         entity.setUserUpdatedId(loggedUserId != null ? loggedUserId : SYSTEM_ID);
     }

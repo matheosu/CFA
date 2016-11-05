@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 @MappedSuperclass
-public abstract class BaseAuditable<PK extends Serializable> extends BaseEntity<PK> implements Auditable<PK> {
+public abstract class BaseAuditable<PK extends Number> extends BaseEntity<PK> implements Auditable<PK> {
 
 	private static final long serialVersionUID = 8554506860263888514L;
 

@@ -1,11 +1,9 @@
 package br.edu.unigranrio.ect.si.cfa.commons.model;
 
-import java.io.Serializable;
-
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class BaseEntity<PK extends Serializable> implements Serializable, Entity<PK> {
+public abstract class BaseEntity<PK extends Number> implements Entity<PK> {
 
     private static final long serialVersionUID = -6355720954167694592L;
 

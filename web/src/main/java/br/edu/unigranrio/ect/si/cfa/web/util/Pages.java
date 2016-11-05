@@ -19,6 +19,7 @@ public final class Pages {
     public static final String ACTION_AUTH = "/auth" + URL_PATTERN;
     public static final String ACTION_MAIN = RESTRICT + "main" + URL_PATTERN;
 
+    /* Error Pages */
     public static final String ERROR_AUTH_EXPIRED = ERROR + "expired" + URL_PATTERN;
 
     /* Pattern */

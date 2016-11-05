@@ -29,7 +29,7 @@ abstract class ServiceBean implements Service {
     protected EntityManager em;
 
     @Override
-    public <E extends Entity<PK>, PK extends Serializable> E find(Class<E> clazz, PK id) {
+    public <E extends Entity<PK>, PK extends Number> E find(Class<E> clazz, PK id) {
         return em.find(clazz, id);
     }
 
@@ -65,7 +65,7 @@ abstract class ServiceBean implements Service {
         return em.contains(entity);
     }
 
-    protected <E extends Entity<PK>, PK extends Serializable> E singleResult(TypedQuery<E> query) {
+    protected <E extends Entity<PK>, PK extends Number> E singleResult(TypedQuery<E> query) {
         try {
             return Objects.requireNonNull(query).getSingleResult();
         } catch (NoResultException e) {
@@ -78,7 +78,7 @@ abstract class ServiceBean implements Service {
         return null;
     }
 
-    protected <E extends Entity<PK>, PK extends Serializable> E singleResult(CriteriaQuery<E> query) {
+    protected <E extends Entity<PK>, PK extends Number> E singleResult(CriteriaQuery<E> query) {
         return singleResult(em.createQuery(query));
     }
 

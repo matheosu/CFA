@@ -8,6 +8,7 @@
 
 <ui:composition template="${pageContext.request.contextPath}/template/restrict.xhtml">
 
+    <f:phaseListener />
     <ui:define name="title">#{fullEntityName}_list</ui:define>
 
     <ui:define name="content">
@@ -15,9 +16,9 @@
 
             <!-- SubTitle -->
             <div align="left" style="display: inline-block; margin-bottom: 20px;">
-                <p:outputLabel value="#{msg['template.list.title']}">
+                <h:outputLabel value="#{msg['template.list.title']}">
                     <f:param value="#{fullEntityName}"/>
-                </p:outputLabel>
+                </h:outputLabel>
             </div>
 
             <!-- Button New -->
@@ -25,7 +26,8 @@
                 <p:commandButton action="#{action.create}" type="push" immediate="true"
                                  ajax="false" icon="fa fa-plus" id="btnCreate"
                                  value="#{msg['new']}" styleClass=".btn-new"
-                                 style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
+                                 style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" >
+                </p:commandButton>
                 <p:tooltip id="tooltipNew" for="btnCreate"
                            value="#{fullEntityName}" trackMouse="true" />
             </div>

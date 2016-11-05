@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public interface AuditListener {
 
-    <PK extends Serializable> void prePersist(Auditable<PK> entity);
+    <PK extends Number> void prePersist(Auditable<PK> entity);
 
-    <PK extends Serializable> void preUpdate(Auditable<PK> entity);
+    <PK extends Number> void preUpdate(Auditable<PK> entity);
 
 }

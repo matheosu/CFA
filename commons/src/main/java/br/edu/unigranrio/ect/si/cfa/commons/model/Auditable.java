@@ -3,7 +3,7 @@ package br.edu.unigranrio.ect.si.cfa.commons.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
-public interface Auditable<PK extends Serializable> extends Entity<PK>{
+public interface Auditable<PK extends Number> extends Entity<PK>{
 
     Long getUserCreatedId();
 
