@@ -7,7 +7,7 @@ import br.edu.unigranrio.ect.si.cfa.service.LocalizationService;
 import javax.inject.Named;
 
 @Named
-public class LocalizationServiceBean extends BaseService implements LocalizationService {
+public class LocalizationServiceBean extends ServiceBean implements LocalizationService {
 
     private static final long serialVersionUID = 9005938490309568180L;
 

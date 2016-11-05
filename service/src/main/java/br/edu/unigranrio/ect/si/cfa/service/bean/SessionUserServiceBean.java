@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Named
-public class SessionUserServiceBean extends BaseService implements SessionUserService {
+public class SessionUserServiceBean extends ServiceBean implements SessionUserService {
 
     private static final long serialVersionUID = 8239206494004378799L;
 

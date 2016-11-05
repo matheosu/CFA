@@ -1,6 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.commons.model;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.listener.AuditableListener;
+import br.edu.unigranrio.ect.si.cfa.commons.factory.AuditListenerFactory;
+import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListener;
 import br.edu.unigranrio.ect.si.cfa.commons.util.DateTimeUtils;
 
 import javax.persistence.*;
@@ -8,7 +9,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 @MappedSuperclass
-@EntityListeners({AuditableListener.class })
 public abstract class BaseAuditable<PK extends Serializable> extends BaseEntity<PK> implements Auditable<PK> {
 
 	private static final long serialVersionUID = 8554506860263888514L;
@@ -111,5 +111,19 @@ public abstract class BaseAuditable<PK extends Serializable> extends BaseEntity<
 				", dateUpdated:" + DateTimeUtils.calendar2String(dateUpdated) +
 				", version:" + version +
 				"]" ;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		AuditListener listener = AuditListenerFactory.getEntityListener();
+		if (listener != null)
+			listener.prePersist(this);
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		AuditListener listener = AuditListenerFactory.getEntityListener();
+		if (listener != null)
+			listener.preUpdate(this);
 	}
 }

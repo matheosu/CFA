@@ -13,4 +13,15 @@
     <packaging>jar</packaging>
     <name>Classes Comuns e Utilitárias</name>
 
+
+    <dependencies>
+        <!-- Java EE -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 </project>

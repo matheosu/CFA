@@ -1,6 +1,5 @@
 package br.edu.unigranrio.ect.si.cfa.web.message.bean;
 
-import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 import br.edu.unigranrio.ect.si.cfa.web.message.Message;
 
 import javax.faces.application.FacesMessage;

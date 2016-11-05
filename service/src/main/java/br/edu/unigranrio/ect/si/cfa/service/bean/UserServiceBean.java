@@ -10,7 +10,7 @@ import javax.persistence.criteria.*;
 import java.util.List;
 
 @Named
-public class UserServiceBean extends BaseService implements UserService {
+public class UserServiceBean extends ServiceBean implements UserService {
 
     private static final long serialVersionUID = 6581130279830770035L;
 

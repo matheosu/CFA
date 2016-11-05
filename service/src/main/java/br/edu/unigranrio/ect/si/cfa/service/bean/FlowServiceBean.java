@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Named
-public class FlowServiceBean extends BaseService implements FlowService {
+public class FlowServiceBean extends ServiceBean implements FlowService {
 
     private static final long serialVersionUID = 3532101836322434970L;
 

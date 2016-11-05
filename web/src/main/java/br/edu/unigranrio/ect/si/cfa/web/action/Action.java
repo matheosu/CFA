@@ -13,4 +13,7 @@ public interface Action extends Serializable {
     String delete();
 
     String back();
+
+    String list();
+
 }

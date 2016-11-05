@@ -24,10 +24,10 @@
             <div align="right" style="float: right;">
                 <p:commandButton action="#{action.create}" type="push" immediate="true"
                                  ajax="false" icon="fa fa-plus" id="btnCreate"
-                                 value="#{msg['new']} #{entityName}" styleClass=".btn-new"
+                                 value="#{msg['new']}" styleClass=".btn-new"
                                  style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
                 <p:tooltip id="tooltipNew" for="btnCreate"
-                           value="#{msg['new']} #{fullEntityName}" trackMouse="true" />
+                           value="#{fullEntityName}" trackMouse="true" />
             </div>
 
 
@@ -55,12 +55,12 @@
                                          styleClass=".btn-edit"
                                          style="text-shadow: none;background: #5bc0de none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                          icon="fa fa-pencil-square-o">
-                            <f:param value="#{instance.id}" name="id" />
+                            <f:param value="#{instance.id}" name="requestId" />
                         </p:commandButton>
 
                         <!-- Tool tip Change -->
                         <p:tooltip id="toolTipAlterar" for="btnAlterar"
-                                   value="#{msg['update']} #{fullEntityName}" trackMouse="true" />
+                                   value="#{msg['update']}" trackMouse="true" />
 
                         <!-- Button Delete  -->
                         <p:commandButton type="button" id="btnExcluir"
@@ -77,7 +77,7 @@
                             <p:commandButton ajax="false" type="push" value="#{msg['yes']}" oncomplete="PF('conf#{instance.id}').hide()"
                                              style="text-shadow: none;background: #5cb85c none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                              action="#{action.delete}" immediate="true" icon="fa fa-check">
-                                <f:param value="#{instance.id}" name="id" />
+                                <f:param value="#{instance.id}" name="requestId" />
                             </p:commandButton>
 
                             <p:commandButton value="#{msg['no']}" onclick="PF('conf#{instance.id}').hide()"
@@ -87,7 +87,7 @@
 
                         <!-- Tool tip Delete -->
                         <p:tooltip id="toolTipExcluir" for="btnExcluir"
-                                   value="#{msg['remove']} #{fullEntityName}" trackMouse="true" />
+                                   value="#{msg['remove']}" trackMouse="true" />
 
                     </h:panelGroup>
                 </p:column>

@@ -7,29 +7,26 @@
     <ui:param name="fullEntityName" value="Localização" />
     <ui:param name="entityName" value="Localizacao" />
     <ui:param name="action" value="#{localizationAction}" />
-    <ui:param name="instance" value="#{localizationAction.instance}" />
 
     <ui:define name="fields">
         <h:panelGrid columns="1" cellpadding="3">
             <h:panelGroup>
                 <!-- ID -->
-                <h:inputHidden id="idLocalizacao" value="#{instance.id}" />
+                <h:inputHidden id="id" value="#{localizationAction.instance.id}" />
             </h:panelGroup>
 
             <!--  Nome -->
             <h:outputLabel for="name" value="Nome" />
             <p:inputText id="name" placeholder="Nome"
-                         value="#{instance.name}"
-                         required="true" requiredMessage="Nome é obrigatório" size="66"
-                         maxlength="#{instance.MAX_LENGTH_NAME}" />
+                         value="#{localizationAction.instance.name}"
+                         required="true" requiredMessage="Nome é obrigatório" size="66"/>
             <p:message for="name" />
 
             <!--  Descrição -->
             <h:outputLabel for="descricao" value="Descrição" />
             <p:inputText id="descricao" placeholder="Descrição"
-                         value="#{instance.description}"
-                         required="false"  size="66"
-                         maxlength="#{instance.MAX_LENGTH_DESCRIPTION}" />
+                         value="#{localizationAction.instance.description}"
+                         required="false"  size="66"/>
             <p:message for="descricao" />
 
         </h:panelGrid>

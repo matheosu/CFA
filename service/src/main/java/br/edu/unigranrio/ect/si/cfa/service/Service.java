@@ -3,12 +3,13 @@ package br.edu.unigranrio.ect.si.cfa.service;
 import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface Service extends Serializable {
 
     <E extends Entity<PK>, PK extends Serializable> E find(Class<E> clazz, PK id);
 
-    <E extends Entity<?>> E list(Class<E> clazz);
+    <E extends Entity<?>> List<E> list(Class<E> clazz);
 
     <E extends Entity<?>> void save(E entity);
 

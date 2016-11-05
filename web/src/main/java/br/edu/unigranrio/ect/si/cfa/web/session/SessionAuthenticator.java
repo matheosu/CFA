@@ -1,33 +1,33 @@
-package br.edu.unigranrio.ect.si.cfa.web.bean;
+package br.edu.unigranrio.ect.si.cfa.web.session;
 
 import br.edu.unigranrio.ect.si.cfa.commons.factory.AuditListenerFactory;
-import br.edu.unigranrio.ect.si.cfa.commons.model.Feature;
 import br.edu.unigranrio.ect.si.cfa.commons.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.AuthService;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
-import br.edu.unigranrio.ect.si.cfa.web.Auth;
-import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
+import br.edu.unigranrio.ect.si.cfa.web.Authenticator;
 import br.edu.unigranrio.ect.si.cfa.web.listener.WebAuditListener;
+import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
-import java.util.Optional;
+import java.security.Principal;
 
 @Named("auth")
 @SessionScoped
-public class AuthBean implements Auth {
+public class SessionAuthenticator implements Authenticator {
 
     private static final long serialVersionUID = 3015058683489706291L;
 
-    @Inject AuthMessage message;
-    @Inject AuthService authService;
+    @Inject
+    AuthMessage message;
+    @Inject
+    AuthService authService;
 
     private User user;
-    private List<Feature> features;
+    private Principal principal;
 
     private String email;
     private String password;
@@ -37,8 +37,7 @@ public class AuthBean implements Auth {
     public String doLogin() {
         try {
             user = authService.doLogin(email, password);
-            features = user.getRole().getFeatures();
-            if (!features.isEmpty())
+            if (user != null)
                 AuditListenerFactory.setEntityListener(new WebAuditListener(user.getId()));
             return Pages.actionMain();
         } catch (AuthException e) {
@@ -60,33 +59,18 @@ public class AuthBean implements Auth {
     }
 
     @Override
-    public String getUserName() {
-        return isAuthenticate() ? user.getName() : "";
+    public Principal getPrincipal() {
+        if (isAuthenticate()) {
+            if (principal == null)
+                principal = PrincipalWrapper.wrapper(user.getName());
+            return principal;
+        }
+        return null;
     }
 
     @Override
     public boolean isAuthenticate() {
         return user != null;
-    }
-
-    @Override
-    public boolean hasFeature(final String featureName) {
-        if (isAuthenticate())
-            return features.stream()
-                        .filter(f -> f.getName().equals(featureName))
-                        .findAny().isPresent();
-        return false;
-    }
-
-    @Override
-    public String urlFeature(final String featureName) {
-        if (isAuthenticate()) {
-            Optional<Feature> optional = features.stream()
-                                .filter(f -> f.getName().equals(featureName))
-                                .findFirst();
-            return optional.isPresent() ? Pages.actionList(optional.get().getUrl(), true) : Pages.actionMain();
-        }
-        return Pages.actionAuth(true);
     }
 
     public String getEmail() {
@@ -103,6 +87,28 @@ public class AuthBean implements Auth {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Principal Wrapper
+     */
+    private static final class PrincipalWrapper implements Principal {
+
+        private final String name;
+
+        private PrincipalWrapper(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        static Principal wrapper(String name) {
+            return new PrincipalWrapper(name);
+        }
+
     }
 
 }

@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Named
-public class RoleServiceBean extends BaseService implements RoleService {
+public class RoleServiceBean extends ServiceBean implements RoleService {
 
     private static final long serialVersionUID = -801540652111399827L;
 

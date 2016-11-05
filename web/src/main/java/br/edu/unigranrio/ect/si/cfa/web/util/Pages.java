@@ -7,22 +7,23 @@ public final class Pages {
     /* Redirect */
     public static final String REDIRECT = "?faces-redirect=true";
 
-    public static final String EXTENSION = ".action";
+    public static final String XHTML = ".xhtml";
+    public static final String URL_PATTERN = ".action";
 
     /* Path */
     public static final String ERROR = "/error/";
     public static final String RESTRICT = "/restrict/";
 
     /* Default Pages */
-    public static final String INDEX = "/index" + EXTENSION;
-    public static final String ACTION_AUTH = "/auth" + EXTENSION;
-    public static final String ACTION_MAIN = RESTRICT + "main" + EXTENSION;
+    public static final String INDEX = "/index" + URL_PATTERN;
+    public static final String ACTION_AUTH = "/auth" + URL_PATTERN;
+    public static final String ACTION_MAIN = RESTRICT + "main" + URL_PATTERN;
 
-    public static final String ERROR_AUTH_EXPIRED = ERROR + "expired" + EXTENSION;
+    public static final String ERROR_AUTH_EXPIRED = ERROR + "expired" + URL_PATTERN;
 
     /* Pattern */
-    public static final String ACTION_LIST = "_list" + EXTENSION;
-    public static final String ACTION_EDIT = "_edit" + EXTENSION;
+    public static final String ACTION_LIST = "_list" + URL_PATTERN;
+    public static final String ACTION_EDIT = "_edit" + URL_PATTERN;
 
 
     private Pages() {

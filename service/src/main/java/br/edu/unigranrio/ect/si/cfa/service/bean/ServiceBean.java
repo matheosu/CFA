@@ -19,11 +19,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-abstract class BaseService implements Service {
+abstract class ServiceBean implements Service {
 
     private static final long serialVersionUID = -4097016207010149674L;
 
-    private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServiceBean.class);
 
     @Inject
     protected EntityManager em;
@@ -34,8 +34,10 @@ abstract class BaseService implements Service {
     }
 
     @Override
-    public <E extends Entity<?>> E list(Class<E> clazz) {
-        return null;
+    public <E extends Entity<?>> List<E> list(Class<E> clazz) {
+        CriteriaUtil<E, E> util = createCriteriaUtil(clazz);
+        CriteriaQuery<E> query = util.getQuery();
+        return resultList(query);
     }
 
     @Override
@@ -80,7 +82,7 @@ abstract class BaseService implements Service {
         return singleResult(em.createQuery(query));
     }
 
-    protected <E extends Entity<PK>, PK extends Serializable> List<E> resultList(TypedQuery<E> query) {
+    protected <E extends Entity<?>> List<E> resultList(TypedQuery<E> query) {
         try {
             return Objects.requireNonNull(query).getResultList();
         } catch (Exception e) {
@@ -89,7 +91,7 @@ abstract class BaseService implements Service {
         return Collections.emptyList();
     }
 
-    protected <E extends Entity<PK>, PK extends Serializable> List<E> resultList(CriteriaQuery<E> query) {
+    protected <E extends Entity<?>> List<E> resultList(CriteriaQuery<E> query) {
         return resultList(em.createQuery(query));
     }
 
@@ -115,7 +117,7 @@ abstract class BaseService implements Service {
         return query.where(cb.equal(util.getFrom().get(attr), value));
     }
 
-    class CriteriaUtil<S extends Serializable, R extends Entity<?>> {
+    class CriteriaUtil<S, R extends Entity<?>> {
 
         private CriteriaQuery<S> query;
         private Root<R> from;

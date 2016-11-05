@@ -18,13 +18,13 @@
     <ui:insert name="menu">
         <ui:include src="${pageContext.request.contextPath}/template/menu.xhtml"/>
     </ui:insert>
-    <div class="ui-g">
-        <div class="ui-g-14 ui-md-10 ui-g-nopad">
-            <ui:insert name="content"/>
-        </div>
+    <div style="margin: 10px auto;">
+        <ui:insert name="content"/>
     </div>
-    <ui:insert name="footer">
-        <ui:include src="${pageContext.request.contextPath}/template/footer.xhtml"/>
-    </ui:insert>
+    <div align="center" style="padding: 10px 10px 10px 10px; margin: 100px auto;">
+        <ui:insert name="footer">
+            <ui:include src="${pageContext.request.contextPath}/template/footer.xhtml"/>
+        </ui:insert>
+    </div>
 </h:body>
 </html>

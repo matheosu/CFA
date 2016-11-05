@@ -6,49 +6,42 @@
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition>
-    <h:outputStylesheet library="css" name="default.css" />
+    <h:outputStylesheet library="css" name="default.css"/>
     <h:form>
         <p:tabMenu activeIndex="#{param.i}">
             <p:menuitem value="Menu Principal" outcome="/restrict/main.xhtml"
                         icon="fa fa-tachometer">
-                <f:param name="i" value="0" />
+                <f:param name="i" value="0"/>
             </p:menuitem>
 
-            <p:menuitem value="Grupo de Usuários" url="#{auth.urlFeature('Grupo de Usuários')}"
-                        icon="fa fa-users" rendered="#{auth.hasFeature('Grupo de Usuários')}">
-                <f:param name="i" value="1" />
+            <p:menuitem value="Grupo de Usuários"
+                        icon="fa fa-users" rendered="#{featureValidation.hasFeature('Grupo de Usuários')}">
+                <f:param name="i" value="1"/>
             </p:menuitem>
 
-            <p:menuitem value="Usuários" url="#{auth.urlFeature('Usuários')}"
-                        icon="fa fa-user" rendered="#{auth.hasFeature('Usuários')}">
-                <f:param name="i" value="2" />
+            <p:menuitem value="Usuários"
+                        icon="fa fa-user" rendered="#{featureValidation.hasFeature('Usuários')}">
+                <f:param name="i" value="2"/>
             </p:menuitem>
 
-            <p:menuitem value="Restrições de Fluxo" url="#{auth.urlFeature('Restrições de Fluxo')}"
-                        icon="fa fa-viacoin" rendered="#{auth.hasFeature('Restrições de Fluxo')}">
-                <f:param name="i" value="3" />
+            <p:menuitem value="Restrições de Fluxo"
+                        icon="fa fa-viacoin" rendered="#{featureValidation.hasFeature('Restrições de Fluxo')}">
+                <f:param name="i" value="3"/>
             </p:menuitem>
 
-            <p:menuitem value="Localização de Controladores" url="#{auth.urlFeature('Localização de Controladores')}"
-                        icon="fa fa-map-marker" rendered="#{auth.hasFeature('Localização de Controladores')}">
-                <f:param name="i" value="4" />
+
+            <p:menuitem value="Localização de Controladores"
+                        icon="fa fa-map-marker"
+                        outcome="#{featureValidation.urlFeature('Localização de Controladores')}"
+                        rendered="#{featureValidation.hasFeature('Localização de Controladores')}">
+                <f:param name="i" value="4"/>
             </p:menuitem>
 
-            <p:menuitem value="Controladores" url="#{auth.urlFeature('Controladores')}"
-                        icon="fa fa-server" rendered="#{auth.hasFeature('Controladores')}">
-                <f:param name="i" value="5" />
+            <p:menuitem value="Controladores"
+                        icon="fa fa-server" rendered="#{featureValidation.hasFeature('Controladores')}">
+                <f:param name="i" value="5"/>
             </p:menuitem>
 
-            <f:facet name="options">
-                <p:inputText style="margin-right:10px" placeholder="Search"/>
-                <p:menuButton value="#{auth.userName}" iconPos="" style="margin-right:20px; border:none;">
-                    <p:menuitem value="Alterar Dados" icon="fa fa-user" />
-                    <p:menuitem value="Configurações" icon="fa fa-cog" />
-                    <p:separator />
-                    <p:menuitem value="Sair" icon="fa fa-sign-out"
-                                action="#{auth.doLogout}" ajax="false" style="color:red" />
-                </p:menuButton>
-            </f:facet>
         </p:tabMenu>
     </h:form>
 </ui:composition>

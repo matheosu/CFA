@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
 >
 
-<ui:composition template="${pageContext.request.contextPath}/template/messages.xhtml">
+<ui:composition template="/template/messages.xhtml">
+
     <ui:define name="title">#{msg['error.exception.title']}</ui:define>
 
     <ui:param name="color" value="#d9534f" />
@@ -20,9 +21,23 @@
             <h:outputText
                     style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
                     value="#{msg['error.exception.detail']}" />
-            <!--<p:commandButton value="Menu" ajax="false" immediate="true"-->
-                             <!--action="#{.show}" icon="fa fa-tachometer" id="btnMenu"-->
-                             <!--style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />-->
+
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
+                    value="#{exceptionHandler.statusCode}"/>
+
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
+                    value="#{exceptionHandler.message}"/>
+
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
+                    value="#{exceptionHandler.exceptionType}"/>
+
+            <h:outputText
+                    style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
+                    value="#{exceptionHandler.servletName}"/>
+
         </h:panelGrid>
     </ui:define>
 </ui:composition>

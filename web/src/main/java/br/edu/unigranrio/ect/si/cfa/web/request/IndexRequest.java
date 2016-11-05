@@ -1,6 +1,6 @@
-package br.edu.unigranrio.ect.si.cfa.web.bean;
+package br.edu.unigranrio.ect.si.cfa.web.request;
 
-import br.edu.unigranrio.ect.si.cfa.web.Auth;
+import br.edu.unigranrio.ect.si.cfa.web.Authenticator;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,12 +13,12 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class WebApplication implements Serializable {
+public class IndexRequest implements Serializable {
 
     private static final long serialVersionUID = -27976548695925185L;
 
     @Inject
-    private Auth auth;
+    private Authenticator auth;
 
     public void init(PhaseEvent event) {
         FacesContext context = event.getFacesContext();

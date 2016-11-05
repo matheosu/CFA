@@ -16,10 +16,11 @@
                 <h:outputLabel style="margin-left: 15px;">#{msg['title']}</h:outputLabel>
             </f:facet>
             <f:facet name="right">
-                <p:splitButton value="#{auth.userName}" icon="fa fa-user">
+                <p:splitButton value="#{auth.principal.name}" icon="fa fa-user">
                     <p:menuitem value="#{msg['update']}" icon="fa fa-cogs" />
                     <p:separator />
-                    <p:menuitem value="#{msg['logout']}" action="#{auth.doLogout}" icon="fa fa-sign-out" />
+                    <p:menuitem value="#{msg['logout']}" action="#{auth.doLogout}"
+                                ajax="false" style="color:red" icon="fa fa-sign-out" />
                 </p:splitButton>
             </f:facet>
         </p:toolbar>

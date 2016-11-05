@@ -38,7 +38,7 @@
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
-    <!-- Mime Type -->
+    <!-- Mime OrderType -->
     <mime-mapping>
         <extension>xhtml</extension>
         <mime-type>application/xhtml+xml</mime-type>
@@ -122,7 +122,6 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/error/exception.xhtml</location>
     </error-page>
-
 
     <resource-env-ref>
         <resource-env-ref-name>BeanManager</resource-env-ref-name>
