@@ -1,5 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.model;
 
+import br.edu.unigranrio.ect.si.cfa.commons.util.Securities;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.Collections;
@@ -102,7 +104,7 @@ public class User extends BaseAuditable<Long> {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Securities.encrypt(password);
     }
 
     public Boolean getActive() {

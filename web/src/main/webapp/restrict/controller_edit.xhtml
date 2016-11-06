@@ -35,13 +35,13 @@
                                 converter="entity-converter"
                                 value="#{controllerAction.instance.localization}"
                                 filter="true" filterMatchMode="contains">
-                <f:selectItems value="#{controllerAction.localizations}" var="l"
-                               itemLabel="#{l.name}" itemValue="#{l}" />
+                <f:selectItems value="#{controllerAction.localizations}" var="r"
+                               itemLabel="#{r.name}" itemValue="#{r}" />
                 <p:column>
-                    <h:outputText value="#{l.name}" />
+                    <h:outputText value="#{r.name}" />
                 </p:column>
                 <p:column>
-                    <h:outputText value="#{l.description}" />
+                    <h:outputText value="#{r.description}" />
                 </p:column>
             </p:selectOneListbox>
             <p:message for="localization" />

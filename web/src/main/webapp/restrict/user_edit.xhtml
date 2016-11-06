@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/edit.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['user']}" />
+    <ui:param name="entityName" value="User" />
+    <ui:param name="action" value="#{userAction}" />
+
+    <ui:define name="fields">
+        <h:panelGrid columns="1" cellpadding="3">
+            <h:panelGroup>
+                <!-- ID -->
+                <h:inputHidden id="id" value="#{userAction.instance.id}" />
+            </h:panelGroup>
+
+            <!-- Name -->
+            <h:outputLabel for="name" value="#{msg['user.name']}" />
+            <p:inputText id="name" placeholder="#{msg['user.name']}"
+                         value="#{userAction.instance.name}"
+                         required="true" requiredMessage="#{msg['required.name']}" size="40"/>
+            <p:message for="name" />
+
+            <!-- Email -->
+            <h:outputLabel for="email" value="#{msg['user.email']}" />
+            <p:inputText id="email" placeholder="#{msg['user.email']}"
+                         value="#{userAction.instance.email}"
+                         type="email"
+                         required="true" requiredMessage="#{msg['required.email']}"  size="40"/>
+            <p:message for="email" />
+
+            <!-- Password -->
+            <h:outputLabel for="password" value="#{msg['user.password']}"/>
+            <p:password id="password" value="#{userAction.instance.password}"
+                        required="true" requiredMessage="#{msg['required.password']}"
+                        promptLabel="#{msg['user.password.enter']}"
+                        weakLabel="#{msg['user.password.weak']}"
+                        goodLabel="#{msg['user.password.good']}"
+                        strongLabel="#{msg['user.password.strong']}"
+                        feedback="true"/>
+
+            <!-- Active -->
+            <h:outputLabel for="active" value="#{msg['user.active']}" />
+            <p:selectBooleanButton id="active" value="#{userAction.instance.active}" onLabel="#{msg['yes']}" offLabel="#{msg['no']}"
+                                   onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px"/>
+
+            <!-- Role -->
+            <p:outputLabel for="role" value="#{msg['user.role']}" />
+            <p:selectOneListbox id="role" required="true"
+                                requiredMessage="#{msg['required.role']}"
+                                converter="entity-converter"
+                                value="#{userAction.instance.role}"
+                                filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{userAction.roles}" var="r"
+                               itemLabel="#{r.name}" itemValue="#{r}" />
+                <p:column>
+                    <h:outputText value="#{r.name}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{r.description}" />
+                </p:column>
+            </p:selectOneListbox>
+            <p:message for="role" />
+
+            <!-- Restriction -->
+            <p:outputLabel for="restriction" value="#{msg['user.flowRestriction']}" />
+            <p:selectOneListbox id="restriction" required="true"
+                                requiredMessage="#{msg['required.flow.restriction']}"
+                                converter="entity-converter"
+                                value="#{userAction.instance.flowRestriction}"
+                                filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{userAction.flowRestrictions}" var="f"
+                               itemLabel="#{f.name}" itemValue="#{f}" />
+                <p:column>
+                    <h:outputText value="#{f.name}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{f.description}" />
+                </p:column>
+            </p:selectOneListbox>
+            <p:message for="restriction" />
+
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>

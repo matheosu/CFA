@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/template/list.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['user']}" />
+    <ui:param name="entityName" value="User" />
+    <ui:param name="action" value="#{userAction}" />
+
+    <ui:define name="itensList">
+
+        <!-- Name -->
+        <p:column headerText="#{msg['user.name']}">
+            <h:outputText value="#{instance.name}" />
+        </p:column>
+
+        <!-- Email -->
+        <p:column headerText="#{msg['user.email']}">
+            <h:outputText value="#{instance.email}" />
+        </p:column>
+
+        <!-- Active -->
+        <p:column headerText="#{msg['user.active']}">
+            <p:selectBooleanCheckbox value="#{instance.active}" disabled="true" />
+        </p:column>
+
+        <!-- Role -->
+        <p:column headerText="#{msg['user.role']}">
+            <h:outputText value="#{instance.role.name}" />
+        </p:column>
+
+        <!-- Restriction -->
+        <p:column headerText="#{msg['user.role']}">
+            <h:outputText value="#{instance.role.name}" />
+        </p:column>
+
+    </ui:define>
+</ui:composition>

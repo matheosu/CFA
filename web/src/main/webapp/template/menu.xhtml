@@ -17,20 +17,21 @@
                 <f:param name="i" value="0"/>
             </p:menuitem>
 
-            <p:menuitem value="Grupo de Usuários"
+            <p:menuitem value="#{msg['role']}"
                         icon="fa fa-users"
                         outcome="#{featureValidation.urlFeature(Constants.ROLE_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.ROLE_FEATURE_ID)}">
                 <f:param name="i" value="1"/>
             </p:menuitem>
 
-            <p:menuitem value="Usuários"
+            <p:menuitem value="#{msg['user']}"
                         icon="fa fa-user"
+                        outcome="#{featureValidation.urlFeature(Constants.USER_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.USER_FEATURE_ID)}">
                 <f:param name="i" value="2"/>
             </p:menuitem>
 
-            <p:menuitem value="Restrições de Fluxo"
+            <p:menuitem value="#{msg['flow.restriction']}"
                         icon="fa fa-viacoin"
                         outcome="#{featureValidation.urlFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}">

@@ -8,7 +8,9 @@ public final class Constants {
     /**
      * System User ID
      */
-    public static final Long SYSTEM_ID = 1L;
+    public static final Long USER_ADMIN_ID = 1L;
+    public static final Long ROLE_ADMIN_ID = 1L;
+
 
     /**
      * Features
