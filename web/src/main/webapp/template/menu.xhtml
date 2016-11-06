@@ -8,6 +8,9 @@
 <ui:composition>
     <h:outputStylesheet library="css" name="default.css"/>
     <h:form>
+
+        <p:importConstants type="br.edu.unigranrio.ect.si.cfa.commons.util.Constants" var="Constants" />
+
         <p:tabMenu activeIndex="#{param.i}">
             <p:menuitem value="Menu Principal" outcome="/restrict/main.xhtml"
                         icon="fa fa-tachometer">
@@ -15,31 +18,36 @@
             </p:menuitem>
 
             <p:menuitem value="Grupo de Usuários"
-                        outcome="#{featureValidation.urlFeature('Grupo de Usuários')}"
-                        icon="fa fa-users" rendered="#{featureValidation.hasFeature('Grupo de Usuários')}">
+                        icon="fa fa-users"
+                        outcome="#{featureValidation.urlFeature(Constants.ROLE_FEATURE_ID)}"
+                        rendered="#{featureValidation.hasFeature(Constants.ROLE_FEATURE_ID)}">
                 <f:param name="i" value="1"/>
             </p:menuitem>
 
             <p:menuitem value="Usuários"
-                        icon="fa fa-user" rendered="#{featureValidation.hasFeature('Usuários')}">
+                        icon="fa fa-user"
+                        rendered="#{featureValidation.hasFeature(Constants.USER_FEATURE_ID)}">
                 <f:param name="i" value="2"/>
             </p:menuitem>
 
             <p:menuitem value="Restrições de Fluxo"
-                        icon="fa fa-viacoin" rendered="#{featureValidation.hasFeature('Restrições de Fluxo')}">
+                        icon="fa fa-viacoin"
+                        outcome="#{featureValidation.urlFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}"
+                        rendered="#{featureValidation.hasFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}">
                 <f:param name="i" value="3"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['localization']}"
                         icon="fa fa-map-marker"
-                        outcome="#{featureValidation.urlFeature('Localização de Controladores')}"
-                        rendered="#{featureValidation.hasFeature('Localização de Controladores')}">
+                        outcome="#{featureValidation.urlFeature(Constants.LOCALIZATION_FEATURE_ID)}"
+                        rendered="#{featureValidation.hasFeature(Constants.LOCALIZATION_FEATURE_ID)}">
                 <f:param name="i" value="4"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['controller']}"
-                        outcome="#{featureValidation.urlFeature('Controladores')}"
-                        icon="fa fa-server" rendered="#{featureValidation.hasFeature('Controladores')}">
+                        icon="fa fa-server"
+                        outcome="#{featureValidation.urlFeature(Constants.CONTROLLER_FEATURE_ID)}"
+                        rendered="#{featureValidation.hasFeature(Constants.CONTROLLER_FEATURE_ID)}">
                 <f:param name="i" value="5"/>
             </p:menuitem>
 

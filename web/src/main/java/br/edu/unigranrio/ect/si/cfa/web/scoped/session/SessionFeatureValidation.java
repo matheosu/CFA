@@ -34,18 +34,18 @@ public class SessionFeatureValidation implements FeatureValidation {
     }
 
     @Override
-    public boolean hasFeature(String featureName) {
+    public boolean hasFeature(Long featureId) {
         return isAuthenticate() &&
                 loggedUserFeatures.stream()
-                        .filter(f -> f.getName().equals(featureName))
+                        .filter(f -> f.getId().equals(featureId))
                         .findAny().isPresent();
     }
 
     @Override
-    public String urlFeature(String featureName) {
+    public String urlFeature(Long featureId) {
         if (isAuthenticate()) {
             Optional<Feature> optional = loggedUserFeatures.stream()
-                    .filter(f -> f.getName().equals(featureName))
+                    .filter(f -> f.getId().equals(featureId))
                     .findFirst();
             return optional.isPresent() ? Pages.actionList(optional.get().getUrl(), true) : Pages.actionMain();
         }

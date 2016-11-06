@@ -17,6 +17,10 @@ public class MessageBean implements Message {
 
     @Override
     public Object get(String key) {
-        return bundle.getObject(key);
+        try {
+            return bundle.getObject(key);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

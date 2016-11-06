@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface FeatureValidation extends Serializable {
 
-    boolean hasFeature(String featureName);
+    boolean hasFeature(Long featureId);
 
-    String urlFeature(final String featureName);
+    String urlFeature(final Long featureId);
 }

@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/template/list.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['flow.restriction']}" />
+    <ui:param name="entityName" value="FlowRestriction" />
+    <ui:param name="action" value="#{flowRestrictionAction}" />
+
+    <ui:define name="itensList">
+
+        <!-- Name -->
+        <p:column headerText="#{msg['flow.restriction.name']}">
+            <h:outputText value="#{instance.name}" />
+        </p:column>
+
+        <!-- Description -->
+        <p:column headerText="#{msg['flow.restriction.description']}">
+            <h:outputText value="#{instance.description}" />
+        </p:column>
+
+        <!-- Period -->
+        <p:column headerText="#{msg['flow.restriction.period']}">
+            <h:outputText value="#{messageBean.getString(instance.period)}" />
+        </p:column>
+
+        <!-- Restricion -->
+        <p:column headerText="#{msg['flow.restriction.restriction']}">
+            <h:outputText value="#{messageBean.getString(instance.restriction)}" />
+        </p:column>
+
+        <!-- Restricion Value -->
+        <p:column headerText="#{msg['flow.restriction.value']}">
+            <h:outputText value="#{instance.value}" />
+        </p:column>
+
+    </ui:define>
+</ui:composition>

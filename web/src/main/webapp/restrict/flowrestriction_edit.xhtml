@@ -32,8 +32,7 @@
             <!-- Period -->
             <p:importEnum type="br.edu.unigranrio.ect.si.cfa.model.Period" var="Period" allSuffix="ALL_PERIOD" />
             <p:outputLabel for="period" value="#{msg['flow.restriction.period']}" />
-            <p:selectOneRadio id="period" value="#{flowRestrictionAction.instance.period}"
-                              converter="javax.faces.Enum">
+            <p:selectOneRadio id="period" value="#{flowRestrictionAction.instance.period}">
                 <f:selectItems value="#{Period.ALL_PERIOD}" var="p" itemLabel="#{p.description}" itemValue="#{p}"/>
             </p:selectOneRadio>
             <p:message for="period" />

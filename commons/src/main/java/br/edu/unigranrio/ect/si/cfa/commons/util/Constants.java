@@ -1,8 +1,5 @@
 package br.edu.unigranrio.ect.si.cfa.commons.util;
 
-import java.util.Arrays;
-import java.util.List;
-
 public final class Constants {
 
 
@@ -16,11 +13,11 @@ public final class Constants {
     /**
      * Features
      */
-    public static final Long roleFeatureId = 10L;
-    public static final Long userFeatureId = 20L;
-    public static final Long controllerFeatureId = 40L;
-    public static final Long localizationFeatureId = 30L;
-    public static final Long flowRestrictionFeatureId = 50L;
+    public static final Long ROLE_FEATURE_ID = 10L;
+    public static final Long USER_FEATURE_ID = 20L;
+    public static final Long CONTROLLER_FEATURE_ID = 40L;
+    public static final Long LOCALIZATION_FEATURE_ID = 30L;
+    public static final Long FLOW_RESTRICTION_FEATURE_ID = 50L;
 
     private Constants() {
     }
