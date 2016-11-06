@@ -32,21 +32,25 @@
             <!-- Period -->
             <p:importEnum type="br.edu.unigranrio.ect.si.cfa.model.Period" var="Period" allSuffix="ALL_PERIOD" />
             <p:outputLabel for="period" value="#{msg['flow.restriction.period']}" />
-            <p:selectOneRadio id="period" value="#{flowRestrictionAction.instance.period}">
+            <p:selectOneRadio id="period" value="#{flowRestrictionAction.instance.period}" required="true"
+            requiredMessage="#{msg['required.period']}">
                 <f:selectItems value="#{Period.ALL_PERIOD}" var="p" itemLabel="#{p.description}" itemValue="#{p}"/>
             </p:selectOneRadio>
             <p:message for="period" />
 
             <!-- Restriction -->
             <p:outputLabel for="restriction" value="#{msg['flow.restriction.restriction']}" />
-            <p:selectOneMenu id="restriction" value="#{flowRestrictionAction.instance.restriction}" style="width:125px">
+            <p:selectOneMenu id="restriction" value="#{flowRestrictionAction.instance.restriction}"
+                             required="true" requiredMessage="#{msg['required.restriction']}" style="width:125px">
                 <f:selectItems value="#{flowRestrictionAction.restrictions}"/>
             </p:selectOneMenu>
             <p:message for="restriction" />
 
             <!-- Value -->
             <h:outputLabel for="value" value="#{msg['flow.restriction.value']}" />
-            <p:spinner id="value" value="#{flowRestrictionAction.instance.value}" min="0" max="1000" />
+            <p:spinner id="value" value="#{flowRestrictionAction.instance.value}"
+                       required="true" requiredMessage="#{msg['required.value']}"
+                       min="0" max="1000" />
             <p:message for="value" />
 
         </h:panelGrid>
