@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="commons">
-    <output-path>$PROJECT_DIR$/out/artifacts/commons</output-path>
-    <root id="archive" name="commons.jar">
-      <element id="module-output" name="commons" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
