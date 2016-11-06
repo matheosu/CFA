@@ -4,7 +4,7 @@ import javax.faces.application.FacesMessage;
 import java.io.Serializable;
 
 @FunctionalInterface
-public interface Message extends Serializable {
+public interface WebMessage extends Serializable {
 
     void msg(FacesMessage.Severity status, String msg, String details, String idPage);
 
