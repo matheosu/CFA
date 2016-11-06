@@ -9,8 +9,8 @@
 <ui:composition template="/template/messages.xhtml">
     <ui:define name="title">#{msg['error.404.title']}</ui:define>
 
-    <ui:param name="color" value="#d9534f" />
-    <ui:param name="icon" value="fa-user-times" />
+    <ui:param name="color" value="#EEAC57" />
+    <ui:param name="icon" value="fa-file-code-o" />
 
     <ui:define name="content">
         <h:panelGrid columns="1" cellpadding="5" style="text-align:center;">
@@ -21,7 +21,7 @@
             <h:outputText
                     style="color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:18px;"
                     value="#{msg['error.404.detail']}" />
-            <p:button value="Voltar" outcome="/" icon="fa fa-tachometer"
+            <p:button value="Voltar" outcome="/restrict/main.action?faces-redirect=true" icon="fa fa-backward"
                       style="text-shadow: none;background: #428bca none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
         </h:panelGrid>
     </ui:define>
