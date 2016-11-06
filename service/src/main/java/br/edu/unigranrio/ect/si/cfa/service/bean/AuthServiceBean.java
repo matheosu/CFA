@@ -1,10 +1,10 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.SessionInfo;
-import br.edu.unigranrio.ect.si.cfa.commons.model.SessionUser;
-import br.edu.unigranrio.ect.si.cfa.commons.model.User;
 import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
 import br.edu.unigranrio.ect.si.cfa.commons.util.Securities;
+import br.edu.unigranrio.ect.si.cfa.model.SessionInfo;
+import br.edu.unigranrio.ect.si.cfa.model.SessionUser;
+import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.AuthService;
 import br.edu.unigranrio.ect.si.cfa.service.SessionUserService;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
@@ -25,7 +25,7 @@ import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static br.edu.unigranrio.ect.si.cfa.service.exception.AuthException.*;
+import static br.edu.unigranrio.ect.si.cfa.service.exception.AuthException.Type;
 
 @Named
 public class AuthServiceBean implements AuthService {

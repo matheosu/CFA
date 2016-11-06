@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/edit.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['role']}" />
+    <ui:param name="entityName" value="Role" />
+    <ui:param name="action" value="#{roleAction}" />
+
+    <ui:define name="fields">
+        <h:panelGrid columns="1" cellpadding="3">
+            <h:panelGroup>
+                <!-- ID -->
+                <h:inputHidden id="id" value="#{roleAction.instance.id}" />
+            </h:panelGroup>
+
+            <!--  Name -->
+            <h:outputLabel for="name" value="#{msg['role.name']}" />
+            <p:inputText id="name" placeholder="#{msg['role.name']}"
+                         value="#{roleAction.instance.name}"
+                         required="true" requiredMessage="#{msg['required.name']}" size="66"/>
+            <p:message for="name" />
+
+            <!--  Description -->
+            <h:outputLabel for="description" value="#{msg['role.description']}" />
+            <p:inputText id="description" placeholder="#{msg['role.description']}"
+                         value="#{roleAction.instance.description}"
+                         required="false"  size="66"/>
+            <p:message for="description" />
+
+            <!-- Features -->
+            <p:outputLabel for="features" value="#{msg['role.features']}" />
+            <p:selectManyMenu id="features" value="#{roleAction.instance.features}"
+                              converter="entity-converter" filter="true" filterMatchMode="contains"
+                              showCheckbox="false">
+                <f:selectItems value="#{roleAction.features}" var="f"
+                               itemLabel="#{f.name}" itemValue="#{f}" />
+                <p:column>
+                    <h:outputText value="#{f.name}" />
+                </p:column>
+
+                <p:column>
+                    <h:outputText value="#{msg['dependency']} - #{f.dependency.name}" />
+                </p:column>
+            </p:selectManyMenu>
+            <p:message for="features" />
+
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>

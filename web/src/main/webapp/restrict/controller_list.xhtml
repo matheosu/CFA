@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/template/list.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['controller']}" />
+    <ui:param name="entityName" value="Controller" />
+    <ui:param name="action" value="#{controllerAction}" />
+
+    <ui:define name="itensList">
+
+        <!-- UUID -->
+        <p:column headerText="#{msg['controller.uuid']}">
+            <h:outputText value="#{instance.uuid}" />
+        </p:column>
+
+        <!-- Model -->
+        <p:column headerText="#{msg['controller.model']}">
+            <h:outputText value="#{instance.model}" />
+        </p:column>
+
+        <!-- Model -->
+        <p:column headerText="#{msg['controller.localization']}">
+            <h:outputText value="#{instance.localization.toDescription()}" />
+        </p:column>
+
+    </ui:define>
+</ui:composition>

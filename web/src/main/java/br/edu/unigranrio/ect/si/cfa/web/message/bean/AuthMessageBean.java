@@ -3,7 +3,7 @@ package br.edu.unigranrio.ect.si.cfa.web.message.bean;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 import br.edu.unigranrio.ect.si.cfa.web.annotation.MessageResource;
 import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
-import br.edu.unigranrio.ect.si.cfa.web.message.Message;
+import br.edu.unigranrio.ect.si.cfa.web.message.WebMessage;
 
 import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
@@ -16,14 +16,14 @@ public class AuthMessageBean implements AuthMessage {
     private static final long serialVersionUID = -705388947939385985L;
 
     @Inject
-    private Message message;
+    private WebMessage webMessage;
 
     @Inject @MessageResource
     private ResourceBundle bundle;
 
     @Override
     public void authMsg(FacesMessage.Severity severity, String msg, AuthException.Type type) {
-        message.msg(severity, messageForType(type), null, null);
+        webMessage.msg(severity, messageForType(type), null, null);
     }
 
     private String messageForType(AuthException.Type type) {

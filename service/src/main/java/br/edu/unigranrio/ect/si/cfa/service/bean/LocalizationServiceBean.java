@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Localization;
-import br.edu.unigranrio.ect.si.cfa.commons.model.Localization_;
+import br.edu.unigranrio.ect.si.cfa.model.Localization;
+import br.edu.unigranrio.ect.si.cfa.model.Localization_;
 import br.edu.unigranrio.ect.si.cfa.service.LocalizationService;
 
 import javax.inject.Named;

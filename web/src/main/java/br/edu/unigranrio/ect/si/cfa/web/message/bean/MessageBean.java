@@ -1,22 +1,22 @@
 package br.edu.unigranrio.ect.si.cfa.web.message.bean;
 
+import br.edu.unigranrio.ect.si.cfa.web.annotation.MessageResource;
 import br.edu.unigranrio.ect.si.cfa.web.message.Message;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ResourceBundle;
 
-@Named("message")
+@Named
 public class MessageBean implements Message {
 
-    private static final long serialVersionUID = -6451232072778461226L;
+    private static final long serialVersionUID = -8085939994948874898L;
 
-    @Inject FacesContext context;
+    @Inject @MessageResource
+    private ResourceBundle bundle;
 
     @Override
-    public void msg(FacesMessage.Severity status, String msg, String details, String idPage) {
-        context.addMessage(idPage, new FacesMessage(status, msg, details));
+    public Object get(String key) {
+        return bundle.getObject(key);
     }
-
 }

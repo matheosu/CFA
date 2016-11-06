@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.User;
+import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 
 import java.io.Serializable;

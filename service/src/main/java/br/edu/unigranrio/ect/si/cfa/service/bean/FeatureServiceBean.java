@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.*;
+import br.edu.unigranrio.ect.si.cfa.model.*;
 import br.edu.unigranrio.ect.si.cfa.service.FeatureService;
 
 import javax.inject.Named;

@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.service.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-abstract class ServiceBean implements Service {
+public abstract class ServiceBean implements Service {
 
     private static final long serialVersionUID = -4097016207010149674L;
 

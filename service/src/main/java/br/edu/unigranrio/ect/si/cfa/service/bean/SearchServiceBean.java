@@ -1,9 +1,9 @@
 package br.edu.unigranrio.ect.si.cfa.service.bean;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.commons.search.Criteria;
 import br.edu.unigranrio.ect.si.cfa.commons.search.Search;
 import br.edu.unigranrio.ect.si.cfa.commons.search.SearchResult;
+import br.edu.unigranrio.ect.si.cfa.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.service.SearchService;
 
 import javax.persistence.criteria.*;

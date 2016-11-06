@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.web.action;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.model.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -8,7 +8,6 @@ import br.edu.unigranrio.ect.si.cfa.service.exception.TransactionalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.faces.application.Application;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;

@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Role;
-import br.edu.unigranrio.ect.si.cfa.commons.model.User;
+import br.edu.unigranrio.ect.si.cfa.model.Role;
+import br.edu.unigranrio.ect.si.cfa.model.User;
 
 import java.util.List;
 

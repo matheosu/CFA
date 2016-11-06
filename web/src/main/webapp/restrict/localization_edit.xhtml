@@ -4,8 +4,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="/template/edit.xhtml">
 
-    <ui:param name="fullEntityName" value="Localização" />
-    <ui:param name="entityName" value="Localizacao" />
+    <ui:param name="fullEntityName" value="#{msg['localization']}" />
+    <ui:param name="entityName" value="Localization" />
     <ui:param name="action" value="#{localizationAction}" />
 
     <ui:define name="fields">
@@ -15,19 +15,19 @@
                 <h:inputHidden id="id" value="#{localizationAction.instance.id}" />
             </h:panelGroup>
 
-            <!--  Nome -->
-            <h:outputLabel for="name" value="Nome" />
-            <p:inputText id="name" placeholder="Nome"
+            <!-- Name -->
+            <h:outputLabel for="name" value="#{msg['localization.name']}" />
+            <p:inputText id="name" placeholder="#{msg['localization.name']}"
                          value="#{localizationAction.instance.name}"
-                         required="true" requiredMessage="Nome é obrigatório" size="66"/>
+                         required="true" requiredMessage="#{msg['required.name']}" size="66"/>
             <p:message for="name" />
 
-            <!--  Descrição -->
-            <h:outputLabel for="descricao" value="Descrição" />
-            <p:inputText id="descricao" placeholder="Descrição"
+            <!-- Description -->
+            <h:outputLabel for="description" value="#{msg['localization.description']}" />
+            <p:inputText id="description" placeholder="#{msg['localization.description']}"
                          value="#{localizationAction.instance.description}"
                          required="false"  size="66"/>
-            <p:message for="descricao" />
+            <p:message for="description" />
 
         </h:panelGrid>
     </ui:define>

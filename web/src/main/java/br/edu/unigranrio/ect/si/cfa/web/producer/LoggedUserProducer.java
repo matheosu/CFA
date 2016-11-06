@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.web.producer;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.User;
+import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
 import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUser;

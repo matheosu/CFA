@@ -15,11 +15,6 @@
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
 
-    <!-- WebApplication Context -->
-    <listener>
-        <listener-class>br.edu.unigranrio.ect.si.cfa.web.listener.WebApplicationContextListener</listener-class>
-    </listener>
-
     <!-- Welcome File List -->
     <welcome-file-list>
         <welcome-file>index.action</welcome-file>

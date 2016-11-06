@@ -1,7 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.web.listener;
 
 import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListener;
-import br.edu.unigranrio.ect.si.cfa.commons.model.Auditable;
+import br.edu.unigranrio.ect.si.cfa.model.Auditable;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.web.util;
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.model.Entity;
 
 public final class Pages {
 

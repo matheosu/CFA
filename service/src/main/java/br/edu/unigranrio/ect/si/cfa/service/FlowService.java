@@ -1,8 +1,8 @@
 package br.edu.unigranrio.ect.si.cfa.service;
 
 
-import br.edu.unigranrio.ect.si.cfa.commons.model.Flow;
-import br.edu.unigranrio.ect.si.cfa.commons.model.Period;
+import br.edu.unigranrio.ect.si.cfa.model.Flow;
+import br.edu.unigranrio.ect.si.cfa.model.Period;
 
 import java.util.List;
 

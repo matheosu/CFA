@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/edit.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['controller']}" />
+    <ui:param name="entityName" value="Controller" />
+    <ui:param name="action" value="#{controllerAction}" />
+
+    <ui:define name="fields">
+        <h:panelGrid columns="1" cellpadding="3">
+            <h:panelGroup>
+                <!-- ID -->
+                <h:inputHidden id="id" value="#{controllerAction.instance.id}" />
+            </h:panelGroup>
+
+            <!--  UUID -->
+            <h:outputLabel for="uuid" value="#{msg['controller.uuid']}" />
+            <p:inputText id="uuid" placeholder="#{msg['controller.uuid']}"
+                         value="#{controllerAction.instance.uuid}"
+                         required="true" requiredMessage="#{msg['required.uuid']}" size="66"/>
+            <p:message for="uuid" />
+
+            <!--  Model -->
+            <h:outputLabel for="model" value="#{msg['controller.model']}" />
+            <p:inputText id="model" placeholder="#{msg['controller.model']}"
+                         value="#{controllerAction.instance.model}"
+                         required="false"  size="66"/>
+            <p:message for="model" />
+
+            <!-- Localization -->
+            <p:outputLabel for="localization" value="#{msg['controller.localization']}" />
+            <p:selectOneListbox id="localization"
+                                converter="entity-converter"
+                                value="#{controllerAction.instance.localization}"
+                                filter="true" filterMatchMode="contains">
+                <f:selectItems value="#{controllerAction.localizations}" var="l"
+                               itemLabel="#{l.name}" itemValue="#{l}" />
+                <p:column>
+                    <h:outputText value="#{l.name}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{l.description}" />
+                </p:column>
+            </p:selectOneListbox>
+            <p:message for="localization" />
+
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>

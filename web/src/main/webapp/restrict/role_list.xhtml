@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/template/list.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['role']}" />
+    <ui:param name="entityName" value="Role" />
+    <ui:param name="action" value="#{roleAction}" />
+
+    <ui:define name="itensList">
+
+        <!-- Name -->
+        <p:column headerText="#{msg['role.name']}">
+            <h:outputText value="#{instance.name}" />
+        </p:column>
+
+        <!-- Description -->
+        <p:column headerText="#{msg['role.description']}">
+            <h:outputText value="#{instance.description}" />
+        </p:column>
+
+        <!-- Features -->
+        <p:column headerText="#{msg['role.features']}">
+            <ui:repeat value="#{instance.features}" var="f" varStatus="status">
+                <h:outputText value="#{f.name}" />
+                <h:outputText rendered="#{!status.last}" value=", "/>
+            </ui:repeat>
+        </p:column>
+
+
+    </ui:define>
+</ui:composition>

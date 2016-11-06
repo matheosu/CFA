@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template/edit.xhtml">
+
+    <ui:param name="fullEntityName" value="#{msg['flow.restriction']}" />
+    <ui:param name="entityName" value="FlowRestriction" />
+    <ui:param name="action" value="#{flowRestrictionAction}" />
+
+    <ui:define name="fields">
+        <h:panelGrid columns="1" cellpadding="3">
+            <h:panelGroup>
+                <!-- ID -->
+                <h:inputHidden id="id" value="#{flowRestrictionAction.instance.id}" />
+            </h:panelGroup>
+
+            <!--  Name -->
+            <h:outputLabel for="name" value="#{msg['flow.restriction.name']}" />
+            <p:inputText id="name" placeholder="#{msg['flow.restriction.name']}"
+                         value="#{flowRestrictionAction.instance.name}"
+                         required="true" requiredMessage="#{msg['required.name']}" size="66"/>
+            <p:message for="name" />
+
+            <!--  Description -->
+            <h:outputLabel for="description" value="#{msg['flow.restriction.description']}" />
+            <p:inputText id="description" placeholder="#{msg['flow.restriction.description']}"
+                         value="#{flowRestrictionAction.instance.description}"
+                         required="false"  size="66"/>
+            <p:message for="description" />
+
+            <!-- Period -->
+            <p:importEnum type="br.edu.unigranrio.ect.si.cfa.model.Period" var="Period" allSuffix="ALL_PERIOD" />
+            <p:outputLabel for="period" value="#{msg['flow.restriction.period']}" />
+            <p:selectOneRadio id="period" value="#{flowRestrictionAction.instance.period}"
+                              converter="javax.faces.Enum">
+                <f:selectItems value="#{Period.ALL_PERIOD}" var="p" itemLabel="#{p.description}" itemValue="#{p}"/>
+            </p:selectOneRadio>
+            <p:message for="period" />
+
+            <!-- Restriction -->
+            <p:outputLabel for="restriction" value="#{msg['flow.restriction.restriction']}" />
+            <p:selectOneMenu id="restriction" value="#{flowRestrictionAction.instance.restriction}" style="width:125px">
+                <f:selectItems value="#{flowRestrictionAction.restrictions}"/>
+            </p:selectOneMenu>
+            <p:message for="restriction" />
+
+            <!-- Value -->
+            <h:outputLabel for="value" value="#{msg['flow.restriction.value']}" />
+            <p:spinner id="value" value="#{flowRestrictionAction.instance.value}" min="0" max="1000" />
+            <p:message for="value" />
+
+        </h:panelGrid>
+    </ui:define>
+</ui:composition>

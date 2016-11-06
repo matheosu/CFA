@@ -15,6 +15,7 @@
             </p:menuitem>
 
             <p:menuitem value="Grupo de Usuários"
+                        outcome="#{featureValidation.urlFeature('Grupo de Usuários')}"
                         icon="fa fa-users" rendered="#{featureValidation.hasFeature('Grupo de Usuários')}">
                 <f:param name="i" value="1"/>
             </p:menuitem>
@@ -29,15 +30,15 @@
                 <f:param name="i" value="3"/>
             </p:menuitem>
 
-
-            <p:menuitem value="Localização de Controladores"
+            <p:menuitem value="#{msg['localization']}"
                         icon="fa fa-map-marker"
                         outcome="#{featureValidation.urlFeature('Localização de Controladores')}"
                         rendered="#{featureValidation.hasFeature('Localização de Controladores')}">
                 <f:param name="i" value="4"/>
             </p:menuitem>
 
-            <p:menuitem value="Controladores"
+            <p:menuitem value="#{msg['controller']}"
+                        outcome="#{featureValidation.urlFeature('Controladores')}"
                         icon="fa fa-server" rendered="#{featureValidation.hasFeature('Controladores')}">
                 <f:param name="i" value="5"/>
             </p:menuitem>
