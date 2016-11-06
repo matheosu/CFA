@@ -24,42 +24,69 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
         return totalFlowPerPeriod - totalUsedFlows.floatValue(); // Realiza o calculo
     }
 
-    public List<Flow> findFlowByPeriod(Long userId, Period period) {
+    @Override
+    public List<Flow> findFlowByPeriod(Long userId, Period period, Calendar date) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaUtil<Flow, Flow> util = createCriteriaUtil(Flow.class);
         CriteriaQuery<Flow> query = util.getQuery();
         Root<Flow> from = util.getFrom();
+
         Path<Long> userPath = from.join(Flow_.user).get(User_.id);
         Path<Calendar> registrantionPath = from.get(Flow_.registrantion);
 
-        int expValue = 0;
-        Expression<Integer> expPath = null;
-        Calendar now = Calendar.getInstance();
-        if(period != null) switch (period) {
-            case DAY:
-                expValue = now.get(Calendar.DAY_OF_MONTH);
-                expPath = cb.function("day", Integer.class, registrantionPath);
-                break;
-
-            case WEEK:
-                expValue = now.get(Calendar.WEEK_OF_MONTH);
-                expPath = cb.function("week", Integer.class, registrantionPath);
-                break;
-
-            case MONTH:
-                expValue = now.get(Calendar.MONTH) + 1;
-                expPath = cb.function("month", Integer.class, registrantionPath);
-                break;
-
-            case YEAR:
-                expValue = now.get(Calendar.YEAR);
-                expPath = cb.function("year", Integer.class, registrantionPath);
-                break;
-            default:
-                return Collections.emptyList();
-        }
+        Integer expValue = getPeriodValueFromDate(period, date);
+        Expression<Integer> expPath = getExpressionFromPeriod(period, registrantionPath);
 
         return resultList(query.where(cb.and(cb.equal(userPath, userId), cb.equal(expPath, expValue))));
-
     }
+
+    @Override
+    public List<Flow> findFlowByPeriod(Period period, Calendar date) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaUtil<Flow, Flow> util = createCriteriaUtil(Flow.class);
+        CriteriaQuery<Flow> query = util.getQuery();
+        Root<Flow> from = util.getFrom();
+
+        Path<Calendar> registrantionPath = from.get(Flow_.registrantion);
+
+        Integer expValue = getPeriodValueFromDate(period, date);
+        Expression<Integer> expPath = getExpressionFromPeriod(period, registrantionPath);
+
+        return resultList(query.where(cb.equal(expPath, expValue)));
+    }
+
+    private Expression<Integer> getExpressionFromPeriod(Period period, Path<Calendar> calendarPath) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        if(period != null) switch (period) {
+            case DAY:
+                return cb.function("day", Integer.class, calendarPath);
+            case WEEK:
+                return cb.function("week", Integer.class, calendarPath);
+            case MONTH:
+                return cb.function("month", Integer.class, calendarPath);
+
+            case YEAR:
+                return cb.function("year", Integer.class, calendarPath);
+        }
+        return null;
+    }
+
+    private Integer getPeriodValueFromNow(Period period) {
+        return getPeriodValueFromDate(period, Calendar.getInstance());
+    }
+
+    private Integer getPeriodValueFromDate(Period period, Calendar date) {
+        if(period != null && date != null) switch (period) {
+            case DAY:
+                return date.get(Calendar.DAY_OF_MONTH);
+            case WEEK:
+                return date.get(Calendar.WEEK_OF_MONTH);
+            case MONTH:
+                return date.get(Calendar.MONTH) + 1;
+            case YEAR:
+                return date.get(Calendar.YEAR);
+        }
+        return -1;
+    }
+
 }

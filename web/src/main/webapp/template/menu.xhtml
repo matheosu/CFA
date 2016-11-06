@@ -13,40 +13,40 @@
 
         <p:tabMenu activeIndex="#{param.index}">
             <p:menuitem value="Menu Principal" outcome="/restrict/main.xhtml"
-                        icon="fa fa-tachometer">
+                        icon="fa fa-tachometer pull-left">
                 <f:param name="i" value="0"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['role']}"
-                        icon="fa fa-users"
+                        icon="fa fa-users pull-left"
                         outcome="#{featureValidation.urlFeature(Constants.ROLE_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.ROLE_FEATURE_ID)}">
                 <f:param name="i" value="1"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['user']}"
-                        icon="fa fa-user"
+                        icon="fa fa-user pull-left"
                         outcome="#{featureValidation.urlFeature(Constants.USER_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.USER_FEATURE_ID)}">
                 <f:param name="i" value="2"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['flow.restriction']}"
-                        icon="fa fa-viacoin"
+                        icon="fa fa-viacoin pull-left"
                         outcome="#{featureValidation.urlFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.FLOW_RESTRICTION_FEATURE_ID)}">
                 <f:param name="i" value="3"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['localization']}"
-                        icon="fa fa-map-marker"
+                        icon="fa fa-map-marker pull-left"
                         outcome="#{featureValidation.urlFeature(Constants.LOCALIZATION_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.LOCALIZATION_FEATURE_ID)}">
                 <f:param name="i" value="4"/>
             </p:menuitem>
 
             <p:menuitem value="#{msg['controller']}"
-                        icon="fa fa-server"
+                        icon="fa fa-server pull-left"
                         outcome="#{featureValidation.urlFeature(Constants.CONTROLLER_FEATURE_ID)}"
                         rendered="#{featureValidation.hasFeature(Constants.CONTROLLER_FEATURE_ID)}">
                 <f:param name="i" value="5"/>

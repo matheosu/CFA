@@ -65,7 +65,14 @@ public abstract class ServiceBean implements Service {
         return em.contains(entity);
     }
 
-    protected <E extends Entity<PK>, PK extends Number> E singleResult(TypedQuery<E> query) {
+    @Override
+    public  <E extends Entity<?>> Long count(Class<E> from) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = cb.createQuery(Long.class);
+        return singleResult(query.select(cb.count(query.from(from))));
+    }
+
+    protected <E> E singleResult(TypedQuery<E> query) {
         try {
             return Objects.requireNonNull(query).getSingleResult();
         } catch (NoResultException e) {
@@ -78,11 +85,11 @@ public abstract class ServiceBean implements Service {
         return null;
     }
 
-    protected <E extends Entity<PK>, PK extends Number> E singleResult(CriteriaQuery<E> query) {
+    protected <E> E singleResult(CriteriaQuery<E> query) {
         return singleResult(em.createQuery(query));
     }
 
-    protected <E extends Entity<?>> List<E> resultList(TypedQuery<E> query) {
+    protected <E> List<E> resultList(TypedQuery<E> query) {
         try {
             return Objects.requireNonNull(query).getResultList();
         } catch (Exception e) {
@@ -91,7 +98,7 @@ public abstract class ServiceBean implements Service {
         return Collections.emptyList();
     }
 
-    protected <E extends Entity<?>> List<E> resultList(CriteriaQuery<E> query) {
+    protected <E> List<E> resultList(CriteriaQuery<E> query) {
         return resultList(em.createQuery(query));
     }
 

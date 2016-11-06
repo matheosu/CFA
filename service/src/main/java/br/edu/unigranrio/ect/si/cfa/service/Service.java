@@ -20,4 +20,6 @@ public interface Service extends Serializable {
     <E extends Entity<?>> void refresh(E entity);
 
     <E extends Entity<?>> boolean contains(E entity);
+
+    <E extends Entity<?>> Long count(Class<E> entity);
 }

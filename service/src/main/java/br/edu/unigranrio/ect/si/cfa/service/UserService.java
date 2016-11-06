@@ -35,6 +35,9 @@ public interface UserService extends Service {
      */
 	List<User> findUserByActivity(Boolean activity);
 
+
+	Long getTotalActiveUsers();
+
 	default List<User> findActiveUsers(){
 		return findUserByActivity(Boolean.TRUE);
 	}

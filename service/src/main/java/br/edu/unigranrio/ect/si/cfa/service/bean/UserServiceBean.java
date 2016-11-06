@@ -41,6 +41,15 @@ public class UserServiceBean extends ServiceBean implements UserService {
     }
 
     @Override
+    public Long getTotalActiveUsers() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = cb.createQuery(Long.class);
+        Root<User> from = query.from(User.class);
+        query = query.where(cb.equal(from.get(User_.active), Boolean.TRUE));
+        return singleResult(query.select(cb.count(from)));
+    }
+
+    @Override
     public List<User> findUsersByRole(Role role) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
 

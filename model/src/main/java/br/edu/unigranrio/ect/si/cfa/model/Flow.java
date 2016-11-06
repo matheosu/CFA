@@ -17,7 +17,7 @@ public class Flow extends BaseAuditable<Long> {
     private Long id;
 
     /**
-     * Measure
+     * Measure in litter
      */
     @Column(nullable = false)
     private Float measure;

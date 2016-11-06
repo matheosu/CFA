@@ -1,15 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
 >
 
 <ui:composition template="/template/restrict.xhtml">
+    <h:outputStylesheet library="css" name="default.css"/>
     <ui:define name="title">Menu</ui:define>
 
     <ui:define name="content">
-        <br/>Testando teste teste running
-    </ui:define>
+        <div align="center" style="margin: 50px 100px 50px 100px; left: 50%">
+            <p:importConstants type="br.edu.unigranrio.ect.si.cfa.web.scoped.session.SessionDashboard"
+                               var="DASH_CONSTANTS"/>
+            <h:form>
+                <!-- Box -->
+                <p:dashboard id="box" model="#{dashboard.boxModel}">
+                    <p:panel id="#{DASH_CONSTANTS.DASH_LOCALIZATIONS_ID}" header="#{msg['total']} #{msg['localizations']}"
+                    rendered="#{dashboard.admin}">
+                        <div>
+                            <i class="fa fa-map-marker fa-2x fa-align-left"/> &nbsp;
+                            <h:outputText
+                                    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                                    value="#{dashboard.totalLocalizations}"/>
+                        </div>
+                    </p:panel>
 
+                    <p:panel id="#{DASH_CONSTANTS.DASH_CONTROLLERS_ID}" header="#{msg['total']} #{msg['controllers']}"
+                             rendered="#{dashboard.admin}">
+                        <div>
+                            <i class="fa fa-server fa-2x fa-align-left"/> &nbsp;
+                            <h:outputText
+                                    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                                    value="#{dashboard.totalControllers}"/>
+                        </div>
+                    </p:panel>
+                    <p:panel id="#{DASH_CONSTANTS.DASH_ACTIVE_USERS_ID}" header="#{msg['active.users']}"
+                             rendered="#{dashboard.admin or dashboard.manager}">
+                        <div>
+                            <i class="fa fa-user fa-2x "/> &nbsp;
+                            <h:outputText
+                                    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                                    value="#{dashboard.totalActiveUsers}"/>
+                        </div>
+                    </p:panel>
+                    <p:panel id="#{DASH_CONSTANTS.DASH_AVERAGE_FLOW_USERS_ID}" header="#{msg['average.flow.users']}">
+                        <div><i class="fa fa-bath fa-2x fa-align-left"/> &nbsp;
+                        <h:outputText
+                                style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                                value="#{dashboard.averageFlowUsers}"/>
+                        </div>
+                    </p:panel>
+                    <p:panel id="#{DASH_CONSTANTS.DASH_AVERAGE_TIME_USERS_ID}" header="#{msg['average.time.users']}">
+                        <div><i class="fa fa-clock-o fa-2x "/> &nbsp;
+                            <h:outputText
+                                    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:28px;"
+                                    value="#{dashboard.averageTimeUsers}"/>
+                        </div>
+                    </p:panel>
+                </p:dashboard>
+                <div style="clear:both"></div>
+                <p:dashboard id="charts" model="#{dashboard.chartModel}">
+
+                    <p:panel id="#{DASH_CONSTANTS.DASH_FLOW_RESTRICT_ID}" header="#{msg['available.flow.user']}"
+                             rendered="#{dashboard.user or dashboard.manager}">
+                        <p:poll interval="30" update="#{DASH_CONSTANTS.DASH_FLOW_RESTRICT_CHART_ID}" />
+                        <p:chart id="#{DASH_CONSTANTS.DASH_FLOW_RESTRICT_CHART_ID}" type="pie" responsive="true"
+                                 model="#{dashboard.availableFlow}" style="width:400px;height:300px"/>
+                    </p:panel>
+
+                    <p:panel id="#{DASH_CONSTANTS.DASH_TOTAL_EXPENDITURE_ID}" rendered="#{dashboard.admin}"
+                             header="#{msg['total.expenditure']}" >
+                        <p:poll interval="30" update="#{DASH_CONSTANTS.DASH_TOTAL_EXPENDITURE_CHART_ID}"/>
+                        <p:chart id="#{DASH_CONSTANTS.DASH_TOTAL_EXPENDITURE_CHART_ID}" type="line" responsive="true"
+                                 model="#{dashboard.totalExpenditureModel}"
+                                 style="height:200px; width: 500px"/>
+                    </p:panel>
+
+                    <p:panel id="#{DASH_CONSTANTS.DASH_RAKING_USERS_ID}" header="#{msg['raking.users']}"
+                             rendered="#{dashboard.admin or dashboard.manager}">
+                        <p:poll interval="30" update="#{DASH_CONSTANTS.DASH_RAKING_USERS_CHART_ID}"/>
+                        <p:chart id="#{DASH_CONSTANTS.DASH_RAKING_USERS_CHART_ID}" type="bar" responsive="true"
+                                 model="#{dashboard.rakingUsersModel}"
+                                 style="height:200px; width: 500px"/>
+                    </p:panel>
+                </p:dashboard>
+                <div style="clear:both"></div>
+            </h:form>
+        </div>
+    </ui:define>
 </ui:composition>
 </html>

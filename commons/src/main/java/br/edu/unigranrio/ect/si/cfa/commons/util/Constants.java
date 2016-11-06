@@ -10,6 +10,9 @@ public final class Constants {
      */
     public static final Long USER_ADMIN_ID = 1L;
     public static final Long ROLE_ADMIN_ID = 1L;
+    public static final Long ROLE_MANAGER_ID = 2L;
+    public static final Long ROLE_USER_ID = 3L;
+
 
 
     /**
