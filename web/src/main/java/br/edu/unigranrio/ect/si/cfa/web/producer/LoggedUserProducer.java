@@ -4,8 +4,8 @@ import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
 import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
 import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedRoleId;
-import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUser;
-import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUserId;
+import br.edu.unigranrio.ect.si.cfa.commons.annotation.LoggedUser;
+import br.edu.unigranrio.ect.si.cfa.commons.annotation.LoggedUserId;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;

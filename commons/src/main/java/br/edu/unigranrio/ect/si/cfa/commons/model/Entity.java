@@ -1,4 +1,4 @@
-package br.edu.unigranrio.ect.si.cfa.model;
+package br.edu.unigranrio.ect.si.cfa.commons.model;
 
 import java.io.Serializable;
 

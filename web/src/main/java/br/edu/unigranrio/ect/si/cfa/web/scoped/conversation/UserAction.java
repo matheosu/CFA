@@ -7,7 +7,7 @@ import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.Service;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
 import br.edu.unigranrio.ect.si.cfa.web.action.ConversationAction;
-import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUserId;
+import br.edu.unigranrio.ect.si.cfa.commons.annotation.LoggedUserId;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;

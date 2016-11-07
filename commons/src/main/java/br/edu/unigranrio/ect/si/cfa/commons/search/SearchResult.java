@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.commons.search;
 
-import br.edu.unigranrio.ect.si.cfa.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 
 import java.util.List;
 

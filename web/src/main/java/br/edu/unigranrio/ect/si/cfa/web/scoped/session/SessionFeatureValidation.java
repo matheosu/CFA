@@ -2,7 +2,7 @@ package br.edu.unigranrio.ect.si.cfa.web.scoped.session;
 
 import br.edu.unigranrio.ect.si.cfa.model.Feature;
 import br.edu.unigranrio.ect.si.cfa.service.FeatureService;
-import br.edu.unigranrio.ect.si.cfa.web.annotation.LoggedUserId;
+import br.edu.unigranrio.ect.si.cfa.commons.annotation.LoggedUserId;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 import br.edu.unigranrio.ect.si.cfa.web.validation.FeatureValidation;
 

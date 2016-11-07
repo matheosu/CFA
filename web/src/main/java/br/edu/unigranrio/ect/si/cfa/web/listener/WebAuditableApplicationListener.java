@@ -1,20 +1,28 @@
 package br.edu.unigranrio.ect.si.cfa.web.listener;
 
-import br.edu.unigranrio.ect.si.cfa.commons.listener.AuditListener;
-import br.edu.unigranrio.ect.si.cfa.model.Auditable;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Auditable;
+import br.edu.unigranrio.ect.si.cfa.commons.model.listener.AuditableApplicationListener;
+import br.edu.unigranrio.ect.si.cfa.commons.annotation.LoggedUserId;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Calendar;
 
 import static br.edu.unigranrio.ect.si.cfa.commons.util.Constants.USER_ADMIN_ID;
 
-public class WebAuditListener implements AuditListener, Serializable {
+@Named
+public class WebAuditableApplicationListener implements AuditableApplicationListener, Serializable {
 
     private static final long serialVersionUID = -36248322712939881L;
 
-    private final Long loggedUserId;
+    @Inject @LoggedUserId
+    private Long loggedUserId;
 
-    public WebAuditListener(Long loggedUserId) {
+    public WebAuditableApplicationListener() {
+    }
+
+    public WebAuditableApplicationListener(Long loggedUserId) {
         this.loggedUserId = loggedUserId;
     }
 

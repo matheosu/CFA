@@ -6,7 +6,6 @@ import br.edu.unigranrio.ect.si.cfa.service.FlowService;
 import javax.inject.Named;
 import javax.persistence.criteria.*;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 @Named

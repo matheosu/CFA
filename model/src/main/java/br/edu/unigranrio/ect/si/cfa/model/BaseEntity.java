@@ -1,5 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.model;
 
+import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
+
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass

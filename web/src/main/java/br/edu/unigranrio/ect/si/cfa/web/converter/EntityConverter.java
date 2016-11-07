@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.web.converter;
 
-import br.edu.unigranrio.ect.si.cfa.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

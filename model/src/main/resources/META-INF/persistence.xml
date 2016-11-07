@@ -4,7 +4,6 @@
     <persistence-unit name="cfaPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-
             <!-- Connection -->
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/cfa" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
@@ -24,7 +23,7 @@
 
             <!-- Log SQL -->
             <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
 
         </properties>
     </persistence-unit>

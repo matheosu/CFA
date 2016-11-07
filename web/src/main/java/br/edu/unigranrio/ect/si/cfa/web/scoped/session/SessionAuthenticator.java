@@ -1,13 +1,12 @@
 package br.edu.unigranrio.ect.si.cfa.web.scoped.session;
 
-import br.edu.unigranrio.ect.si.cfa.commons.factory.AuditListenerFactory;
 import br.edu.unigranrio.ect.si.cfa.model.User;
 import br.edu.unigranrio.ect.si.cfa.service.AuthService;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 import br.edu.unigranrio.ect.si.cfa.web.authentication.Authenticator;
 import br.edu.unigranrio.ect.si.cfa.web.authentication.PrincipalWrapper;
-import br.edu.unigranrio.ect.si.cfa.web.listener.WebAuditListener;
+import br.edu.unigranrio.ect.si.cfa.web.listener.WebAuditableApplicationListener;
 import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 
@@ -27,6 +26,7 @@ public class SessionAuthenticator implements Authenticator {
     @Inject
     AuthService authService;
 
+
     private User user;
     private Principal principal;
 
@@ -38,8 +38,6 @@ public class SessionAuthenticator implements Authenticator {
     public String doLogin() {
         try {
             user = authService.doLogin(email, password);
-            if (user != null)
-                AuditListenerFactory.setEntityListener(new WebAuditListener(user.getId()));
             return Pages.actionMain();
         } catch (AuthException e) {
             message.authMsg(e.getType());

@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.web.action;
 
-import br.edu.unigranrio.ect.si.cfa.model.Entity;
+import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.service.Service;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.web.annotation.RequestParam;
