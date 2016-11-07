@@ -4,6 +4,8 @@ import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.service.Service;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.web.annotation.RequestParam;
+import br.edu.unigranrio.ect.si.cfa.web.message.Message;
+import br.edu.unigranrio.ect.si.cfa.web.message.WebMessage;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +22,9 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     private static final long serialVersionUID = -2353426370709926798L;
     private static final Logger logger = LoggerFactory.getLogger(BaseAction.class);
 
-    @Inject @RequestParam
-    private String requestId;
+    @Inject private Message message;
+    @Inject private WebMessage webMessage;
+    @Inject @RequestParam private String requestId;
 
     private E instance;
     private Class<E> entityClass;
@@ -29,7 +32,6 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
 
     @Produces
     protected abstract E newInstance();
-
     protected abstract Service service();
     protected abstract PK parseId(String id);
 
@@ -65,9 +67,14 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
 
     @Override
     @Transactional
-    public String delete() {
-        logger.info("Delete instance from {}; Id: {}", entityClass(), requestId());
-        service().remove(service().find(entityClass(), requestId()));
+    public String delete() {E e = service().find(entityClass(),requestId());
+        if(!e.hasReference()) {
+            logger.info("Delete instance from {}; Id: {}", entityClass(), requestId());
+            service().remove(e);
+        } else {
+            logger.warn("Cannot delete, instance has references; {}", entityClass());
+            webMessage.warn(message.getString("delete.has.references"));
+        }
         instances = Collections.emptyList();
         return back();
     }
@@ -82,6 +89,11 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     public String back() {
         setInstance(newInstance());
         return list();
+    }
+
+    @Override
+    public boolean isManaged() {
+        return instance != null && instance.isIdNotNull();
     }
 
     public E getInstance() {

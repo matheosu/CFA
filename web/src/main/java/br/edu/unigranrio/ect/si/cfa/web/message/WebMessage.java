@@ -29,7 +29,7 @@ public interface WebMessage extends Serializable {
     }
 
     default void warn(String msg) {
-        warn(msg, null);
+        warn(msg, msg);
     }
 
     default void error(String msg, String details, String idPage) {

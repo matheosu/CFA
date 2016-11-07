@@ -67,8 +67,8 @@ public class Role extends BaseAuditable<Long> {
 	}
 
 	@Override
-	public String toDescription() {
-		return name;
+	public boolean hasReference() {
+		return users != null && !users.isEmpty();
 	}
 
 	public String getName() {

@@ -8,7 +8,7 @@ public interface Entity<PK extends Number> extends Serializable {
 
     void setId(PK id);
 
-    String toDescription();
+    boolean hasReference();
 
     default boolean isIdNotNull(){
         return getId() != null && getId().longValue() != 0L;

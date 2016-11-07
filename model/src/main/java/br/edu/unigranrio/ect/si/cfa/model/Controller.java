@@ -25,10 +25,11 @@ public class Controller extends BaseAuditable<Long> {
     private String model;
 
     @ManyToOne
-    @JoinColumn(name = "localization_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "localization_fk"))
+    @JoinColumn(name = "localization_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "localization_fk"))
     private Localization localization;
 
-    @OneToMany(mappedBy = "controller")
+    @OneToMany(mappedBy = "controller", cascade = CascadeType.REMOVE)
     private List<Flow> flows;
 
     public Controller() {initCollections();}
@@ -54,8 +55,8 @@ public class Controller extends BaseAuditable<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return uuid + " " + model;
+    public boolean hasReference() {
+        return false;
     }
 
     public String getUuid() {

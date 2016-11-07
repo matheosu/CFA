@@ -61,8 +61,8 @@ public class SessionUser extends BaseEntity<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return "Login " + DateTimeUtils.calendar2String(loginDate) + " - Logout " + DateTimeUtils.calendar2String(logoutDate);
+    public boolean hasReference() {
+        return false;
     }
 
     public Calendar getLoginDate() {

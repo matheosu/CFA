@@ -16,4 +16,6 @@ public interface Action extends Serializable {
 
     String list();
 
+    boolean isManaged();
+
 }

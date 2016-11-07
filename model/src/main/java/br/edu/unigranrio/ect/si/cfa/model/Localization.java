@@ -60,8 +60,8 @@ public class Localization extends BaseAuditable<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return name;
+    public boolean hasReference() {
+        return controllers != null && !controllers.isEmpty();
     }
 
     public String getName() {

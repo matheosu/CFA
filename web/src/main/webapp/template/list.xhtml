@@ -34,7 +34,7 @@
 
 
             <!-- Messages -->
-            <p:messages autoUpdate="true" globalOnly="true" closable="true" />
+            <p:messages showIcon="true" autoUpdate="true" globalOnly="true" closable="true" />
 
             <!-- List -->
             <p:dataTable id="list_#{entityName}s" value="#{action.instances}"
@@ -46,6 +46,26 @@
                 <!-- Insert -->
                 <ui:insert name="itensList">
                 </ui:insert>
+
+                <!-- User Created -->
+                <p:column headerText="#{msg['user.created']}" rendered="#{showAuditable}">
+                    <h:outputText value="#{instance.userCreated.name}" />
+                </p:column>
+
+                <!-- Date Created -->
+                <p:column headerText="#{msg['date.created']}" rendered="#{showAuditable}">
+                    <h:outputText value="#{instance.dateCreated}" converter="calendar-converter"/>
+                </p:column>
+
+                <!-- User Updated -->
+                <p:column headerText="#{msg['user.updated']}" rendered="#{showAuditable}">
+                    <h:outputText value="#{instance.userUpdated.name}" />
+                </p:column>
+
+                <!-- Date Updated -->
+                <p:column headerText="#{msg['date.updated']}" rendered="#{showAuditable}">
+                    <h:outputText value="#{instance.dateUpdated}" converter="calendar-converter"/>
+                </p:column>
 
                 <!-- Actions -->
                 <p:column headerText="Ações">
@@ -65,14 +85,14 @@
                                    value="#{msg['update']}" trackMouse="true" />
 
                         <!-- Button Delete  -->
-                        <p:commandButton type="button" id="btnExcluir"
+                        <p:commandButton type="button" id="btnExcluir" rendered="#{deleted}"
                                          style="text-shadow: none;background: #d9534f none;color: #ffffff;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
                                          styleClass=".btn-delete"
                                          onclick="PF('conf#{instance.id}').show()" icon="fa fa-trash-o">
                         </p:commandButton>
 
                         <p:confirmDialog message="#{msg['template.list.remove.msg']}"
-                                         showEffect="shake" hideEffect="drop"
+                                         showEffect="shake" hideEffect="drop" rendered="#{deleted}"
                                          header="#{msg['template.list.remove.header']}" severity="alert"
                                          widgetVar="conf#{instance.id}" >
 

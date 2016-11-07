@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -13,13 +14,50 @@
         <h:form id="form_#{entityName}" enctype="#{meta}">
 
             <!-- Messages -->
-            <p:messages autoUpdate="true" globalOnly="true" closable="true" />
+            <p:messages autoUpdate="true" globalOnly="true" closable="true"/>
 
             <!-- Panel -->
             <p:panel id="panel#{entityName}" header="#{fullEntityName}"
                      style="margin-bottom:20px">
                 <ui:insert name="fields">
                 </ui:insert>
+
+                <h:panelGrid columns="2" cellpadding="2" rendered="#{showAuditable and action.managed}">
+                    <h:panelGroup>
+                        <h:panelGrid columns="1" cellpadding="2">
+                            <h:outputLabel for="user_created" value="#{msg['user.created']}"/>
+                            <p:inputText id="user_created" readonly="true"
+                                         value="#{action.instance.userCreated.name}"
+                                         size="40"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:panelGrid columns="1" cellpadding="2">
+                            <h:outputLabel for="date_created" value="#{msg['date.created']}"/>
+                            <p:inputText id="date_created" readonly="true"
+                                         value="#{action.instance.dateCreated}"
+                                         converter="calendar-converter"
+                                         size="40"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:panelGrid columns="1" cellpadding="2">
+                            <h:outputLabel for="user_updated" value="#{msg['user.updated']}"/>
+                            <p:inputText id="user_updated" readonly="true"
+                                         value="#{action.instance.userUpdated.name}"
+                                         size="40"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:panelGrid columns="1" cellpadding="2">
+                            <h:outputLabel for="date_updated" value="#{msg['date.updated']}"/>
+                            <p:inputText id="date_updated" readonly="true"
+                                         value="#{action.instance.dateUpdated}"
+                                         converter="calendar-converter"
+                                         size="40"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
 
                 <!-- Buttons -->
                 <f:facet name="footer">

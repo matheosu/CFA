@@ -82,8 +82,8 @@ public class Feature extends BaseEntity<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return name;
+    public boolean hasReference() {
+        return (roles != null && !roles.isEmpty()) || (dependents != null && !dependents.isEmpty());
     }
 
     public String getName() {

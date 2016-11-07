@@ -54,8 +54,8 @@ public class Flow extends BaseAuditable<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return String.valueOf(measure);
+    public boolean hasReference() {
+        return user != null || controller != null;
     }
 
     public Float getMeasure() {

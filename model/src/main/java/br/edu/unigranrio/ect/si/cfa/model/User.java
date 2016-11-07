@@ -41,10 +41,10 @@ public class User extends BaseAuditable<Long> {
     @JoinColumn(name = "flowRestriction_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "flowRestriction_fk"))
     private FlowRestriction flowRestriction;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<SessionUser> sessions;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Flow> flows;
 
 
@@ -79,8 +79,8 @@ public class User extends BaseAuditable<Long> {
     }
 
     @Override
-    public String toDescription() {
-        return name;
+    public boolean hasReference() {
+        return false;
     }
 
     public String getName() {
