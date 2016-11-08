@@ -8,3 +8,4 @@ Projeto é dividido em 5 módulos:
   * Web - Módulo responsável pela interface Web, em JSF 2.2, contendo opções de gerenciamento e controle das entidades e gráficos que ajudam o entendimento do negócio;
   * WS-RS - Módulo que contém o WebService RESTFul para a integração do arduíno a base de dados;
   
+Obs.: O módulo parent é apenas um módulo responsável para realizar o versionamento do projeto, não contém nenhuma classe em java.
