@@ -20,7 +20,8 @@ public abstract class ValidObject<E extends Entity> implements Serializable, Tra
 
     @Override
     public void copy(E entity) {
-        this.setId(entity.getId());
+        if (entity != null)
+            this.setId(entity.getId());
     }
 
 

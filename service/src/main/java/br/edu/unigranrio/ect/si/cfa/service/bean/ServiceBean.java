@@ -30,7 +30,7 @@ public abstract class ServiceBean implements Service {
 
     @Override
     public <E extends Entity<PK>, PK extends Number> E find(Class<E> clazz, PK id) {
-        return em.find(clazz, id);
+        try { return em.find(clazz, id); } catch(NoResultException e){ return null; }
     }
 
     @Override

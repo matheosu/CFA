@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import java.util.Calendar;
 
 @Entity
-public class Flow extends BaseAuditable<Long> {
+public class Flow extends BaseEntity<Long> {
 
     private static final long serialVersionUID = -3141442875732879250L;
 

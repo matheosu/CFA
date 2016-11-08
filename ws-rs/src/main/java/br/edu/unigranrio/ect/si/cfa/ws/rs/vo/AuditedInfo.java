@@ -22,6 +22,8 @@ public class AuditedInfo implements TranscribeValues<Auditable> {
     @JsonDeserialize(using = CalendarDeserializer.class)
     private Calendar dateUpdated;
 
+    private Integer version;
+
     public AuditedInfo(Auditable auditable) {
         this.copy(auditable);
     }
@@ -58,11 +60,22 @@ public class AuditedInfo implements TranscribeValues<Auditable> {
         this.dateUpdated = dateUpdated;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     @Override
     public void copy(Auditable entity) {
-        this.setUserCreatedId(entity.getUserCreatedId());
-        this.setUserUpdatedId(entity.getUserUpdatedId());
-        this.setDateCreated(entity.getDateCreated());
-        this.setDateUpdated(entity.getDateUpdated());
+        if (entity != null) {
+            this.setUserCreatedId(entity.getUserCreatedId());
+            this.setUserUpdatedId(entity.getUserUpdatedId());
+            this.setDateCreated(entity.getDateCreated());
+            this.setDateUpdated(entity.getDateUpdated());
+            this.setVersion(entity.getVersion());
+        }
     }
 }

@@ -1,18 +1,22 @@
 package br.edu.unigranrio.ect.si.cfa.ws.rs.vo;
 
-import br.edu.unigranrio.ect.si.cfa.model.Feature;
-import br.edu.unigranrio.ect.si.cfa.model.Role;
+import br.edu.unigranrio.ect.si.cfa.model.Localization;
 
-import java.util.List;
-import java.util.stream.Collectors;
+public class LocalizationVO extends ValidObject<Localization>{
 
-public class RoleVO extends ValidObject<Role> {
-
-    private static final long serialVersionUID = 7368815660254227564L;
+    private static final long serialVersionUID = -4042720722769344819L;
 
     private String name;
     private String description;
-    private List<String> features;
+    private AuditedInfo audited;
+
+    public LocalizationVO() {
+    }
+
+
+    public LocalizationVO(Localization entity) {
+        copy(entity);
+    }
 
     public String getName() {
         return name;
@@ -30,23 +34,21 @@ public class RoleVO extends ValidObject<Role> {
         this.description = description;
     }
 
-    public List<String> getFeatures() {
-        return features;
+    public AuditedInfo getAudited() {
+        return audited;
     }
 
-    public void setFeatures(List<String> features) {
-        this.features = features;
+    public void setAudited(AuditedInfo audited) {
+        this.audited = audited;
     }
 
     @Override
-    public void copy(Role entity) {
+    public void copy(Localization entity) {
         super.copy(entity);
         if (entity != null) {
             this.setName(entity.getName());
             this.setDescription(entity.getDescription());
-            this.setFeatures(entity.getFeatures().stream().map(Feature::getName).collect(Collectors.toList()));
+            this.setAudited(new AuditedInfo(entity));
         }
     }
-
-
 }

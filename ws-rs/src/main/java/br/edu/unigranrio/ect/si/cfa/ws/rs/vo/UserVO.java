@@ -12,6 +12,13 @@ public class UserVO extends ValidObject<User> {
     private RoleVO role;
     private AuditedInfo audited;
 
+    public UserVO() {
+    }
+
+    public UserVO(User user) {
+        copy(user);
+    }
+
     public String getName() {
         return name;
     }
@@ -55,10 +62,12 @@ public class UserVO extends ValidObject<User> {
     @Override
     public void copy(User entity) {
         super.copy(entity);
-        this.setName(entity.getName());
-        this.setEmail(entity.getEmail());
-        this.setActive(entity.getActive());
-        this.setRole(entity2Vo(RoleVO.class, entity.getRole()));
-        this.setAudited(new AuditedInfo(entity));
+        if (entity != null) {
+            this.setName(entity.getName());
+            this.setEmail(entity.getEmail());
+            this.setActive(entity.getActive());
+            this.setRole(entity2Vo(RoleVO.class, entity.getRole()));
+            this.setAudited(new AuditedInfo(entity));
+        }
     }
 }
