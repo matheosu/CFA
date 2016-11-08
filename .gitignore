@@ -15,4 +15,5 @@ commons/target/
 model/target/
 service/target/
 web/target/
+ws-rs/target/
 out/
