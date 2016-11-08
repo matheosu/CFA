@@ -24,7 +24,7 @@ public class FlowPath extends PathAdapter {
     @GET
     @Path("/{flowId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("flowId") Long flowId) {
+    public Response getById(@PathParam("flowId") Long flowId) {
         Flow flow = service.find(Flow.class, flowId);
         return ok(FlowVO.class, flow);
     }
