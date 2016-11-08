@@ -69,19 +69,34 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Jersey Core -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>2.24</version>
-        </dependency>
-
-        <!-- Jersey Servlet -->
+        <!-- Jersey Container -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
             <version>2.24</version>
         </dependency>
+
+        <!-- Jersey JSON Jackson -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.24</version>
+        </dependency>
+
+        <!-- Jersey CDI Servlet -->
+        <dependency>
+            <groupId>org.glassfish.jersey.ext.cdi</groupId>
+            <artifactId>jersey-cdi1x-servlet</artifactId>
+            <version>2.24</version>
+        </dependency>
+
+        <!-- Weld Servlet -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>2.4.0.Final</version>
+        </dependency>
+
     </dependencies>
 
 

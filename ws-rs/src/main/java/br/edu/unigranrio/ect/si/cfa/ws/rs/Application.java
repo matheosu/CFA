@@ -1,6 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.ws.rs;
 
-import br.edu.unigranrio.ect.si.cfa.ws.rs.resource.Test;
+import br.edu.unigranrio.ect.si.cfa.ws.rs.path.UserPath;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -9,6 +9,6 @@ import javax.ws.rs.ApplicationPath;
 public class Application extends ResourceConfig {
 
     public Application() {
-        register(Test.class);
+        register(UserPath.class);
     }
 }

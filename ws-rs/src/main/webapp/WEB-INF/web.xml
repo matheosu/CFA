@@ -7,13 +7,16 @@
 
     <servlet>
         <servlet-name>Jersey REST Servlet</servlet-name>
+
         <servlet-class>
             org.glassfish.jersey.servlet.ServletContainer
         </servlet-class>
+
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>br.edu.unigranrio.ect.si.cfa.ws.rs.resource</param-value>
+            <param-value>br.edu.unigranrio.ect.si.cfa.ws.rs.path</param-value>
         </init-param>
+
         <load-on-startup>1</load-on-startup>
     </servlet>
 

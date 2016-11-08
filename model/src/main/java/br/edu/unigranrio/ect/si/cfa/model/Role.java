@@ -29,7 +29,7 @@ public class Role extends BaseAuditable<Long> {
 	@OneToMany(mappedBy = "role", cascade = CascadeType.DETACH)
 	private List<User> users;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "role_features",
 			joinColumns = {
 					@JoinColumn(name = "role_id", nullable = false, updatable = false,
