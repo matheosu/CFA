@@ -7,5 +7,5 @@ Projeto é dividido em 5 módulos:
   * Service - Módulo responsável por fazer a conexão com o banco e realizar buscas, criações, alterações e exclusões das entidades de modelo;
   * Web - Módulo responsável pela interface Web, em JSF 2.2, contendo opções de gerenciamento e controle das entidades e gráficos que ajudam o entendimento do negócio;
   * WS-RS - Módulo que contém o RESTFul Web Service para a integração do arduíno a base de dados;
-  
+
 Obs.: O módulo parent é apenas um módulo responsável para realizar o versionamento do projeto, não contém nenhuma classe em java.
