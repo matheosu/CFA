@@ -3,7 +3,6 @@ package br.edu.unigranrio.ect.si.cfa.model;
 public enum Period {
 
     DAY("Dia"),
-    WEEK("Semana"),
     MONTH("Mês"),
     YEAR("Ano"),
     ;

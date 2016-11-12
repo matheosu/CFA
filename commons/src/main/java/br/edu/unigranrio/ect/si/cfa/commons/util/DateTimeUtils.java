@@ -2,10 +2,10 @@ package br.edu.unigranrio.ect.si.cfa.commons.util;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 public final class DateTimeUtils {
 
@@ -70,4 +70,16 @@ public final class DateTimeUtils {
         return instant2String(date.toInstant());
     }
 
+    public static Long diffCalendars(SortedSet<Calendar> calendars, TimeUnit unitResult) {
+        return diff2Calendar(calendars.first(), calendars.last(), unitResult);
+    }
+
+    public static Long diff2Calendar(Calendar c1, Calendar c2, TimeUnit result) {
+        return c1 != null && c2 != null ? diff2Milliseconds(c1.getTimeInMillis(), c2.getTimeInMillis(), result) : -1L;
+    }
+
+    public static Long diff2Milliseconds(Long l1, Long l2, TimeUnit result) {
+        long duration = Math.abs(l1 - l2);
+        return result.convert(duration, MILLISECONDS);
+    }
 }

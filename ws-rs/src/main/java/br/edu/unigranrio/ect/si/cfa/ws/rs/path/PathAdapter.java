@@ -3,8 +3,8 @@ package br.edu.unigranrio.ect.si.cfa.ws.rs.path;
 import br.edu.unigranrio.ect.si.cfa.commons.model.Entity;
 import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.ValidObject;
 
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+import java.net.URI;
 import java.util.Collection;
 
 public abstract class PathAdapter {

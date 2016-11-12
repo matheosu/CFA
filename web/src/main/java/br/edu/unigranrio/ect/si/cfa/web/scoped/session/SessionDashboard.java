@@ -1,6 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.web.scoped.session;
 
 import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
+import br.edu.unigranrio.ect.si.cfa.commons.util.DateTimeUtils;
 import br.edu.unigranrio.ect.si.cfa.model.*;
 import br.edu.unigranrio.ect.si.cfa.service.FlowService;
 import br.edu.unigranrio.ect.si.cfa.service.UserService;
@@ -17,10 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -196,22 +194,16 @@ public class SessionDashboard implements Dashboard {
             flowByPeriod = flowService.findFlowByPeriod(Period.MONTH);
         }
 
-        Map<User, Set<Calendar>> collect = flowByPeriod.stream()
+        Map<User, SortedSet<Calendar>> collect = flowByPeriod.stream()
                 .filter(f -> f.getMeasure() != null)
                 .filter(f -> f.getMeasure() != 0L)
                 .collect(Collectors.groupingBy(Flow::getUser,
-                        Collectors.mapping(Flow::getRegistrantion, Collectors.toSet())));
+                        Collectors.mapping(Flow::getRegistrantion, Collectors.toCollection(TreeSet::new))));
         Long totalValue = 0L;
-        for (User user : collect.keySet()) {
-            Long lastTimeMillis = 0L;
-            for (Calendar calendar : collect.get(user)) {
-                if (lastTimeMillis != 0L)
-                    totalValue += TimeUnit.MILLISECONDS.toMinutes(Math.abs(lastTimeMillis - calendar.getTimeInMillis()));
-                lastTimeMillis = calendar.getTimeInMillis();
-            }
-        }
+        for (User user : collect.keySet())
+            totalValue += DateTimeUtils.diffCalendars(collect.get(user), TimeUnit.MINUTES);
 
-        return totalValue != null && totalValue != 0L ? (double) (totalValue / collect.keySet().size()) : 0D;
+        return totalValue != 0L ? (double) (totalValue / collect.keySet().size()) : 0D;
     }
 
 

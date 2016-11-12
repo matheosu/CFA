@@ -10,23 +10,23 @@ import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.FlowVO;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.util.Arrays;
 import java.util.Calendar;
 
 @Path("flows")
 public class FlowPath extends PathAdapter {
 
-    @Inject
-    private FlowService service;
-
     @Context
     private UriInfo uriInfo;
+
+    @Inject
+    private FlowService service;
 
     @GET
     @Path("/{flowId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("flowId") Long flowId) {
-        Flow flow = service.find(Flow.class, flowId);
-        return ok(FlowVO.class, flow);
+        return ok(FlowVO.class, service.find(Flow.class, flowId));
     }
 
     @GET
@@ -45,12 +45,12 @@ public class FlowPath extends PathAdapter {
 
         /* Busco o usuário */
         User user = service.find(User.class, userId);
-        if (user == null) /* Valido se existe*/
+        if (user == null)
             return notFound();
 
         /* Busco o controller */
         Controller controller = service.find(Controller.class, controllerId);
-        if (controller == null) /* Valido se existe*/
+        if (controller == null)
             return notFound();
 
         /* Crio um novo fluxo */
@@ -63,7 +63,7 @@ public class FlowPath extends PathAdapter {
 
         /* Crio a URI correta */
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path(Long.toString(flow.getId()));
-        return Response.created(builder.build()).build(); /* Respondo */
+        builder.path(FlowPath.class, "getById");
+        return Response.created(builder.build(flow.getId())).build(); /* Respondo */
     }
 }

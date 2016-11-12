@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cfa-ws-rs</artifactId>
     <packaging>war</packaging>
-    <name>RESTFul</name>
+    <name>RESTful</name>
 
     <dependencies>
         <!-- Commons -->
@@ -136,7 +136,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/cfa-rs</path>
-                    <port>8080</port>
+                    <port>8081</port>
                     <contextReloadable>true</contextReloadable>
                     <addContextWarDependencies>true</addContextWarDependencies>
                     <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
