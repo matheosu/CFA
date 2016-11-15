@@ -20,7 +20,7 @@ bool WifiClient::restart(){
     return findOK(command("AT+RST\r\n", 2000));
 }
 String WifiClient::version(){
-    String response = scommand("AT+GMR\r\n", 2000);
+    String response = command("AT+GMR\r\n", 2000);
     int okIndex = response.indexOf("OK");
     if(okIndex != -1) {
         response.replace("OK\r\n","");
@@ -35,9 +35,8 @@ bool WifiClient::disableEcho(){
 }
 
 bool WifiClient::begin(){
-    return restart() && disableEcho() && stationMode() && disconnecAP();
+    return restart() && disableEcho() && stationMode() && disconnectAP();
 }
-
 
 /**** Wifi Layer ****/
 bool WifiClient::apMode(){
@@ -58,13 +57,13 @@ bool WifiClient::connectAP(const char* ssid, const char* passwd){
     connectAPCommand.concat("\""); // "
     connectAPCommand.concat(passwd); // passwd
     connectAPCommand.concat("\""); // "
-    wifiModeCommand.concat("\r\n"); // \r\n
+    connectAPCommand.concat("\r\n"); // \r\n
     return findOK(command(connectAPCommand, 4000));
 }
 String WifiClient::listAPS(){
     return command("AT+CWLAP\r\n", 4000);
 }
-bool WifiClient::disconnecAP(){
+bool WifiClient::disconnectAP(){
     return findOK(command("AT+CWQAP\r\n", 3000));
 }
 String WifiClient::listClientsConnected(){
@@ -159,7 +158,11 @@ bool WifiClient::tcpStatus(int status){
     if(statusIndex != -1){
         response.replace("STATUS:");
     }
-    return response.toInt() == status ? true : false;
+    if (response.toInt() == status) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool WifiClient::tcpConnections(int mode){
@@ -170,10 +173,14 @@ bool WifiClient::tcpConnections(int mode){
 }
 
 bool WifiClient::find(String response, String word){
-    return response.indexOf(word) == -1 ? false : true;
+    if (response.indexOf(word) == -1) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
-bool WifiClient::findOK(String response)
+bool WifiClient::findOK(String response){
     return find(response, "OK");
 }
 
