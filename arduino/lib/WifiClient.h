@@ -89,7 +89,7 @@ class WifiClient {
 
         bool findOK(String response);
 
-        String command(const char* command, const int timeout);
+        String command(String command, int timeout);
 
 };
 

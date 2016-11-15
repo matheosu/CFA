@@ -60,7 +60,7 @@ bool WifiClient::connectAP(const char* ssid, const char* passwd){
     connectAPCommand.concat("\r\n"); // \r\n
     return findOK(command(connectAPCommand, 4000));
 }
-String WifiClient::listAPS(){
+String WifiClient::listAPs(){
     return command("AT+CWLAP\r\n", 4000);
 }
 bool WifiClient::disconnectAP(){
@@ -97,10 +97,10 @@ String WifiClient::sendData(String request){ // REVER PQ PRIMEIRO VEM >> DEPOIS 
     if(requestLength > 2048)
         requestLength = 2048;
     sendCommand.concat(requestLength);
-    startCommand.concat("\r\n"); // \r\n
+    sendCommand.concat("\r\n"); // \r\n
     
     if(find(command(sendCommand, 4000), ">")){
-        String response = find(command(request, 4000), "SEND OK");
+        String response = command(request, 4000);
         int ipdIndex = response.indexOf("+IPD");
         int httpIndex = response.indexOf("HTTP");
         if(ipdIndex != -1 && httpIndex != -1){
@@ -156,7 +156,7 @@ bool WifiClient::tcpStatus(int status){
         response.replace("OK\r\n","");
     }
     if(statusIndex != -1){
-        response.replace("STATUS:");
+        response.replace("STATUS:","");
     }
     if (response.toInt() == status) {
         return true;
@@ -191,7 +191,7 @@ bool WifiClient::transmissionMode(int mode){
     return findOK(command(transmissionCommand, 1500));
 }
 
-String WifiClient::command(const char* command, const int timeout){
+String WifiClient::command(String command, int timeout){
     String response = "";
     wifi->print(command); // send the read character to the esp8266
     long int time = millis();
