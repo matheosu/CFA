@@ -34,8 +34,9 @@ bool WifiClient::disableEcho(){
     return echo(0);
 }
 
-bool WifiClient::begin(){
-    return restart() && disableEcho() && stationMode() && disconnectAP();
+void WifiClient::begin(){
+    restart();
+    disableEcho();
 }
 
 /**** Wifi Layer ****/

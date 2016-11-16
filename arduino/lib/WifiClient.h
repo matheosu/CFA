@@ -29,8 +29,8 @@ class WifiClient {
         bool enableEcho();
         /* Disable echo (Doesn’t send back received command) */
         bool disableEcho();
-        /* Restart and Disable Echo*/
-        bool begin();
+        /* Restart and Disable Echo */
+        void begin();
 
         /**** Wifi Layer ****/
         
