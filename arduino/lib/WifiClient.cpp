@@ -59,7 +59,7 @@ bool WifiClient::connectAP(const char* ssid, const char* passwd){
     connectAPCommand.concat(passwd); // passwd
     connectAPCommand.concat("\""); // "
     connectAPCommand.concat("\r\n"); // \r\n
-    return findOK(command(connectAPCommand, 4000));
+    return findOK(command(connectAPCommand, 10000));
 }
 String WifiClient::listAPs(){
     return command("AT+CWLAP\r\n", 4000);
@@ -120,7 +120,7 @@ bool WifiClient::tcpClose(){
     return findOK(command("AT+CIPCLOSE\r\n", 3000));
 }
 String WifiClient::getIP(){
-    String response = command("AT+CIFSR\r\n",2000);
+    String response = command("AT+CIFSR\r\n",3000);
     int okIndex = response.indexOf("OK");
     if(okIndex != -1){
         response.replace("OK\r\n", "");
