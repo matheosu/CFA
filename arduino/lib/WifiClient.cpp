@@ -83,16 +83,17 @@ bool WifiClient::disconnected(){
 }
 bool WifiClient::tcpStart(const char* ip, const int port){
     String startCommand = "AT+CIPSTART=";
-    startCommand.concat("\"TCP\""); // TCP 
+    startCommand.concat("\"TCP\""); // "TCP"
+    startCommand.concat(","); // ,
     startCommand.concat("\""); // "
     startCommand.concat(ip); // ip 
     startCommand.concat("\""); // "
     startCommand.concat(","); // ,
     startCommand.concat(port); // port
     startCommand.concat("\r\n"); // \r\n
-    return findOK(command(startCommand, 4000));
+    return findOK(command(startCommand, 5000));
 }
-String WifiClient::sendData(String request){ // REVER PQ PRIMEIRO VEM >> DEPOIS SEND OK
+String WifiClient::sendData(String request){
     String sendCommand = "AT+CIPSEND=";
     int requestLength = request.length();
     if(requestLength > 2048)
@@ -100,17 +101,17 @@ String WifiClient::sendData(String request){ // REVER PQ PRIMEIRO VEM >> DEPOIS 
     sendCommand.concat(requestLength);
     sendCommand.concat("\r\n"); // \r\n
     
-    if(find(command(sendCommand, 4000), ">")){
-        String response = command(request, 4000);
-        int ipdIndex = response.indexOf("+IPD");
-        int httpIndex = response.indexOf("HTTP");
-        if(ipdIndex != -1 && httpIndex != -1){
-            response.replace(response.substring(ipdIndex, httpIndex),"");
-        }        
-        int okIndex = response.indexOf("OK");
-        if(okIndex != -1){
-            response.replace("OK\r\n", "");
-        }
+    if(find(command(sendCommand, 5000), ">")){
+        String response = command(request, 10000);
+//        int ipdIndex = response.indexOf("+IPD");
+//        int httpIndex = response.indexOf("HTTP");
+//        if(ipdIndex != -1 && httpIndex != -1){
+//            response.replace(response.substring(ipdIndex, httpIndex),"");
+//        }
+//        int okIndex = response.indexOf("OK");
+//        if(okIndex != -1){
+//            response.replace("OK\r\n", "");
+//        }
         return response;
     } else {
         return "";
