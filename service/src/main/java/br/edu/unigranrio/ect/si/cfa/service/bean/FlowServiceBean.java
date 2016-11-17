@@ -51,7 +51,7 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
                 SortedSet<Calendar> collect = flows.stream().map(Flow::getRegistrantion)
                         .sorted().collect(Collectors.toCollection(TreeSet::new));
                 /* Converto o valor da restrição sempre em minutos */
-                Number minuteRestriction = TimeUnit.MINUTES.convert(flowRestrictionValue.longValue(), TimeUnit.valueOf(restriction.name() + "s"));
+                Number minuteRestriction = TimeUnit.MINUTES.convert(flowRestrictionValue.longValue(), TimeUnit.valueOf(restriction.name() + "S"));
                 return collect.isEmpty() ? minuteRestriction.floatValue() : minuteRestriction.floatValue() -
                         DateTimeUtils.diffCalendars(collect, TimeUnit.MINUTES).floatValue(); /* Calcula a diferença entre as datas retornando em Minutos */
             }

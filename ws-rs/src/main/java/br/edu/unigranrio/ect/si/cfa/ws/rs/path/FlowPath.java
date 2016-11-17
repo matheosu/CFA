@@ -10,7 +10,6 @@ import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.FlowVO;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.util.Arrays;
 import java.util.Calendar;
 
 @Path("flows")
@@ -38,11 +37,11 @@ public class FlowPath extends PathAdapter {
 
     @POST
     @Transactional
+    @Consumes(MediaType.TEXT_PLAIN)
     @Path("/{userId}/controller/{controllerId}")
     public Response measure(@PathParam("userId") Long userId,
                             @PathParam("controllerId") Long controllerId,
                             Float measure) {
-
         /* Busco o usuário */
         User user = service.find(User.class, userId);
         if (user == null)
