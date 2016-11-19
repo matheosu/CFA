@@ -101,7 +101,7 @@ String WifiClient::sendData(String request){
     if(find(command(sendCommand, 5000), ">")) {
         delay(1000);
         request.concat("\r\n\r\n"); // adding two return & new line in request
-        Stirng response =  command(request, 10000);
+        String response = command(request, 10000);
         int httpIndex = response.indexOf("HTTP"); // removing anything before HTTP response
         if(httpIndex != -1){
             response.replace(response.substring(0, httpIndex),"");
