@@ -24,7 +24,8 @@ String WifiClient::version(){
     int okIndex = response.indexOf("OK");
     if(okIndex != -1) {
         response.replace("OK\r\n","");
-    } 
+    }
+    response.trim();
    return response; 
 }
 bool WifiClient::enableEcho(){
@@ -95,27 +96,32 @@ bool WifiClient::tcpStart(const char* ip, const int port){
 }
 String WifiClient::sendData(String request){
     String sendCommand = "AT+CIPSEND=";
-    int requestLength = request.length();
-    if(requestLength > 2048)
-        requestLength = 2048;
-    sendCommand.concat(requestLength);
-    sendCommand.concat("\r\n"); // \r\n
-    
-    if(find(command(sendCommand, 5000), ">")){
-        String response = command(request, 10000);
-//        int ipdIndex = response.indexOf("+IPD");
-//        int httpIndex = response.indexOf("HTTP");
-//        if(ipdIndex != -1 && httpIndex != -1){
-//            response.replace(response.substring(ipdIndex, httpIndex),"");
-//        }
-//        int okIndex = response.indexOf("OK");
-//        if(okIndex != -1){
-//            response.replace("OK\r\n", "");
-//        }
+    sendCommand.concat(request.length() + 4); // request with two return & new line
+    sendCommand.concat("\r\n"); // return & new line
+    if(find(command(sendCommand, 5000), ">")) {
+        delay(1000);
+        request.concat("\r\n\r\n"); // adding two return & new line in request
+        Stirng response =  command(request, 10000);
+        int httpIndex = response.indexOf("HTTP"); // removing anything before HTTP response
+        if(httpIndex != -1){
+            response.replace(response.substring(0, httpIndex),"");
+        }
+        int okIndex = response.indexOf("OK"); // removing AT OK response
+        if(okIndex != -1){
+            response.replace("OK\r\n", "");
+        }
+        int unlinkIndex = response.indexOf("Unlink"); // removing AT Unlink response
+        if(unlinkIndex != -1){
+            response.replace("Unlink\r\n", "");
+        }
+        int sendIndex = response.indexOf("SEND"); // removing AT SEND response
+        if(sendIndex != -1){
+            response.replace("SEND", "");
+        }
         return response;
     } else {
-        return "";
-    } 
+        return "ERROR";
+    }
 }
 bool WifiClient::tcpClose(){
     return findOK(command("AT+CIPCLOSE\r\n", 3000));
@@ -126,6 +132,7 @@ String WifiClient::getIP(){
     if(okIndex != -1){
         response.replace("OK\r\n", "");
     }
+    response.trim();
     return response;
 }
 bool WifiClient::multipleConnections(){
