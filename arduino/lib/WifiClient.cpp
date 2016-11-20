@@ -82,7 +82,7 @@ bool WifiClient::connected(){
 bool WifiClient::disconnected(){
     return tcpStatus(4);
 }
-bool WifiClient::tcpStart(const char* ip, const int port){
+bool WifiClient::tcpStart(const String ip, const int port){
     String startCommand = "AT+CIPSTART=";
     startCommand.concat("\"TCP\""); // "TCP"
     startCommand.concat(","); // ,

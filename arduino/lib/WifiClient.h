@@ -59,7 +59,7 @@ class WifiClient {
         /* TCPStatus is Disconnected (4) */
         bool disconnected();
         /* Start a connection as client. (Single connection mode) */
-        bool tcpStart(const char* ip, const int port);
+        bool tcpStart(const String ip, const int port);
         /* Send a data to client tcp start */
         String sendData(String request, int timeout);
         /* Close TCP or UDP connection.For single connection mode */
