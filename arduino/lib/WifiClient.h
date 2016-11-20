@@ -61,7 +61,7 @@ class WifiClient {
         /* Start a connection as client. (Single connection mode) */
         bool tcpStart(const char* ip, const int port);
         /* Send a data to client tcp start */
-        String sendData(String request);
+        String sendData(String request, int timeout);
         /* Close TCP or UDP connection.For single connection mode */
         bool tcpClose();
         /* Get local IP address */

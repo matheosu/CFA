@@ -94,14 +94,14 @@ bool WifiClient::tcpStart(const char* ip, const int port){
     startCommand.concat("\r\n"); // \r\n
     return findOK(command(startCommand, 5000));
 }
-String WifiClient::sendData(String request){
+String WifiClient::sendData(String request, int timeout){
     String sendCommand = "AT+CIPSEND=";
     sendCommand.concat(request.length() + 4); // request with two return & new line
     sendCommand.concat("\r\n"); // return & new line
     if(find(command(sendCommand, 5000), ">")) {
         delay(1000);
         request.concat("\r\n\r\n"); // adding two return & new line in request
-        String response = command(request, 10000);
+        String response = command(request, timeout);
         int httpIndex = response.indexOf("HTTP"); // removing anything before HTTP response
         if(httpIndex != -1){
             response.replace(response.substring(0, httpIndex),"");
