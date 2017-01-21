@@ -23,6 +23,7 @@ public class SessionAuthenticator implements Authenticator {
     private final AuthMessage message;
     private final AuthService authService;
 
+
     private User user;
     private Principal principal;
 

@@ -23,9 +23,13 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     private static final long serialVersionUID = -2353426370709926798L;
     private static final Logger logger = LoggerFactory.getLogger(BaseAction.class);
 
-    @Inject private Message message;
-    @Inject private WebMessage webMessage;
-    @Inject @RequestParam private String requestId;
+    @Inject
+    private Message message;
+    @Inject
+    private WebMessage webMessage;
+    @Inject
+    @RequestParam
+    private String requestId;
 
     private E instance;
     private Class<E> entityClass;
@@ -33,7 +37,9 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
 
     @Produces
     protected abstract E newInstance();
+
     protected abstract Service service();
+
     protected abstract PK parseId(String id);
 
     @Override
@@ -70,8 +76,8 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     @Override
     @Transactional
     public String delete() {
-        Optional<E> e = service().find(entityClass(),requestId());
-        if(e.isPresent() && !e.get().hasReference()) {
+        Optional<E> e = service().find(entityClass(), requestId());
+        if (e.isPresent() && !e.get().hasReference()) {
             logger.info("Delete instance from {}; Id: {}", entityClass(), requestId());
             service().remove(e.get());
         } else {
@@ -108,7 +114,7 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     }
 
     public List<E> getInstances() {
-        if(instances == null || instances.isEmpty()) {
+        if (instances == null || instances.isEmpty()) {
             logger.info("Loading all instance from {};", entityClass());
             instances = service().list(entityClass());
         }
@@ -122,10 +128,14 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
 
     @SuppressWarnings("unchecked")
     private Class<E> entityClass() {
-        if (entityClass == null) {
-            Type type = ((ParameterizedType) getClass().getSuperclass()
-                    .getGenericSuperclass()).getActualTypeArguments()[0];
-            entityClass = (Class<E>) type;
+        try {
+            if (entityClass == null) {
+                Type type = ((ParameterizedType) getClass().getSuperclass()
+                        .getGenericSuperclass()).getActualTypeArguments()[0];
+                entityClass = (Class<E>) type;
+            }
+        } catch (Exception e) {
+            entityClass = (Class<E>) getClass().getSuperclass();
         }
         return entityClass;
     }

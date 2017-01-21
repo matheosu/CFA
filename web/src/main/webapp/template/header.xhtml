@@ -17,8 +17,6 @@
             </f:facet>
             <f:facet name="right">
                 <p:splitButton value="#{auth.principal.name}" icon="fa fa-user">
-                    <p:menuitem value="#{msg['update']}" icon="fa fa-cogs" />
-                    <p:separator />
                     <p:menuitem value="#{msg['logout']}" action="#{auth.doLogout}"
                                 ajax="false" style="color:red" icon="fa fa-sign-out" />
                 </p:splitButton>
