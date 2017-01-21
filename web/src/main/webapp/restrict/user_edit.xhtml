@@ -33,8 +33,7 @@
 
             <!-- Password -->
             <h:outputLabel for="password" value="#{msg['user.password']}"/>
-            <p:password id="password" value="#{userAction.instance.password}"
-                        required="true" requiredMessage="#{msg['required.password']}"
+            <p:password id="password" value="#{userAction.password}"
                         promptLabel="#{msg['user.password.enter']}"
                         weakLabel="#{msg['user.password.weak']}"
                         goodLabel="#{msg['user.password.good']}"

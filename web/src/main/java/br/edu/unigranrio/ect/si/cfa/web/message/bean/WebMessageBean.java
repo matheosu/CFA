@@ -12,7 +12,12 @@ public class WebMessageBean implements WebMessage {
 
     private static final long serialVersionUID = -6451232072778461226L;
 
-    @Inject FacesContext context;
+    private final FacesContext context;
+
+    @Inject
+    public WebMessageBean(FacesContext context) {
+        this.context = context;
+    }
 
     @Override
     public void msg(FacesMessage.Severity status, String msg, String details, String idPage) {

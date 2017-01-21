@@ -12,8 +12,12 @@ public class MessageBean implements Message {
 
     private static final long serialVersionUID = -8085939994948874898L;
 
-    @Inject @MessageResource
-    private ResourceBundle bundle;
+    private final ResourceBundle bundle;
+
+    @Inject
+    public MessageBean(@MessageResource ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
 
     @Override
     public Object get(String key) {

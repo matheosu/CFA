@@ -32,7 +32,7 @@ public class SessionUserServiceBean extends ServiceBean implements SessionUserSe
                         query.where(cb.equal(joinUser, user), logout.isNull())
                              .orderBy(cb.asc(login))
                 )
-        );
+        ).orElse(null);
     }
 
     @Override

@@ -13,6 +13,8 @@ import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static br.edu.unigranrio.ect.si.cfa.model.Period.*;
+
 @Named
 public class FlowServiceBean extends ServiceBean implements FlowService {
 
@@ -20,11 +22,7 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
 
     private static final Integer FACTOR_ML_TO_L = 1000; // 1000 mL x 1L
 
-    public Float availableFlow(Long userId) {
-        /* Descobre usuário */
-        User user = find(User.class, userId);
-        if (user == null) return DEFAULT_VALUE;
-
+    public Float availableFlow(User user) {
         /* Pega sua restrição de fluxo */
         FlowRestriction flowRestriction = user.getFlowRestriction();
         /* Pega a restrição */
@@ -32,7 +30,7 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
         /* Pega o período da restrição */
         Period period = flowRestriction.getPeriod();
         /* Busca todos os fluxos já realizados nesse periodo */
-        List<Flow> flows = findFlowByPeriod(userId, period);
+        List<Flow> flows = findFlowByPeriod(user.getId(), period);
 
         Float flowRestrictionValue = flowRestriction.getValue() != null ? flowRestriction.getValue() : DEFAULT_VALUE;
         switch (restriction.getType()) {
@@ -51,11 +49,10 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
                 SortedSet<Calendar> collect = flows.stream().map(Flow::getRegistrantion)
                         .sorted().collect(Collectors.toCollection(TreeSet::new));
                 /* Converto o valor da restrição sempre em minutos */
-                Number minuteRestriction = TimeUnit.MINUTES.convert(flowRestrictionValue.longValue(), TimeUnit.valueOf(restriction.name() + "S"));
+                Number minuteRestriction = TimeUnit.MINUTES.convert(flowRestrictionValue.longValue(), TimeUnit.valueOf(restriction.name()));
                 return collect.isEmpty() ? minuteRestriction.floatValue() : minuteRestriction.floatValue() -
                         DateTimeUtils.diffCalendars(collect, TimeUnit.MINUTES).floatValue(); /* Calcula a diferença entre as datas retornando em Minutos */
             }
-
             default: {
                 return DEFAULT_VALUE;
             }
@@ -97,11 +94,11 @@ public class FlowServiceBean extends ServiceBean implements FlowService {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         if(period != null) switch (period) {
             case DAY:
-                return cb.function("day", Integer.class, calendarPath);
+                return cb.function(DAY.name().toLowerCase(), Integer.class, calendarPath);
             case MONTH:
-                return cb.function("month", Integer.class, calendarPath);
+                return cb.function(MONTH.name().toLowerCase(), Integer.class, calendarPath);
             case YEAR:
-                return cb.function("year", Integer.class, calendarPath);
+                return cb.function(YEAR.name().toLowerCase(), Integer.class, calendarPath);
         }
         return null;
     }

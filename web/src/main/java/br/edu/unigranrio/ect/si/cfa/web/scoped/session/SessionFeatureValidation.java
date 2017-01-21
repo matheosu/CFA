@@ -19,13 +19,16 @@ public class SessionFeatureValidation implements FeatureValidation {
 
     private static final long serialVersionUID = -6491142171002448510L;
 
-    @Inject
-    private FeatureService service;
-
-    @Inject @LoggedUserId
-    private Long loggedUserId;
+    private final Long loggedUserId;
+    private final FeatureService service;
 
     private List<Feature> loggedUserFeatures;
+
+    @Inject
+    public SessionFeatureValidation(FeatureService service, @LoggedUserId Long loggedUserId) {
+        this.service = service;
+        this.loggedUserId = loggedUserId;
+    }
 
     @PostConstruct
     public void init() {
@@ -37,8 +40,7 @@ public class SessionFeatureValidation implements FeatureValidation {
     public boolean hasFeature(Long featureId) {
         return isAuthenticate() &&
                 loggedUserFeatures.stream()
-                        .filter(f -> f.getId().equals(featureId))
-                        .findAny().isPresent();
+                        .anyMatch(f -> f.getId().equals(featureId));
     }
 
     @Override

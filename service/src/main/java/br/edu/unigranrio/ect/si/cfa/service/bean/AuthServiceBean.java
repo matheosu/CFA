@@ -36,12 +36,21 @@ public class AuthServiceBean implements AuthService {
     private static final String USER_AGENT = "user-agent";
 
     /* HTTP */
-    @Inject HttpSession session;
-    @Inject HttpServletRequest request;
+    private final HttpSession session;
+    private final HttpServletRequest request;
 
     /* Services */
-    @Inject UserService userService;
-    @Inject SessionUserService sessionUserService;
+    private final UserService userService;
+    private final SessionUserService sessionUserService;
+
+    @Inject
+    public AuthServiceBean(HttpSession session, HttpServletRequest request,
+                           UserService userService, SessionUserService sessionUserService) {
+        this.session = session;
+        this.request = request;
+        this.userService = userService;
+        this.sessionUserService = sessionUserService;
+    }
 
     @Override
     @Transactional
@@ -50,7 +59,7 @@ public class AuthServiceBean implements AuthService {
         User user = identify(email);
 
         // Verify if User is Active
-        if(!user.isActive()) {
+        if (!user.isActive()) {
             String inactiveMsg = "User Inactive " + user;
             logger.warn(inactiveMsg);
             throw new AuthException(inactiveMsg, Type.USER_INACTIVE);
@@ -78,7 +87,7 @@ public class AuthServiceBean implements AuthService {
         session.invalidate();
     }
 
-    private SessionInfo createSessionInfo(User user)  {
+    private SessionInfo createSessionInfo(User user) {
         Locale userLocale = request.getLocale();
         InetAddress inetAddr = null;
 
@@ -116,9 +125,10 @@ public class AuthServiceBean implements AuthService {
     }
 
     private void logoutSession(User user) throws AuthException {
-        try{
+        try {
             if (!userService.contains(user))
-                user = userService.find(User.class, user.getId());
+                user = userService.find(User.class, user.getId()).orElseThrow(() ->
+                        new AuthException("User not found for logout", Type.LOGOUT));
 
             // Find Active Session User
             SessionUser sessionUser = sessionUserService.findActiveSessionUser(user);
@@ -132,7 +142,7 @@ public class AuthServiceBean implements AuthService {
     }
 
     private void closeSession(SessionUser sessionUser) {
-        if(sessionUser != null){
+        if (sessionUser != null) {
             sessionUser.setLogoutDate(Calendar.getInstance());
             sessionUser = sessionUserService.update(sessionUser);
             logger.info("User Session Close {}", sessionUser);
@@ -141,7 +151,7 @@ public class AuthServiceBean implements AuthService {
 
     private User identify(String email) throws AuthException {
         User user = userService.findUserByEmail(email);
-        if(user == null) {
+        if (user == null) {
             logger.warn("User not found {}", email);
             throw new AuthException(Type.USER_NOT_FOUND);
         }
@@ -149,7 +159,7 @@ public class AuthServiceBean implements AuthService {
         return user;
     }
 
-    private boolean verifyPassword(User user, String password)  {
+    private boolean verifyPassword(User user, String password) {
         String encryptPassword = Securities.encrypt(password);
         return user != null && user.getPassword().equals(encryptPassword);
     }

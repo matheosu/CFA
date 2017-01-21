@@ -16,13 +16,10 @@ public class WebAuditableApplicationListener implements AuditableApplicationList
 
     private static final long serialVersionUID = -36248322712939881L;
 
-    @Inject @LoggedUserId
-    private Long loggedUserId;
+    private final Long loggedUserId;
 
-    public WebAuditableApplicationListener() {
-    }
-
-    public WebAuditableApplicationListener(Long loggedUserId) {
+    @Inject
+    public WebAuditableApplicationListener(@LoggedUserId Long loggedUserId) {
         this.loggedUserId = loggedUserId;
     }
 

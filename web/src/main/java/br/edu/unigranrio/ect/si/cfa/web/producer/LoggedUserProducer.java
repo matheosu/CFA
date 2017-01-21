@@ -17,10 +17,14 @@ public class LoggedUserProducer implements Serializable {
 
     private static final long serialVersionUID = -8058360850350664621L;
 
+    private final HttpSession session;
+    private final UserService userService;
+
     @Inject
-    HttpSession session;
-    @Inject
-    UserService userService;
+    public LoggedUserProducer(HttpSession session, UserService userService) {
+        this.session = session;
+        this.userService = userService;
+    }
 
     @Produces
     @LoggedUserId
@@ -32,7 +36,7 @@ public class LoggedUserProducer implements Serializable {
     @Produces
     @LoggedUser
     public User getLoggedUser(@LoggedUserId Long loggedUserId) {
-        return !Objects.equals(loggedUserId, Constants.USER_ADMIN_ID) ? userService.find(User.class, loggedUserId) : null;
+        return !Objects.equals(loggedUserId, Constants.USER_ADMIN_ID) ? userService.find(User.class, loggedUserId).orElse(null) : null;
     }
 
     @Produces

@@ -15,11 +15,14 @@ public class AuthMessageBean implements AuthMessage {
 
     private static final long serialVersionUID = -705388947939385985L;
 
-    @Inject
-    private WebMessage webMessage;
+    private final WebMessage webMessage;
+    private final ResourceBundle bundle;
 
-    @Inject @MessageResource
-    private ResourceBundle bundle;
+    @Inject
+    public AuthMessageBean(WebMessage webMessage, @MessageResource ResourceBundle bundle) {
+        this.webMessage = webMessage;
+        this.bundle = bundle;
+    }
 
     @Override
     public void authMsg(FacesMessage.Severity severity, String msg, AuthException.Type type) {

@@ -44,24 +44,26 @@ public class SessionDashboard implements Dashboard {
     public static final String DASH_RAKING_USERS_CHART_ID = DASH_RAKING_USERS_ID + CHART;
     public static final String DASH_FLOW_RESTRICT_CHART_ID = DASH_FLOW_RESTRICT_ID + CHART;
 
-    @Inject @LoggedRoleId
-    private Long loggedRoleId;
+    private final Long loggedRoleId;
+    private final Long loggedUserId;
 
-    @Inject @LoggedUserId
-    private Long loggedUserId;
+    private final UserService userService;
+    private final FlowService flowService;
 
-    @Inject
-    private UserService userService;
-
-    @Inject
-    private FlowService flowService;
-
-    @Inject
-    private Message message;
+    private final Message message;
 
     private DashboardModel chartModel;
-
     private DashboardModel boxModel;
+
+    @Inject
+    public SessionDashboard(@LoggedRoleId Long loggedRoleId, @LoggedUserId Long loggedUserId,
+                            UserService userService, FlowService flowService, Message message) {
+        this.loggedRoleId = loggedRoleId;
+        this.loggedUserId = loggedUserId;
+        this.userService = userService;
+        this.flowService = flowService;
+        this.message = message;
+    }
 
     @PostConstruct
     public void init() {
@@ -96,11 +98,11 @@ public class SessionDashboard implements Dashboard {
     }
 
     private void userBox() {
-        createBoxs(DASH_AVERAGE_FLOW_USERS_ID,DASH_AVERAGE_TIME_USERS_ID);
+        createBoxs(DASH_AVERAGE_FLOW_USERS_ID, DASH_AVERAGE_TIME_USERS_ID);
     }
 
     private void managerBox() {
-        createBoxs(DASH_ACTIVE_USERS_ID,DASH_AVERAGE_FLOW_USERS_ID,DASH_AVERAGE_TIME_USERS_ID);
+        createBoxs(DASH_ACTIVE_USERS_ID, DASH_AVERAGE_FLOW_USERS_ID, DASH_AVERAGE_TIME_USERS_ID);
     }
 
     private void managerCharts() {
@@ -182,7 +184,7 @@ public class SessionDashboard implements Dashboard {
                 .collect(Collectors.groupingBy(Flow::getUser,
                         Collectors.summingDouble(Flow::getMeasure)));
         Double value = collect.keySet().stream().map(collect::get)
-                        .collect(Collectors.averagingDouble(Double::doubleValue));
+                .collect(Collectors.averagingDouble(Double::doubleValue));
         return value != null ? value : 0D;
     }
 
@@ -279,14 +281,16 @@ public class SessionDashboard implements Dashboard {
 
     public PieChartModel getAvailableFlow() {
         PieChartModel pie = new PieChartModel();
-        User user = userService.find(User.class, loggedUserId);
-        Float flow = flowService.availableFlow(loggedUserId);
+        Optional<User> oUser = userService.find(User.class, loggedUserId);
+        if (oUser.isPresent()) {
+            User user = oUser.get();
+            Float flow = flowService.availableFlow(user);
+            pie.getData().put(user.getFlowRestriction().getName(), user.getFlowRestriction().getValue());
+            pie.getData().put(message.getString("available"), flow);
 
-        pie.getData().put(user.getFlowRestriction().getName(), user.getFlowRestriction().getValue());
-        pie.getData().put(message.getString("available"), flow);
-
-        pie.setTitle("Votes");
-        pie.setLegendPosition("ne");
+            pie.setTitle("Votes");
+            pie.setLegendPosition("ne");
+        }
 
         return pie;
     }

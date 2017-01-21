@@ -14,8 +14,12 @@ import java.util.stream.Collectors;
 @Path("controllers")
 public class ControllerPath extends PathAdapter {
 
+    private final ControllerService service;
+
     @Inject
-    private ControllerService service;
+    public ControllerPath(ControllerService service) {
+        this.service = service;
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,13 +35,14 @@ public class ControllerPath extends PathAdapter {
     @Path("{controllerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("controllerId") Long controllerId){
-        Controller controller = service.find(Controller.class, controllerId);
+        Controller controller = service.find(Controller.class, controllerId).orElse(null);
         return ok(ControllerVO.class, controller);
     }
 
     @GET
+    @Path("uuid/{uuid}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response find(@QueryParam("uuid") String uuid) {
+    public Response find(@PathParam("uuid") String uuid) {
         Controller controller = service.findByUUID(uuid);
         return controller != null ? ok(controller.getId()) : notFound();
     }

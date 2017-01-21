@@ -15,8 +15,12 @@ import java.util.stream.Collectors;
 @Path("users")
 public class UserPath extends PathAdapter {
 
+    private final UserService userService;
+
     @Inject
-    private UserService userService;
+    public UserPath(UserService userService) {
+        this.userService = userService;
+    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -31,7 +35,7 @@ public class UserPath extends PathAdapter {
     @Path("/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getById(@PathParam("userId") Long userId) {
-        User user = userService.find(User.class, userId);
+        User user = userService.find(User.class, userId).orElse(null);
         return ok(UserVO.class, user);
     }
 

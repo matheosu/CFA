@@ -16,6 +16,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implements Action {
 
@@ -61,16 +62,18 @@ public abstract class BaseAction<E extends Entity<PK>, PK extends Number> implem
     @Override
     public String edit() {
         logger.info("Loading instance from {}; Id: {}", entityClass(), requestId());
-        setInstance(service().find(entityClass(), requestId()));
+        Optional<E> instance = service().find(entityClass(), requestId());
+        setInstance(instance.orElse(null));
         return Pages.actionEdit(entityClass());
     }
 
     @Override
     @Transactional
-    public String delete() {E e = service().find(entityClass(),requestId());
-        if(!e.hasReference()) {
+    public String delete() {
+        Optional<E> e = service().find(entityClass(),requestId());
+        if(e.isPresent() && !e.get().hasReference()) {
             logger.info("Delete instance from {}; Id: {}", entityClass(), requestId());
-            service().remove(e);
+            service().remove(e.get());
         } else {
             logger.warn("Cannot delete, instance has references; {}", entityClass());
             webMessage.warn(message.getString("delete.has.references"));

@@ -30,4 +30,7 @@ public final class Strings {
 		return value != null ? String.format(HEX_STRING_FORMAT, new BigInteger(1, value)) : null;
 	}
 
+	public static boolean isNotNullAndNotEmpty(String value) {
+		return value != null && !value.isEmpty();
+	}
 }

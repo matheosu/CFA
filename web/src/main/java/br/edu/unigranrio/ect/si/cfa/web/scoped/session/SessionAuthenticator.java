@@ -6,7 +6,6 @@ import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.service.exception.AuthException;
 import br.edu.unigranrio.ect.si.cfa.web.authentication.Authenticator;
 import br.edu.unigranrio.ect.si.cfa.web.authentication.PrincipalWrapper;
-import br.edu.unigranrio.ect.si.cfa.web.listener.WebAuditableApplicationListener;
 import br.edu.unigranrio.ect.si.cfa.web.message.AuthMessage;
 import br.edu.unigranrio.ect.si.cfa.web.util.Pages;
 
@@ -21,17 +20,20 @@ public class SessionAuthenticator implements Authenticator {
 
     private static final long serialVersionUID = 3015058683489706291L;
 
-    @Inject
-    AuthMessage message;
-    @Inject
-    AuthService authService;
-
+    private final AuthMessage message;
+    private final AuthService authService;
 
     private User user;
     private Principal principal;
 
     private String email;
     private String password;
+
+    @Inject
+    public SessionAuthenticator(AuthMessage message, AuthService authService) {
+        this.message = message;
+        this.authService = authService;
+    }
 
     @Override
     @Transactional

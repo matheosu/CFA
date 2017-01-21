@@ -11,7 +11,13 @@ import java.io.Serializable;
 public class RequestParamProducer implements Serializable {
 
     private static final long serialVersionUID = 2L;
-    @Inject ExternalContext context;
+
+    private final ExternalContext context;
+
+    @Inject
+    public RequestParamProducer(ExternalContext context) {
+        this.context = context;
+    }
 
     @Produces @RequestParam
     public String getRequestParameter(InjectionPoint ip) {

@@ -11,9 +11,9 @@ public enum Restriction {
     MILLILITER(MEASURE),
     LITER(MEASURE),
 
-    SECOND(TIME),
-    MINUTE(TIME),
-    HOUR(TIME),
+    SECONDS(TIME),
+    MINUTES(TIME),
+    HOURS(TIME),
     ;
 
     public enum RestrictionType {

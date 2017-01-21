@@ -17,8 +17,12 @@ public class Index implements Serializable {
 
     private static final long serialVersionUID = -27976548695925185L;
 
+    private final Authenticator auth;
+
     @Inject
-    private Authenticator auth;
+    public Index(Authenticator auth) {
+        this.auth = auth;
+    }
 
     public void init(PhaseEvent event) {
         FacesContext context = event.getFacesContext();

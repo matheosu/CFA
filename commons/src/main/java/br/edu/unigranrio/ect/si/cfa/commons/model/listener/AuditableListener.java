@@ -15,6 +15,7 @@ public class AuditableListener implements Serializable {
     private static final long serialVersionUID = -2129592208515731772L;
 
     @PrePersist
+    @SuppressWarnings("unchecked")
     public void prePersist(Object auditable) {
         AuditableApplicationListener applicationListener = getAuditableApplicationListener();
         if (auditable instanceof Auditable)
@@ -22,6 +23,7 @@ public class AuditableListener implements Serializable {
                 applicationListener.prePersist((Auditable) auditable);
     }
 
+    @SuppressWarnings("unchecked")
     private AuditableApplicationListener getAuditableApplicationListener() {
         BeanManager beanManager = CDI.current().getBeanManager();
         Bean bean = beanManager.resolve(beanManager.getBeans(AuditableApplicationListener.class));
@@ -30,6 +32,7 @@ public class AuditableListener implements Serializable {
     }
 
     @PreUpdate
+    @SuppressWarnings("unchecked")
     public void preUpdate(Object auditable) {
         AuditableApplicationListener applicationListener = getAuditableApplicationListener();
         if (auditable instanceof Auditable)

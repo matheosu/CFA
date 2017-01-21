@@ -3,7 +3,7 @@ package br.edu.unigranrio.ect.si.cfa.service;
 
 import br.edu.unigranrio.ect.si.cfa.model.Flow;
 import br.edu.unigranrio.ect.si.cfa.model.Period;
-import br.edu.unigranrio.ect.si.cfa.service.exception.ServiceExeption;
+import br.edu.unigranrio.ect.si.cfa.model.User;
 
 import java.util.Calendar;
 import java.util.List;
@@ -19,17 +19,17 @@ public interface FlowService extends Service {
      * Método responsável por verificar quanto de fluxo disponível ainda tem para o usuário. <br/>
      * Métrica de fluxo gasto pelo usuário VS restrição de fluxo.<br/>
      *
-     * @param userId id do usuário para realizar a verificação
+     * @param user usuário para realizar a verificação
      * @return Retorna o valor disponível em: <br/>
      *  <ul>
      *      <li>Litros se o tipo da restrição for Medida</li>
      *      <li>Minutos se o tipo da restrição for Tempo</li>
-     *      <li>Retorna valor {@value FlowService.DEFAULT_VALUE } Default caso não encontre o usuário</li>
+     *      <li>Retorna valor {@value FlowService.DEFAULT_VALUE } caso problema</li>
      *  </ul>
      *  @see br.edu.unigranrio.ect.si.cfa.model.Restriction
      *  @see br.edu.unigranrio.ect.si.cfa.model.Restriction.RestrictionType
      */
-    Float availableFlow(Long userId);
+    Float availableFlow(User user);
 
     List<Flow> findFlowByPeriod(Long userId, Period period, Calendar date);
 

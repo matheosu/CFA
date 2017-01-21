@@ -1,8 +1,6 @@
 package br.edu.unigranrio.ect.si.cfa.ws.rs.path;
 
-import br.edu.unigranrio.ect.si.cfa.model.Controller;
-import br.edu.unigranrio.ect.si.cfa.model.Flow;
-import br.edu.unigranrio.ect.si.cfa.model.User;
+import br.edu.unigranrio.ect.si.cfa.model.*;
 import br.edu.unigranrio.ect.si.cfa.service.FlowService;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.FlowVO;
@@ -11,6 +9,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.Calendar;
+import java.util.Optional;
+import java.util.Properties;
 
 @Path("flows")
 public class FlowPath extends PathAdapter {
@@ -18,44 +18,59 @@ public class FlowPath extends PathAdapter {
     @Context
     private UriInfo uriInfo;
 
+    private final FlowService service;
+
     @Inject
-    private FlowService service;
+    public FlowPath(FlowService service) {
+        this.service = service;
+    }
 
     @GET
     @Path("/{flowId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("flowId") Long flowId) {
-        return ok(FlowVO.class, service.find(Flow.class, flowId));
+        return ok(FlowVO.class, service.find(Flow.class, flowId).orElse(null));
     }
 
     @GET
-    @Path("/{userId}/available")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("users/{userId}/available")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response availableFlows(@PathParam("userId") Long userId) {
-        return ok(service.availableFlow(userId));
+        Optional<User> oUser = service.find(User.class, userId);
+        if (!oUser.isPresent())
+            return notFound();
+
+        User user = oUser.get();
+        FlowRestriction fr = user.getFlowRestriction();
+        Restriction restriction = fr.getRestriction();
+        Properties response = new Properties();
+        response.put(restriction.getType(), service.availableFlow(user));
+        return ok(response);
     }
 
     @POST
     @Transactional
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Path("/{userId}/controller/{controllerId}")
-    public Response measure(@PathParam("userId") Long userId,
-                            @PathParam("controllerId") Long controllerId,
-                            Float measure) {
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response measure(@FormParam("userId") Long userId,
+                            @FormParam("controllerId") Long controllerId,
+                            @FormParam("measure") Float measure) {
+        if(userId == null || controllerId == null)
+            return notFound();
+
         /* Busco o usuário */
-        User user = service.find(User.class, userId);
-        if (user == null)
+        Optional<User> oUser = service.find(User.class, userId);
+        if (!oUser.isPresent())
             return notFound();
 
         /* Busco o controller */
-        Controller controller = service.find(Controller.class, controllerId);
-        if (controller == null)
+        Optional<Controller> oController = service.find(Controller.class, controllerId);
+        if (!oController.isPresent())
             return notFound();
 
         /* Crio um novo fluxo */
         Flow flow = new Flow();
-        flow.setUser(user);
-        flow.setController(controller);
+        flow.setUser(oUser.get());
+        flow.setController(oController.get());
         flow.setMeasure(measure); // Sempre é Litro por Minuto
         flow.setRegistrantion(Calendar.getInstance());
         service.save(flow); // Salvo o fluxo

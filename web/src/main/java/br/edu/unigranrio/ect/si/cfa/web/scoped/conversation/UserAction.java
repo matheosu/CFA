@@ -1,6 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.web.scoped.conversation;
 
 import br.edu.unigranrio.ect.si.cfa.commons.util.Constants;
+import br.edu.unigranrio.ect.si.cfa.commons.util.Strings;
 import br.edu.unigranrio.ect.si.cfa.model.FlowRestriction;
 import br.edu.unigranrio.ect.si.cfa.model.Role;
 import br.edu.unigranrio.ect.si.cfa.model.User;
@@ -21,11 +22,16 @@ public class UserAction extends ConversationAction<User, Long> {
 
     private static final long serialVersionUID = -3168685830620894551L;
 
-    @Inject
-    private UserService service;
+    private final Long loggedUserId;
+    private final UserService service;
 
-    @Inject @LoggedUserId
-    private Long loggedUserId;
+    private String password;
+
+    @Inject
+    public UserAction(UserService service, @LoggedUserId Long loggedUserId) {
+        this.service = service;
+        this.loggedUserId = loggedUserId;
+    }
 
     @Override
     protected Service service() {
@@ -61,5 +67,20 @@ public class UserAction extends ConversationAction<User, Long> {
                 .filter(u -> !u.getId().equals(loggedUserId))
                 .filter(u -> !u.getId().equals(Constants.USER_ADMIN_ID))
                 .collect(Collectors.toList());
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String save() {
+        if (Strings.isNotNullAndNotEmpty(password))
+            getInstance().setPassword(password);
+        return super.save();
     }
 }

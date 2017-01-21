@@ -24,8 +24,12 @@ public class TransactionalInterceptor implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(TransactionalInterceptor.class);
 
+    private final EntityManager em;
+
     @Inject
-    private EntityManager em;
+    public TransactionalInterceptor(EntityManager em) {
+        this.em = em;
+    }
 
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {

@@ -14,10 +14,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public abstract class ServiceBean implements Service {
 
@@ -28,9 +30,10 @@ public abstract class ServiceBean implements Service {
     @Inject
     protected EntityManager em;
 
+    @NotNull
     @Override
-    public <E extends Entity<PK>, PK extends Number> E find(Class<E> clazz, PK id) {
-        try { return em.find(clazz, id); } catch(NoResultException e){ return null; }
+    public <E extends Entity<PK>, PK extends Number> Optional<E> find(Class<E> clazz, PK id) {
+        try { return Optional.ofNullable(em.find(clazz, id)); } catch(Exception e){ return Optional.empty(); }
     }
 
     @Override
@@ -72,9 +75,10 @@ public abstract class ServiceBean implements Service {
         return singleResult(query.select(cb.count(query.from(from))));
     }
 
-    protected <E> E singleResult(TypedQuery<E> query) {
+    @NotNull
+    protected <E> Optional<E> singleResult(TypedQuery<E> query) {
         try {
-            return Objects.requireNonNull(query).getSingleResult();
+            return Optional.ofNullable(Objects.requireNonNull(query).getSingleResult());
         } catch (NoResultException e) {
             logger.debug("NoResultException {}", e);
         } catch (NonUniqueResultException nure) {
@@ -82,11 +86,11 @@ public abstract class ServiceBean implements Service {
         } catch (Exception e) {
             logger.error("Error in singleResult on {}", query, e);
         }
-        return null;
+        return Optional.empty();
     }
 
     protected <E> E singleResult(CriteriaQuery<E> query) {
-        return singleResult(em.createQuery(query));
+        return singleResult(em.createQuery(query)).orElse(null);
     }
 
     protected <E> List<E> resultList(TypedQuery<E> query) {
