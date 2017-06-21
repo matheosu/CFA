@@ -14,7 +14,7 @@
 
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>br.edu.unigranrio.ect.si.cfa.ws.rs.path</param-value>
+            <param-value>br.edu.unigranrio.ect.si.cfa.ws.rs</param-value>
         </init-param>
 
         <load-on-startup>1</load-on-startup>

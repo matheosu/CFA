@@ -32,18 +32,18 @@ public class ControllerPath extends PathAdapter {
     }
 
     @GET
-    @Path("{controllerId}")
+    @Path("/{controllerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("controllerId") Long controllerId){
-        Controller controller = service.find(Controller.class, controllerId).orElse(null);
+        Controller controller = service.find(Controller.class, controllerId).orElseThrow(NotFoundException::new);
         return ok(ControllerVO.class, controller);
     }
 
     @GET
-    @Path("uuid/{uuid}")
+    @Path("/uuid/{uuid}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response find(@PathParam("uuid") String uuid) {
-        Controller controller = service.findByUUID(uuid);
+        Controller controller = service.findByUUID(uuid).orElseThrow(NotFoundException::new);;
         return controller != null ? ok(controller.getId()) : notFound();
     }
 }

@@ -24,8 +24,9 @@ import java.util.Optional;
 public abstract class ServiceBean implements Service {
 
     private static final long serialVersionUID = -4097016207010149674L;
-
     private static final Logger logger = LoggerFactory.getLogger(ServiceBean.class);
+
+    public static final Long DEFAULT_COUNT = 0L;
 
     @Inject
     protected EntityManager em;
@@ -72,7 +73,7 @@ public abstract class ServiceBean implements Service {
     public  <E extends Entity<?>> Long count(Class<E> from) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> query = cb.createQuery(Long.class);
-        return singleResult(query.select(cb.count(query.from(from))));
+        return singleResult(query.select(cb.count(query.from(from)))).orElse(DEFAULT_COUNT);
     }
 
     @NotNull
@@ -89,8 +90,8 @@ public abstract class ServiceBean implements Service {
         return Optional.empty();
     }
 
-    protected <E> E singleResult(CriteriaQuery<E> query) {
-        return singleResult(em.createQuery(query)).orElse(null);
+    protected <E> Optional<E> singleResult(CriteriaQuery<E> query) {
+        return singleResult(em.createQuery(query));
     }
 
     protected <E> List<E> resultList(TypedQuery<E> query) {

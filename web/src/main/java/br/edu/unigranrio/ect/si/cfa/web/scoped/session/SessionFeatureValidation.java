@@ -49,7 +49,7 @@ public class SessionFeatureValidation implements FeatureValidation {
             Optional<Feature> optional = loggedUserFeatures.stream()
                     .filter(f -> f.getId().equals(featureId))
                     .findFirst();
-            return optional.isPresent() ? Pages.actionList(optional.get().getUrl(), true) : Pages.actionMain();
+            return optional.map(feature -> Pages.actionList(feature.getUrl(), true)).orElseGet(Pages::actionMain);
         }
         return Pages.actionAuth(true);
     }

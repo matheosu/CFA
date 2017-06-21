@@ -1,6 +1,7 @@
 package br.edu.unigranrio.ect.si.cfa.ws.rs.path;
 
 import br.edu.unigranrio.ect.si.cfa.model.*;
+import br.edu.unigranrio.ect.si.cfa.service.ControllerService;
 import br.edu.unigranrio.ect.si.cfa.service.FlowService;
 import br.edu.unigranrio.ect.si.cfa.service.annotation.Transactional;
 import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.FlowVO;
@@ -8,21 +9,22 @@ import br.edu.unigranrio.ect.si.cfa.ws.rs.vo.FlowVO;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.Properties;
 
 @Path("flows")
 public class FlowPath extends PathAdapter {
+
+    private static final String MEASURE_AVAILABLE_RESPONSE = "%s&%2f";
 
     @Context
     private UriInfo uriInfo;
 
     private final FlowService service;
+    private final ControllerService controllerService;
 
     @Inject
-    public FlowPath(FlowService service) {
+    public FlowPath(FlowService service, ControllerService controllerService) {
         this.service = service;
+        this.controllerService = controllerService;
     }
 
     @GET
@@ -33,51 +35,52 @@ public class FlowPath extends PathAdapter {
     }
 
     @GET
-    @Path("users/{userId}/available")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/available/{userId}")
+    @Produces(MediaType.TEXT_PLAIN)
     public Response availableFlows(@PathParam("userId") Long userId) {
-        Optional<User> oUser = service.find(User.class, userId);
-        if (!oUser.isPresent())
-            return notFound();
-
-        User user = oUser.get();
+        User user = service.find(User.class, userId).orElseThrow(NotFoundException::new);
         FlowRestriction fr = user.getFlowRestriction();
         Restriction restriction = fr.getRestriction();
-        Properties response = new Properties();
-        response.put(restriction.getType(), service.availableFlow(user));
+
+        Float availableFlow = service.availableFlow(user);
+        String response = String.format(MEASURE_AVAILABLE_RESPONSE, restriction.getType().toString(), availableFlow);
         return ok(response);
     }
 
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response measure(@FormParam("userId") Long userId,
-                            @FormParam("controllerId") Long controllerId,
+    public Response measure(@FormParam("uuid") String uuid,
+                            @FormParam("userId") Long userId,
                             @FormParam("measure") Float measure) {
-        if(userId == null || controllerId == null)
-            return notFound();
+
+        if(userId == null || uuid == null)
+            throw new NotFoundException();
+
+        if (measure == null)
+            throw new BadRequestException("Measure");
 
         /* Busco o usuário */
-        Optional<User> oUser = service.find(User.class, userId);
-        if (!oUser.isPresent())
-            return notFound();
+        User user = service.find(User.class, userId).orElseThrow(NotFoundException::new);
+
+        Float available = service.availableFlow(user);
+        if (available <= 0)
+            throw new BadRequestException("Unavailable Flows!");
+
 
         /* Busco o controller */
-        Optional<Controller> oController = service.find(Controller.class, controllerId);
-        if (!oController.isPresent())
-            return notFound();
+        Controller controller = controllerService.findByUUID(uuid).orElseThrow(NotFoundException::new);
 
         /* Crio um novo fluxo */
         Flow flow = new Flow();
-        flow.setUser(oUser.get());
-        flow.setController(oController.get());
+        flow.setUser(user);
+        flow.setController(controller);
         flow.setMeasure(measure); // Sempre é Litro por Minuto
-        flow.setRegistrantion(Calendar.getInstance());
         service.save(flow); // Salvo o fluxo
 
         /* Crio a URI correta */
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(FlowPath.class, "getById");
-        return Response.created(builder.build(flow.getId())).build(); /* Respondo */
+        return Response.created(builder.build(flow.getId())).build();
     }
 }

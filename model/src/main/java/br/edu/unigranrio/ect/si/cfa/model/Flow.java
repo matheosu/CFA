@@ -115,4 +115,11 @@ public class Flow extends BaseEntity<Long> {
                 "[ Measure: " + getMeasure() + "]" +
                 "[ Registration: " + DateTimeUtils.calendar2String(getRegistrantion()) + "] ";
     }
+
+    @PrePersist
+    public void prePersist() {
+        if (registrantion == null) {
+            registrantion = Calendar.getInstance();
+        }
+    }
 }

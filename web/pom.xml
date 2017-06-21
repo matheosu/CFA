@@ -10,7 +10,6 @@
     <artifactId>cfa-web</artifactId>
     <packaging>war</packaging>
     <name>Web</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
         <!-- Commons -->
@@ -154,7 +153,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

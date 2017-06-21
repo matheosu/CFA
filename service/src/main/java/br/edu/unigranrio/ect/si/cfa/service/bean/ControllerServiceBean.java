@@ -6,6 +6,7 @@ import br.edu.unigranrio.ect.si.cfa.service.ControllerService;
 
 import javax.inject.Named;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class ControllerServiceBean extends ServiceBean implements ControllerService {
@@ -13,7 +14,7 @@ public class ControllerServiceBean extends ServiceBean implements ControllerServ
     private static final long serialVersionUID = 32324067747514157L;
 
     @Override
-    public Controller findByUUID(String uuid) {
+    public Optional<Controller> findByUUID(String uuid) {
         return singleResult(comparing(Controller.class, Controller_.uuid, uuid));
     }
 

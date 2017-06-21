@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class FlowRestrictionServiceBean extends ServiceBean implements FlowRestrictionService {
@@ -18,7 +19,7 @@ public class FlowRestrictionServiceBean extends ServiceBean implements FlowRestr
     private static final long serialVersionUID = -6704476718601361139L;
 
     @Override
-    public FlowRestriction findByName(String name) {
+    public Optional<FlowRestriction> findByName(String name) {
         return singleResult(comparing(FlowRestriction.class, FlowRestriction_.name, name));
     }
 

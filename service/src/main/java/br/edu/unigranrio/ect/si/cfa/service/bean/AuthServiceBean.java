@@ -150,13 +150,7 @@ public class AuthServiceBean implements AuthService {
     }
 
     private User identify(String email) throws AuthException {
-        User user = userService.findUserByEmail(email);
-        if (user == null) {
-            logger.warn("User not found {}", email);
-            throw new AuthException(Type.USER_NOT_FOUND);
-        }
-
-        return user;
+        return userService.findUserByEmail(email).orElseThrow(() -> new AuthException(Type.USER_NOT_FOUND));
     }
 
     private boolean verifyPassword(User user, String password) {

@@ -5,10 +5,11 @@ import br.edu.unigranrio.ect.si.cfa.model.Period;
 import br.edu.unigranrio.ect.si.cfa.model.Restriction;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface  FlowRestrictionService extends Service {
 
-    FlowRestriction findByName(String name);
+    Optional<FlowRestriction> findByName(String name);
 
     List<FlowRestriction> findByRestriction(Restriction restriction);
 

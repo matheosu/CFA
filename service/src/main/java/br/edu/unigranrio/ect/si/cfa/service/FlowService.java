@@ -24,7 +24,7 @@ public interface FlowService extends Service {
      *  <ul>
      *      <li>Litros se o tipo da restrição for Medida</li>
      *      <li>Minutos se o tipo da restrição for Tempo</li>
-     *      <li>Retorna valor {@value FlowService.DEFAULT_VALUE } caso problema</li>
+     *      <li>Retorna valor {@value DEFAULT_VALUE } caso problema</li>
      *  </ul>
      *  @see br.edu.unigranrio.ect.si.cfa.model.Restriction
      *  @see br.edu.unigranrio.ect.si.cfa.model.Restriction.RestrictionType

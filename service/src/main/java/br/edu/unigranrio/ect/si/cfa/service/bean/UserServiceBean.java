@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class UserServiceBean extends ServiceBean implements UserService {
@@ -18,7 +19,7 @@ public class UserServiceBean extends ServiceBean implements UserService {
     private static final long serialVersionUID = 6581130279830770035L;
 
     @Override
-    public User findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
         return singleResult(comparing(User.class, User_.email, email));
     }
 
@@ -46,7 +47,7 @@ public class UserServiceBean extends ServiceBean implements UserService {
         CriteriaQuery<Long> query = cb.createQuery(Long.class);
         Root<User> from = query.from(User.class);
         query = query.where(cb.equal(from.get(User_.active), Boolean.TRUE));
-        return singleResult(query.select(cb.count(from)));
+        return singleResult(query.select(cb.count(from))).orElse(0L);
     }
 
     @Override

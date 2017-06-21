@@ -5,7 +5,8 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
     bean-discovery-mode="all">
+
     <interceptors>
-        br.edu.unigranrio.ect.si.cfa.service.interceptor.TransactionalInterceptor
+        <class>br.edu.unigranrio.ect.si.cfa.service.interceptor.TransactionalInterceptor</class>
     </interceptors>
 </beans>

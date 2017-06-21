@@ -4,6 +4,7 @@ import br.edu.unigranrio.ect.si.cfa.model.Role;
 import br.edu.unigranrio.ect.si.cfa.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService extends Service {
 
@@ -12,7 +13,7 @@ public interface UserService extends Service {
 	 * @param email a unique email for user
 	 * @return User
      */
-	User findUserByEmail(String email);
+	Optional<User> findUserByEmail(String email);
 
 	/**
 	 * Find a Users by name

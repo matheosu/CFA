@@ -6,6 +6,7 @@ import br.edu.unigranrio.ect.si.cfa.service.FeatureService;
 import javax.inject.Named;
 import javax.persistence.criteria.*;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 public class FeatureServiceBean extends ServiceBean implements FeatureService {
@@ -13,12 +14,12 @@ public class FeatureServiceBean extends ServiceBean implements FeatureService {
     private static final long serialVersionUID = 8890579990737820060L;
 
     @Override
-    public Feature findFeatureByName(String name) {
+    public Optional<Feature> findFeatureByName(String name) {
         return singleResult(comparing(Feature.class, Feature_.name, name));
     }
 
     @Override
-    public Feature findFeatureByURL(String url) {
+    public Optional<Feature> findFeatureByURL(String url) {
         return singleResult(comparing(Feature.class, Feature_.url, url));
     }
 
