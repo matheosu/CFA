@@ -32,7 +32,7 @@
 
             <!-- Features -->
             <p:outputLabel for="features" value="#{msg['role.features']}" />
-            <p:selectManyMenu id="features" value="#{roleAction.instance.features}"
+            <p:selectManyMenu id="features" value="#{roleAction.selectedFeatures}"
                               converter="entity-converter" filter="true" filterMatchMode="contains"
                               showCheckbox="false">
                 <f:selectItems value="#{roleAction.features}" var="f"
