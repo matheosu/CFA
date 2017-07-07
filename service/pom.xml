@@ -6,7 +6,7 @@
         <groupId>br.edu.unigranrio.ect.si.cfa</groupId>
         <artifactId>parent</artifactId>
         <version>1.0.0</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cfa-service</artifactId>
