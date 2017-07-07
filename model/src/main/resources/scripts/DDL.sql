@@ -6,6 +6,33 @@ CREATE TABLE feature (
   dependency_id BIGINT CONSTRAINT dependency_fk REFERENCES feature
 );
 
+CREATE TABLE "user" (
+  id                 BIGINT       NOT NULL CONSTRAINT user_pkey PRIMARY KEY,
+  active             BOOLEAN,
+  email              VARCHAR(400) NOT NULL  CONSTRAINT unique_user_email UNIQUE,
+  name               VARCHAR(200) NOT NULL,
+  password           VARCHAR(500) NOT NULL,
+  datecreated        TIMESTAMP,
+  dateupdated        TIMESTAMP,
+  usercreatedid      BIGINT CONSTRAINT usercreated_fk REFERENCES "user",
+  userupdatedid      BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
+  version            INTEGER
+);
+
+CREATE TABLE flow_restriction (
+  id            BIGINT      NOT NULL CONSTRAINT flow_restriction_pkey PRIMARY KEY,
+  description   VARCHAR(120),
+  name          VARCHAR(80) NOT NULL,
+  period        VARCHAR(255),
+  restriction   VARCHAR(255),
+  value         REAL        NOT NULL,
+  datecreated   TIMESTAMP,
+  dateupdated   TIMESTAMP,
+  usercreatedid BIGINT CONSTRAINT usercreated_fk REFERENCES "user",
+  userupdatedid BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
+  version       INTEGER
+);
+
 CREATE TABLE role (
   id            BIGINT       NOT NULL CONSTRAINT role_pkey PRIMARY KEY,
   description   VARCHAR(200),
@@ -16,6 +43,10 @@ CREATE TABLE role (
   userupdatedid BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
   version       INTEGER
 );
+
+ALTER TABLE "user"
+    ADD flowrestriction_id BIGINT CONSTRAINT flowrestriction_fk REFERENCES flow_restriction,
+    ADD role_id            BIGINT CONSTRAINT role_fk REFERENCES role;
 
 CREATE TABLE role_features (
   role_id    BIGINT NOT NULL CONSTRAINT role_fk REFERENCES role,
@@ -43,35 +74,6 @@ CREATE TABLE controller (
   usercreatedid   BIGINT CONSTRAINT usercreated_fk REFERENCES "user",
   userupdatedid   BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
   version         INTEGER
-);
-
-CREATE TABLE flow_restriction (
-  id            BIGINT      NOT NULL CONSTRAINT flow_restriction_pkey PRIMARY KEY,
-  description   VARCHAR(120),
-  name          VARCHAR(80) NOT NULL,
-  period        VARCHAR(255),
-  restriction   VARCHAR(255),
-  value         REAL        NOT NULL,
-  datecreated   TIMESTAMP,
-  dateupdated   TIMESTAMP,
-  usercreatedid BIGINT CONSTRAINT usercreated_fk REFERENCES "user",
-  userupdatedid BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
-  version       INTEGER
-);
-
-CREATE TABLE "user" (
-  id                 BIGINT       NOT NULL CONSTRAINT user_pkey PRIMARY KEY,
-  active             BOOLEAN,
-  email              VARCHAR(400) NOT NULL  CONSTRAINT unique_user_email UNIQUE,
-  name               VARCHAR(200) NOT NULL,
-  password           VARCHAR(500) NOT NULL,
-  flowrestriction_id BIGINT CONSTRAINT flowrestriction_fk REFERENCES flow_restriction,
-  role_id            BIGINT CONSTRAINT role_fk REFERENCES role,
-  datecreated        TIMESTAMP,
-  dateupdated        TIMESTAMP,
-  usercreatedid      BIGINT CONSTRAINT usercreated_fk REFERENCES "user",
-  userupdatedid      BIGINT CONSTRAINT userupdated_fk REFERENCES "user",
-  version            INTEGER
 );
 
 CREATE TABLE "sessionUser" (
