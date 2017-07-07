@@ -18,7 +18,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper>{
 
     public ObjectMapperProvider() {
         this.mapper = new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, true)
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
                 .configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true)
                 .setAnnotationIntrospector(createJaxbJacksonAnnotationIntrospector());
     }
